@@ -1,0 +1,32 @@
+.FixedWrapper {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+}
+
+.AlertContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: min-content;
+
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.AlertContainerinfo {
+  border: 1px solid blue;
+  background: skyblue;
+}
+.AlertContainererror {
+  border: 1px solid red;
+  background: #eeaeae;
+}
+.AlertContainersuccess {
+  border: 1px solid green;
+  background: greenyellow;
+}

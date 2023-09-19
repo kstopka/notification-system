@@ -1,0 +1,31 @@
+.wrapperLabel {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+.formTextInput {
+  display: flex;
+  gap: 10px;
+}
+
+.textInput {
+  height: 24px;
+  width: 300px;
+}
+
+.svgContainer {
+  max-height: 24px;
+}
+
+.success svg path {
+  fill: green;
+}
+
+.error svg path {
+  fill: red;
+}
+
+.error {
+  color: red;
+}

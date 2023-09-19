@@ -1,12 +1,59 @@
 const express = require("express");
 const db = require("./config/db");
 const cors = require("cors");
+const session = require("express-session");
+const path = require("path");
 
 const app = express();
 
 const PORT = 3002;
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "static")));
+
+app.post("/auth", function (request, response) {
+  console.log("authBackendStart");
+  // Capture the input fields
+  let email = request.body.email;
+  let password = request.body.password;
+  // Ensure the input fields exists and are not empty
+  if (email && password) {
+    // Execute SQL query that'll select the account from the database based on the specified email and password
+    db.query(
+      "SELECT * FROM users WHERE email = ? AND password = ?",
+      [email, password],
+      function (error, results, fields) {
+        // If there is an issue with the query, output the error
+        if (error) throw error;
+        // If the account exists
+        if (results.length > 0) {
+          // Authenticate the user
+          request.session.loggedin = true;
+          request.session.email = email;
+          // Redirect to home page
+          // response.redirect("/home");
+          console.log("user: ", results[0]);
+          response.send(results[0]);
+        } else {
+          console.log("Incorrect email and/or Password!");
+          response.send("Incorrect email and/or Password!");
+        }
+        response.end();
+      }
+    );
+  } else {
+    response.send("Please enter email and Password!");
+    response.end();
+  }
+});
 
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {
@@ -25,16 +72,16 @@ app.use(express.json());
 //   );
 // });
 
-// // Route to get all material
-// app.get("/api/get_material", (req, res) => {
-//   console.log("get_material");
-//   db.query("SELECT * FROM `db.material`", (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     res.send(result);
-//   });
-// });
+app.get("/get_users", (req, res) => {
+  console.log("get_users");
+  db.query("SELECT * FROM `users`", (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(result);
+    res.send(result);
+  });
+});
 
 // //Route to add new parts
 // app.post("/api/add_parts", (req, res) => {
