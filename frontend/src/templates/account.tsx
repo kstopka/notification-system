@@ -12,13 +12,13 @@ const AccountPage: React.FC<AccountPageProps> = () => {
   );
 
   const { logOut } = useActions<IAuthActions>(AuthCtx, ["logOut"]);
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     navigate(URL_PATHS.home.slug);
     logOut();
   };
 
-  const navigate = useNavigate();
   return (
     <>
       <h1>Account Page</h1>

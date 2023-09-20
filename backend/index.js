@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./config/db");
+const checkToken = require("./middleware");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -82,14 +83,18 @@ app.post("/auth", function (request, response) {
 //   );
 // });
 
-app.get("/get_users", (req, res) => {
-  // console.log("get_users");
-  db.query("SELECT * FROM `users`", (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(result);
-    res.send(result);
+app.get("/get_users", (req, res, next) => {
+  console.log("get_users");
+  // console.log("res", res.headers);
+
+  checkToken(req, res, () => {
+    db.query("SELECT * FROM `users`", (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(result);
+    });
   });
 });
 
