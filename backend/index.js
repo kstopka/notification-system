@@ -3,6 +3,7 @@ const db = require("./config/db");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -38,10 +39,19 @@ app.post("/auth", function (request, response) {
           // Authenticate the user
           request.session.loggedin = true;
           request.session.email = email;
-          // Redirect to home page
-          // response.redirect("/home");
-          console.log("user: ", results[0]);
-          response.send(results[0]);
+
+          const user = results[0];
+          const preparedUser = {
+            id: user.id,
+            userEmail: user.email,
+            password: user.password,
+          };
+
+          const token = jwt.sign({ preparedUser }, "secretkey", {
+            expiresIn: "1h",
+          });
+
+          response.send({ ...results[0], token: `Bearer ${token}` });
         } else {
           console.log("Incorrect email and/or Password!");
           response.send("Incorrect email and/or Password!");
