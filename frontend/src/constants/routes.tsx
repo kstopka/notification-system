@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../templates/home";
+import AccountPage from "../templates/account";
+import PanelAdminPage from "../templates/panelAdmin";
 // import { HomePage } from "../templates";
 // import LoginPage from "../templates/Auth/login";
 // import PanelAdmin from "../templates/panel_admin";
@@ -26,17 +28,12 @@ const URL_PATHS: URLPaths = {
   },
   admin: {
     label: "Panel Admin",
-    slug: "/panel_admin/",
+    slug: "/panel-admin/",
   },
-
-  // registiation: {
-  //   label: "Registiation",
-  //   slug: "/registiation/",
-  // },
-  // resetPassword: {
-  //   label: "Reset Password",
-  //   slug: "/reset-password/",
-  // },
+  account: {
+    label: "Account",
+    slug: "/account/",
+  },
 };
 
 export const router = createBrowserRouter([
@@ -50,7 +47,11 @@ export const router = createBrowserRouter([
   },
   {
     path: URL_PATHS.admin.slug,
-    element: <div>panel admin</div>,
+    element: <PanelAdminPage />,
+  },
+  {
+    path: URL_PATHS.account.slug,
+    element: <AccountPage />,
   },
 ]);
 

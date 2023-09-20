@@ -51,7 +51,7 @@ app.post("/auth", function (request, response) {
             expiresIn: "1h",
           });
 
-          response.send({ ...results[0], token: `Bearer ${token}` });
+          response.send({ ...results[0], token });
         } else {
           console.log("Incorrect email and/or Password!");
           response.send("Incorrect email and/or Password!");
@@ -83,7 +83,7 @@ app.post("/auth", function (request, response) {
 // });
 
 app.get("/get_users", (req, res) => {
-  console.log("get_users");
+  // console.log("get_users");
   db.query("SELECT * FROM `users`", (err, result) => {
     if (err) {
       console.log(err);

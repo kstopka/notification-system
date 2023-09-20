@@ -1,23 +1,23 @@
+import Cookies from "js-cookie";
 import initialState from "./state";
 import { IAuthState, LoadAuthPayloadType } from "./types";
 
 class AuthActions {
   logIn = (state: IAuthState, { payload }: { payload: any }) => {
-    // const { id, level, email, first_name, last_name, token } = payload;
-    // Cookies.set("token", token, { expires: 2 });
-    const { id, email, first_name, last_name } = payload;
+    const { id, email, name, surname, token } = payload;
+    Cookies.set("token", token, { expires: 2 });
     return {
       ...state,
       loggedIn: true,
       id,
       email,
-      first_name,
-      last_name,
+      name,
+      surname,
     };
   };
 
   logOut = () => {
-    // Cookies.remove("token");
+    Cookies.remove("token");
     return initialState;
   };
 

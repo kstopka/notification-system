@@ -5,9 +5,9 @@ import LoginForm from "../components/Login";
 interface HomeProps {}
 
 const HomePage: React.FC<HomeProps> = () => {
-  useEffect(() => {
-    Api.getUsers();
-  }, []);
+  // useEffect(() => {
+  //   Api.getUsers();
+  // }, []);
   return (
     <>
       <h1>HOME PAGE</h1>

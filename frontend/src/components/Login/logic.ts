@@ -7,7 +7,6 @@ import { AuthCtx, useActions, useContextState } from "../../contexted";
 import { IAuthActions, IAuthState } from "../../contexted/Auth/types";
 import { ILoginData, IResponse, IUseLogin } from "./types";
 import { defaultValues, schema } from "./utils";
-import AuthApi from "./AuthApi";
 import Api from "../../api/API";
 
 export const useLogin = (): IUseLogin => {
@@ -34,9 +33,9 @@ export const useLogin = (): IUseLogin => {
     Api.login(formValues)
       // .then((res: ILoginData) => {
       .then((res: any) => {
-        // logIn(res.userData);
-        // navigate(URL_PATHS.home.slug);
-        // reset();
+        logIn(res.data);
+        navigate(URL_PATHS.account.slug);
+        reset();
         // setResponse({
         //   status: "success",
         //   message: res.data.message,

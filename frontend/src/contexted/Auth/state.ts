@@ -5,8 +5,8 @@ const initialState: IAuthState = {
   loggedIn: false,
   id: 0,
   email: "",
-  first_name: "",
-  last_name: "",
+  name: "",
+  surname: "",
 };
 
 export default initialState;
