@@ -18,13 +18,10 @@ export interface ILoginData {
 }
 
 export interface IUseLogin {
-  isAlertVisible: boolean;
   isLoading: boolean;
   methods: UseFormReturn<TLoginDefaultState>;
-  response: IResponse;
   onSubmit: any;
   // onSubmit: (
   //   formValues: TLoginDefaultState
   // ) => SubmitHandler<TLoginDefaultState>;
-  onCloseAlert: () => void;
 }

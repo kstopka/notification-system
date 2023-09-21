@@ -1,0 +1,17 @@
+.Footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: #000;
+  min-height: 100px;
+  color: #fff;
+}
+
+.Footer .Name {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0 20px;
+  font-size: 20px;
+  color: yellowgreen;
+}

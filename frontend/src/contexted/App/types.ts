@@ -1,20 +1,26 @@
 import { ReactNode, Dispatch } from "react";
+import { IAlertStatus } from "../../components/atoms/Alert/types";
 
+export interface IAlert {
+  isAlertVisible: boolean;
+  status: IAlertStatus;
+  message: string;
+}
 export interface IAppState {
   imBusy: boolean;
   isModalOpen: boolean;
-  reload: boolean;
+  alert: IAlert;
 }
 
 export type AppActionType =
   | { type: "loaded" }
   | { type: "loading" }
-  | { type: "reload"; payload: boolean };
+  | { type: "setAlert"; payload: IAlert };
 
 export interface IAppActions {
   loaded: () => void;
   loading: () => void;
-  reload: (value: boolean) => void;
+  setAlert: (payload: IAlert) => void;
 }
 
 export interface AppProviderProps {

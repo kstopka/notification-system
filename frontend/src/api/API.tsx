@@ -14,7 +14,6 @@ class ClassApi {
   }
 
   login({ email, password }: { email: string; password: string }) {
-    console.log("authStart");
     return Axios.post(`${this.baseUrl}/auth`, {
       email,
       password,

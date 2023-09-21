@@ -3,18 +3,13 @@ import Alert from "../atoms/Alert";
 import { FormProvider } from "react-hook-form";
 import FormTextInput from "../atoms/FormTextInput";
 import { useEffect } from "react";
+import { useActions, AppCtx } from "../../contexted";
+import { IAppActions } from "../../contexted/App/types";
 
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = () => {
-  const {
-    isLoading,
-    isAlertVisible,
-    response,
-    methods,
-    onSubmit,
-    onCloseAlert,
-  } = useLogin();
+  const { isLoading, methods, onSubmit } = useLogin();
 
   const { handleSubmit } = methods;
 
@@ -33,15 +28,6 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
   return (
     <>
-      {isAlertVisible && (
-        <Alert
-          handleClose={onCloseAlert}
-          title={response.status}
-          description={response.message}
-          status={response.status}
-        />
-      )}
-
       <div className="LoginWrapper">
         <h2>Zaloguj się</h2>
 

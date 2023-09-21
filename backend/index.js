@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
 
 app.post("/auth", function (request, response) {
-  console.log("authBackendStart");
   // Capture the input fields
   let email = request.body.email;
   let password = request.body.password;

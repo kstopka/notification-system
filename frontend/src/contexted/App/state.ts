@@ -1,9 +1,15 @@
-import { IAppState } from "./types";
+import { IAlert, IAppState } from "./types";
+
+export const initialAlert: IAlert = {
+  isAlertVisible: false,
+  status: "info",
+  message: "",
+};
 
 const initialState: IAppState = {
   imBusy: true,
   isModalOpen: false,
-  reload: false,
+  alert: initialAlert,
 };
 
 export default initialState;

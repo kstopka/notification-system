@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import URL_PATHS from "../constants/routes";
 import { useContextState, AuthCtx, useActions } from "../contexted";
 import { IAuthActions, IAuthState } from "../contexted/Auth/types";
+import Layout from "../components/Layout";
 
 interface AccountPageProps {}
 
@@ -20,7 +21,7 @@ const AccountPage: React.FC<AccountPageProps> = () => {
   };
 
   return (
-    <>
+    <Layout>
       <h1>Account Page</h1>
       <button onClick={() => navigate(URL_PATHS.admin.slug)}>
         Panel Admin
@@ -33,7 +34,7 @@ const AccountPage: React.FC<AccountPageProps> = () => {
           <h3>{email}</h3>
         </>
       )}
-    </>
+    </Layout>
   );
 };
 

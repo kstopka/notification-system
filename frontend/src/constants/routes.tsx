@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../templates/home";
 import AccountPage from "../templates/account";
 import PanelAdminPage from "../templates/panelAdmin";
+import LoginPage from "../templates/login";
 // import { HomePage } from "../templates";
 // import LoginPage from "../templates/Auth/login";
 // import PanelAdmin from "../templates/panel_admin";
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
   },
   {
     path: URL_PATHS.login.slug,
-    element: <div>login</div>,
+    element: <LoginPage />,
   },
   {
     path: URL_PATHS.admin.slug,

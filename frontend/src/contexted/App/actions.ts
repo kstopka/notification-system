@@ -1,4 +1,4 @@
-import { IAppState } from "./types";
+import { IAlert, IAppState } from "./types";
 
 class AppActions {
   loaded = (state: IAppState) => ({
@@ -11,9 +11,9 @@ class AppActions {
     imBusy: true,
   });
 
-  reload = (state: IAppState, payload: boolean) => ({
+  setAlert = (state: IAppState, { payload }: { payload: IAlert }) => ({
     ...state,
-    reload: payload,
+    alert: payload,
   });
 }
 

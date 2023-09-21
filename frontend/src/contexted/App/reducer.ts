@@ -9,8 +9,8 @@ function appReducer(state = initialState, action: AppActionType): IAppState {
       return actions.loaded(state);
     case "loading":
       return actions.loading(state);
-    case "reload":
-      return actions.reload(state, action.payload);
+    case "setAlert":
+      return actions.setAlert(state, action);
     default:
       throw new Error("Wrong action type in app reducer");
   }

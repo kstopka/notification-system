@@ -80,9 +80,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
     }
   }, [state, firstRender]);
 
-  useEffect(() => {
-    console.log("Ctx Auth state", state);
-  }, [state]);
+  // useEffect(() => {
+  //   console.log("Ctx Auth state", state);
+  // }, [state]);
 
   return (
     <AuthCtx.Provider
