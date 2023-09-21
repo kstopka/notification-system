@@ -51,10 +51,13 @@ app.post("/auth", function (request, response) {
             expiresIn: "1h",
           });
 
-          response.send({ ...results[0], token });
+          response.send({
+            ...results[0],
+            token,
+            message: "Zalogowano poprawnie",
+          });
         } else {
-          console.log("Incorrect email and/or Password!");
-          response.send("Incorrect email and/or Password!");
+          response.status(401).send("Błedny email lub hasło!");
         }
         response.end();
       }

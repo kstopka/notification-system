@@ -14,8 +14,12 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   const { handleSubmit } = methods;
 
   const login = ({ key }: KeyboardEvent) => {
-    if (key === "1")
+    if (key === "1") {
       onSubmit({ email: "alice@example.com", password: "tajnehaslo" });
+    }
+    if (key === "2") {
+      onSubmit({ email: "alice@example.com", password: "tajnehaslo2" });
+    }
   };
 
   useEffect(() => {

@@ -1,14 +1,9 @@
-import { SubmitHandler, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { IAuthState } from "../../contexted/Auth/types";
 
 import { defaultValues } from "./utils";
 
 type TLoginDefaultState = typeof defaultValues;
-
-export interface IResponse {
-  message: string;
-  status: "info" | "error" | "success";
-}
 
 export interface ILoginData {
   data: {

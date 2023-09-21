@@ -50,9 +50,11 @@ const Layout: React.FC<ILayout> = ({ children, seo = {} }): JSX.Element => {
 
   useEffect(() => {
     if (alert.isAlertVisible) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setAlert(initialAlert);
       }, 3000);
+
+      return () => clearTimeout(timeout);
     }
   }, [alert.isAlertVisible]);
 
