@@ -1,12 +1,11 @@
 const db = require("./config/db");
 const jwt = require("jsonwebtoken");
 
-const getUsers = () =>
+const getUsers = (res) =>
   db.query("SELECT * FROM `users`", (err, result) => {
     if (err) {
-      console.log(err);
+      if (err) throw err;
     }
-    console.log(result);
     res.send(result);
   });
 

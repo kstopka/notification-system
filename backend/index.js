@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "static")));
 
 app.post("/auth", (request, response) => checkPermissions(request, response));
 
-app.get("/get_users", (req, res) => checkToken(req, res, () => getUsers()));
+app.get("/get_users", (req, res) => checkToken(req, res, () => getUsers(res)));
 
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {
