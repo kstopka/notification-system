@@ -11,6 +11,7 @@ import LoginPage from "../templates/login";
 export interface URLSinglePath {
   label: string;
   slug: string;
+  isAdmin?: boolean;
 }
 
 export interface URLPaths {
@@ -30,6 +31,7 @@ const URL_PATHS: URLPaths = {
   admin: {
     label: "Panel Admin",
     slug: "/panel-admin/",
+    isAdmin: true,
   },
   account: {
     label: "Account",

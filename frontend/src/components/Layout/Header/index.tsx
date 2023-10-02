@@ -9,17 +9,18 @@ interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = (): JSX.Element => {
   const URL_PATHS_ARRAY: URLSinglePath[] = objectToArray(URL_PATHS);
-  const { loggedIn } = useContextState<IAuthState>(AuthCtx, [
+  const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
-    "name",
+    "permissions",
   ]);
 
   return (
     <header className="Header">
       <nav className="Navigation">
         {URL_PATHS_ARRAY && URL_PATHS_ARRAY.length > 0
-          ? URL_PATHS_ARRAY.map(({ slug, label }) =>
-              loggedIn && label !== "Login" ? (
+          ? URL_PATHS_ARRAY.map(({ slug, label, isAdmin }) =>
+              (loggedIn && label !== "Login" && !isAdmin) ||
+              (isAdmin && permissions === "admin") ? (
                 <NavLink
                   to={slug}
                   className={({ isActive, isPending }) =>
