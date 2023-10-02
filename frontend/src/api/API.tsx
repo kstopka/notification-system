@@ -16,6 +16,13 @@ class ClassApi {
       password,
     });
   }
+
+  getNews() {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_news`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }
 
 const Api = new ClassApi();

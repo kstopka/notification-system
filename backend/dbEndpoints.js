@@ -9,6 +9,17 @@ const getUsers = (res) =>
     res.send(result);
   });
 
+const getNews = (res) =>
+  db.query(
+    "SELECT p.*, u.name AS user_name, COUNT(pcr.post_id) AS comment_count FROM posts AS p JOIN users AS u ON p.user_id = u.user_id LEFT JOIN post_comment_relations AS pcr ON p.post_id = pcr.post_id WHERE p.type = 'news' GROUP BY p.post_id, u.name ORDER BY p.created_at ASC",
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+      res.send(result);
+    }
+  );
+
 const checkPermissions = (request, response) => {
   // Capture the input fields
   let email = request.body.email;
@@ -56,4 +67,4 @@ const checkPermissions = (request, response) => {
   }
 };
 
-module.exports = { checkPermissions, getUsers };
+module.exports = { checkPermissions, getUsers, getNews };

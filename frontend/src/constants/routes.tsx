@@ -3,10 +3,7 @@ import HomePage from "../templates/home";
 import AccountPage from "../templates/account";
 import PanelAdminPage from "../templates/panelAdmin";
 import LoginPage from "../templates/login";
-// import { HomePage } from "../templates";
-// import LoginPage from "../templates/Auth/login";
-// import PanelAdmin from "../templates/panel_admin";
-// import PartsPage from "../templates/parts";
+import NewsPage from "../templates/news";
 
 export interface URLSinglePath {
   label: string;
@@ -37,6 +34,10 @@ const URL_PATHS: URLPaths = {
     label: "Account",
     slug: "/account/",
   },
+  news: {
+    label: "News",
+    slug: "/news/",
+  },
 };
 
 export const router = createBrowserRouter([
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.account.slug,
     element: <AccountPage />,
+  },
+  {
+    path: URL_PATHS.news.slug,
+    element: <NewsPage />,
   },
 ]);
 
