@@ -17,7 +17,7 @@ const PanelAdminPage: React.FC<PanelAdminPageProps> = () => {
   };
 
   return (
-    <Layout>
+    <Layout isAdmin>
       <h1>Panel Admin</h1>
       <button onClick={() => navigate(URL_PATHS.account.slug)}>Account</button>
       <button onClick={() => getUsers()}>users</button>

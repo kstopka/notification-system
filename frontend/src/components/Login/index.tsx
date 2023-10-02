@@ -20,6 +20,9 @@ const LoginForm: React.FC<LoginFormProps> = () => {
     if (key === "2") {
       onSubmit({ email: "alice@example.com", password: "tajnehaslo2" });
     }
+    if (key === "3") {
+      onSubmit({ email: "john@example.com", password: "haslo123" });
+    }
   };
 
   useEffect(() => {

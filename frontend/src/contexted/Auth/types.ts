@@ -7,6 +7,7 @@ export interface IAuthState {
   email: string;
   surname: string;
   name: string;
+  permissions: string;
 }
 
 export type LoadAuthPayloadType = { auth: IAuthState };

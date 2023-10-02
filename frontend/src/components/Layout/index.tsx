@@ -18,11 +18,19 @@ import { initialAlert } from "../../contexted/App/state";
 interface ILayout {
   children: React.ReactNode;
   seo?: Record<string, any>;
+  isAdmin?: boolean;
 }
 
-const Layout: React.FC<ILayout> = ({ children, seo = {} }): JSX.Element => {
+const Layout: React.FC<ILayout> = ({
+  children,
+  seo = {},
+  isAdmin = false,
+}): JSX.Element => {
   const location = useLocation();
-  const { loggedIn } = useContextState<IAuthState>(AuthCtx, ["loggedIn"]);
+  const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
+    "loggedIn",
+    "permissions",
+  ]);
   const { logOut } = useActions<IAuthActions>(AuthCtx, ["logOut"]);
 
   const { alert } = useContextState<IAppState>(AppCtx, ["alert"]);
@@ -47,6 +55,12 @@ const Layout: React.FC<ILayout> = ({ children, seo = {} }): JSX.Element => {
       navigate(URL_PATHS.login.slug);
     }
   }, [loggedIn, location.pathname, loggedIn, navigate]);
+
+  useEffect(() => {
+    if (isAdmin && permissions !== "admin") {
+      navigate(URL_PATHS.home.slug);
+    }
+  }, [isAdmin, navigate, permissions]);
 
   useEffect(() => {
     if (alert.isAlertVisible) {

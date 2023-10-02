@@ -7,6 +7,7 @@ const initialState: IAuthState = {
   email: "",
   name: "",
   surname: "",
+  permissions: "",
 };
 
 export default initialState;

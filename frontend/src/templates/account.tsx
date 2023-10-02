@@ -7,10 +7,14 @@ import Layout from "../components/Layout";
 interface AccountPageProps {}
 
 const AccountPage: React.FC<AccountPageProps> = () => {
-  const { name, email, surname, loggedIn } = useContextState<IAuthState>(
-    AuthCtx,
-    ["name", "email", "surname", "loggedIn"]
-  );
+  const { name, email, surname, loggedIn, permissions } =
+    useContextState<IAuthState>(AuthCtx, [
+      "name",
+      "email",
+      "surname",
+      "loggedIn",
+      "permissions",
+    ]);
 
   const { logOut } = useActions<IAuthActions>(AuthCtx, ["logOut"]);
   const navigate = useNavigate();
@@ -23,9 +27,11 @@ const AccountPage: React.FC<AccountPageProps> = () => {
   return (
     <Layout>
       <h1>Account Page</h1>
-      <button onClick={() => navigate(URL_PATHS.admin.slug)}>
-        Panel Admin
-      </button>
+      {permissions === "admin" && (
+        <button onClick={() => navigate(URL_PATHS.admin.slug)}>
+          Panel Admin
+        </button>
+      )}
       <button onClick={() => handleLogOut()}>logout</button>
       {loggedIn && (
         <>

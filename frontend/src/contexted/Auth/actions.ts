@@ -4,7 +4,7 @@ import { IAuthState, LoadAuthPayloadType } from "./types";
 
 class AuthActions {
   logIn = (state: IAuthState, { payload }: { payload: any }) => {
-    const { user_id: id, email, name, surname, token } = payload;
+    const { user_id: id, email, name, surname, token, permissions } = payload;
     Cookies.set("token", token, { expires: 2 });
     return {
       ...state,
@@ -13,6 +13,7 @@ class AuthActions {
       email,
       name,
       surname,
+      permissions,
     };
   };
 
