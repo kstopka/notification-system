@@ -1,14 +1,17 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Layout from "../Layout";
-import Api from "../../api/API";
+import SingleNews from "./SingleNews";
 import { useNews } from "./hooks";
-
-interface NewsContentProps {}
+import { NewsContentProps } from "./types";
 
 const NewsContent: React.FC<NewsContentProps> = () => {
   const { news } = useNews();
-  return <div></div>;
+
+  return (
+    <>
+      {news &&
+        news.length > 0 &&
+        news.map((el) => <SingleNews {...el} key={el.post_id} />)}
+    </>
+  );
 };
 
 export default NewsContent;

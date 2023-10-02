@@ -16,6 +16,7 @@ const getNews = (res) =>
       if (err) {
         if (err) throw err;
       }
+
       res.send(result);
     }
   );
