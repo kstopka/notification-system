@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     *,
@@ -73,6 +73,16 @@ export const GlobalStyles = createGlobalStyle`
 
         small{
             font-size: ${(props) => props.theme.fonts.size.small};
+
+        }
+
+        button {
+            color: ${(props) => props.theme.colors.black};
+            background-color: ${(props) => props.theme.colors.white};
+            width: fit-content;
+            padding: 10px;
+            text-decoration: none;
+            border: none;
 
         }
     }

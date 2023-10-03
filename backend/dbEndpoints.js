@@ -20,6 +20,27 @@ const getNews = (res) =>
       res.send(result);
     }
   );
+const updateSingleNews = (req, res) => {
+  const { title, content } = req.body;
+
+  const id = req.params.id;
+
+  console.log("id", id);
+  console.log("title", title);
+  console.log("content", content);
+
+  db.query(
+    "UPDATE `posts` SET `title`= ? ,`content`= ? WHERE post_id = ?",
+    [title, content, id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
 
 const checkPermissions = (request, response) => {
   // Capture the input fields
@@ -68,4 +89,4 @@ const checkPermissions = (request, response) => {
   }
 };
 
-module.exports = { checkPermissions, getUsers, getNews };
+module.exports = { checkPermissions, getUsers, getNews, updateSingleNews };

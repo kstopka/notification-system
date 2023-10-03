@@ -1,7 +1,12 @@
 const express = require("express");
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
-const { getUsers, checkPermissions, getNews } = require("./dbEndpoints");
+const {
+  getUsers,
+  checkPermissions,
+  getNews,
+  updateSingleNews,
+} = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -26,6 +31,10 @@ app.post("/auth", (request, response) => checkPermissions(request, response));
 app.get("/get_users", (req, res) => checkToken(req, res, () => getUsers(res)));
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
+
+app.post("/update_news/:id", (req, res) =>
+  checkToken(req, res, () => updateSingleNews(req, res))
+);
 
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {
@@ -94,38 +103,6 @@ app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
 //       console.log(err);
 //     }
 //   });
-// });
-
-// // Route for update part
-// app.post("/api/update_part/:id", (req, res) => {
-//   console.log("update_part");
-//   const {
-//     nameParts,
-//     materialParts,
-//     quintityMagazinParts,
-//     quantityOrderParts,
-//     quantityOccupiedParts,
-//   } = req.body;
-
-//   const id = req.params.id;
-
-//   db.query(
-//     "UPDATE `db.parts` SET `nameParts`= ? ,`materialParts`= ?,`quintityMagazinParts`= ?,`quantityOrderParts`= ?,`quantityOccupiedParts`= ? WHERE idParts = ?",
-//     [
-//       nameParts,
-//       materialParts,
-//       quintityMagazinParts,
-//       quantityOrderParts,
-//       quantityOccupiedParts,
-//       id,
-//     ],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.send(result);
-//     }
-//   );
 // });
 
 // //EXAMPLES
