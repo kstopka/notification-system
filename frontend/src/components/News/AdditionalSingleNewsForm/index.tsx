@@ -1,26 +1,23 @@
 import { FormProvider } from "react-hook-form";
 import { EditSingleNewsFormProps } from "./types";
-import { useEditSingleNews } from "./logic";
 import FormTextInput from "../../atoms/FormTextInput";
+import { useAdditionalSingleNews } from "./logic";
 
-const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
-  isEditing,
-  content,
-  title,
-  post_id,
+const AdditionalSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
   getNews,
 }) => {
-  const { isLoading, methods, handleSubmit, onSubmit } = useEditSingleNews({
-    content,
-    title,
-    post_id,
-    getNews,
-  });
+  const { isLoading, methods, handleSubmit, onSubmit } =
+    useAdditionalSingleNews({
+      getNews,
+    });
 
   return (
     <div>
       <FormProvider {...methods}>
-        <form id="edit-single-news-form" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="additional-single-news-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <FormTextInput name="title" placeholder="Tytuł:" label="Tytuł:" />
 
           <FormTextInput name="content" placeholder="Treść:" label="Treść:" />
@@ -36,4 +33,4 @@ const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
   );
 };
 
-export default EditSingleNewsForm;
+export default AdditionalSingleNewsForm;

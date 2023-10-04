@@ -83,6 +83,14 @@ export const GlobalStyles = createGlobalStyle`
             padding: 10px;
             text-decoration: none;
             border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+        
+        button:hover{
+
+            background-color: ${(props) => props.theme.colors.black};
+            color: ${(props) => props.theme.colors.white};
 
         }
     }

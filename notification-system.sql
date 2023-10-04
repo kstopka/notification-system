@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 21, 2023 at 10:20 PM
+-- Generation Time: Paź 04, 2023 at 10:20 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `comments`
+-- Struktura tabeli dla tabeli `comments_posts`
 --
 
-CREATE TABLE `comments` (
+CREATE TABLE `comments_posts` (
   `comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
--- Dumping data for table `comments`
+-- Dumping data for table `comments_posts`
 --
 
-INSERT INTO `comments` (`comment_id`, `user_id`, `post_id`, `content`, `created_at`) VALUES
+INSERT INTO `comments_posts` (`comment_id`, `user_id`, `post_id`, `content`, `created_at`) VALUES
 (1, 1, 1, 'To jest świetny post!', '2023-09-21 08:00:00'),
 (2, 2, 2, 'Dziękujemy za ten artykuł.', '2023-09-21 09:15:00'),
 (3, 3, 3, 'Bardzo ciekawy temat.', '2023-09-21 10:30:00'),
@@ -63,12 +63,56 @@ INSERT INTO `comments` (`comment_id`, `user_id`, `post_id`, `content`, `created_
 (21, 1, 10, 'To jest świetny post!', '2023-09-20 08:00:00');
 
 --
--- Wyzwalacze `comments`
+-- Wyzwalacze `comments_posts`
 --
 DELIMITER $$
-CREATE TRIGGER `add_to_post_comment_relations` AFTER INSERT ON `comments` FOR EACH ROW BEGIN
+CREATE TRIGGER `add_to_post_comment_relations` AFTER INSERT ON `comments_posts` FOR EACH ROW BEGIN
     INSERT INTO post_comment_relations (post_id, comment_id)
     VALUES (NEW.post_id, NEW.comment_id);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `comments_ticket`
+--
+
+CREATE TABLE `comments_ticket` (
+  `comment_id` int(11) NOT NULL,
+  `ticket_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `comment_text` text DEFAULT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `comments_ticket`
+--
+
+INSERT INTO `comments_ticket` (`comment_id`, `ticket_id`, `user_id`, `comment_text`, `comment_date`) VALUES
+(1, 1, 6, 'Komentarz do zgłoszenia 1 - Komentarz 1', '2023-10-04 20:17:24'),
+(2, 1, 7, 'Komentarz do zgłoszenia 1 - Komentarz 2', '2023-10-04 20:17:24'),
+(3, 2, 8, 'Komentarz do zgłoszenia 2 - Komentarz 1', '2023-10-04 20:17:24'),
+(4, 2, 9, 'Komentarz do zgłoszenia 2 - Komentarz 2', '2023-10-04 20:17:24'),
+(5, 2, 10, 'Komentarz do zgłoszenia 2 - Komentarz 3', '2023-10-04 20:17:24'),
+(6, 3, 6, 'Komentarz do zgłoszenia 3 - Komentarz 1', '2023-10-04 20:17:24'),
+(7, 3, 7, 'Komentarz do zgłoszenia 3 - Komentarz 2', '2023-10-04 20:17:24'),
+(8, 3, 8, 'Komentarz do zgłoszenia 3 - Komentarz 3', '2023-10-04 20:17:24'),
+(9, 3, 9, 'Komentarz do zgłoszenia 3 - Komentarz 4', '2023-10-04 20:17:24'),
+(10, 4, 10, 'Komentarz do zgłoszenia 4 - Komentarz 1', '2023-10-04 20:17:24'),
+(11, 5, 6, 'Komentarz do zgłoszenia 5 - Komentarz 1', '2023-10-04 20:17:24'),
+(12, 5, 7, 'Komentarz do zgłoszenia 5 - Komentarz 2', '2023-10-04 20:17:24'),
+(13, 5, 8, 'Komentarz do zgłoszenia 5 - Komentarz 3', '2023-10-04 20:17:24');
+
+--
+-- Wyzwalacze `comments_ticket`
+--
+DELIMITER $$
+CREATE TRIGGER `add_to_ticket_comment_relations` AFTER INSERT ON `comments_ticket` FOR EACH ROW BEGIN
+    INSERT INTO ticket_comment_relations (ticket_id, comment_id)
+    VALUES (NEW.ticket_id, NEW.comment_id);
 END
 $$
 DELIMITER ;
@@ -95,16 +139,19 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `created_at`, `type`, `archive`) VALUES
-(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-21 08:00:00', 'news', 1),
+(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-28 08:00:00', 'news', 1),
 (2, 2, 'Drugi post', 'Treść drugiego posta', NULL, '2023-09-21 09:15:00', 'note', 1),
 (3, 1, 'Trzeci post', 'Treść trzeciego posta', NULL, '2023-09-21 10:30:00', 'note', NULL),
-(4, 3, 'Czwarty post', 'Treść czwartego posta', NULL, '2023-09-21 12:45:00', 'news', NULL),
+(4, 3, 'Czwarty post', 'Treść czwartego post', NULL, '2023-09-21 12:45:00', 'news', NULL),
 (5, 2, 'Piąty post', 'Treść piątego posta', NULL, '2023-09-21 14:00:00', 'news', NULL),
 (6, 1, 'Szósty post', 'Treść szóstego posta', NULL, '2023-09-21 15:15:00', 'note', NULL),
 (7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note', NULL),
 (8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news', NULL),
 (9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note', NULL),
-(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news', NULL);
+(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news', NULL),
+(11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news', NULL),
+(22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news', NULL),
+(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news', NULL);
 
 -- --------------------------------------------------------
 
@@ -147,6 +194,64 @@ INSERT INTO `post_comment_relations` (`post_id`, `comment_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `ticket_id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `priority` enum('niski','średni','wysoki') NOT NULL,
+  `status` enum('otwarte','przypisane','zamknięte') NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modification_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`ticket_id`, `subject`, `description`, `priority`, `status`, `creation_date`, `modification_date`, `user_id`) VALUES
+(1, 'Zgłoszenie 1', 'Opis zgłoszenia 1', 'niski', 'otwarte', '2023-10-04 20:14:53', '2023-10-04 20:14:53', 1),
+(2, 'Zgłoszenie 2', 'Opis zgłoszenia 2', 'średni', 'przypisane', '2023-10-04 20:14:53', '2023-10-04 20:14:53', 2),
+(3, 'Zgłoszenie 3', 'Opis zgłoszenia 3', 'wysoki', 'otwarte', '2023-10-04 20:14:53', '2023-10-04 20:14:53', 3),
+(4, 'Zgłoszenie 4', 'Opis zgłoszenia 4', 'niski', 'zamknięte', '2023-10-04 20:14:53', '2023-10-04 20:14:53', 4),
+(5, 'Zgłoszenie 5', 'Opis zgłoszenia 5', 'średni', 'otwarte', '2023-10-04 20:14:53', '2023-10-04 20:14:53', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `ticket_comment_relations`
+--
+
+CREATE TABLE `ticket_comment_relations` (
+  `ticket_id` int(11) DEFAULT NULL,
+  `comment_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `ticket_comment_relations`
+--
+
+INSERT INTO `ticket_comment_relations` (`ticket_id`, `comment_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(3, 6),
+(3, 7),
+(3, 8),
+(3, 9),
+(4, 10),
+(5, 11),
+(5, 12),
+(5, 13);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `users`
 --
 
@@ -155,36 +260,45 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `permissions` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`) VALUES
-(1, 'John', 'Doe', 'john@example.com', 'haslo123'),
-(2, 'Alice', 'Smith', 'alice@example.com', 'tajnehaslo'),
-(3, 'Bob', 'Johnson', 'bob@example.com', 'mojehaslo'),
-(4, 'Eva', 'Brown', 'eva@example.com', 'silnehaslo'),
-(5, 'Michael', 'Wilson', 'michael@example.com', '123456'),
-(6, 'Olivia', 'Lee', 'olivia@example.com', 'haselko'),
-(7, 'David', 'Anderson', 'david@example.com', 'haselkopodobne'),
-(8, 'Sophia', 'Robinson', 'sophia@example.com', 'qwerty'),
-(9, 'Daniel', 'Murphy', 'daniel@example.com', 'mypass123'),
-(10, 'Emma', 'Garcia', 'emma@example.com', '12345678');
+INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`, `permissions`) VALUES
+(1, 'John', 'Doe', 'john@example.com', 'haslo123', 'admin'),
+(2, 'Alice', 'Smith', 'alice@example.com', 'tajnehaslo', 'user'),
+(3, 'Bob', 'Johnson', 'bob@example.com', 'mojehaslo', 'user'),
+(4, 'Eva', 'Brown', 'eva@example.com', 'silnehaslo', 'user'),
+(5, 'Michael', 'Wilson', 'michael@example.com', '123456', 'user'),
+(6, 'Olivia', 'Lee', 'olivia@example.com', 'haselko', 'user'),
+(7, 'David', 'Anderson', 'david@example.com', 'haselkopodobne', 'user'),
+(8, 'Sophia', 'Robinson', 'sophia@example.com', 'qwerty', 'user'),
+(9, 'Daniel', 'Murphy', 'daniel@example.com', 'mypass123', 'user'),
+(10, 'Emma', 'Garcia', 'emma@example.com', '12345678', 'user');
 
 --
 -- Indeksy dla zrzutów tabel
 --
 
 --
--- Indeksy dla tabeli `comments`
+-- Indeksy dla tabeli `comments_posts`
 --
-ALTER TABLE `comments`
+ALTER TABLE `comments_posts`
   ADD PRIMARY KEY (`comment_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `post_id` (`post_id`);
+  ADD KEY `comments_ibfk_2` (`post_id`);
+
+--
+-- Indeksy dla tabeli `comments_ticket`
+--
+ALTER TABLE `comments_ticket`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `ticket_id` (`ticket_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeksy dla tabeli `posts`
@@ -201,6 +315,20 @@ ALTER TABLE `post_comment_relations`
   ADD KEY `comment_id` (`comment_id`);
 
 --
+-- Indeksy dla tabeli `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`ticket_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeksy dla tabeli `ticket_comment_relations`
+--
+ALTER TABLE `ticket_comment_relations`
+  ADD KEY `ticket_id` (`ticket_id`),
+  ADD KEY `comment_id` (`comment_id`);
+
+--
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -209,6 +337,24 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `comments_ticket`
+--
+ALTER TABLE `comments_ticket`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -221,11 +367,18 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `comments`
+-- Constraints for table `comments_posts`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`);
+ALTER TABLE `comments_posts`
+  ADD CONSTRAINT `comments_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `comments_posts_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`);
+
+--
+-- Constraints for table `comments_ticket`
+--
+ALTER TABLE `comments_ticket`
+  ADD CONSTRAINT `comments_ticket_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
+  ADD CONSTRAINT `comments_ticket_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `posts`
@@ -238,7 +391,20 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `post_comment_relations`
   ADD CONSTRAINT `post_comment_relations_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `post_comment_relations_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`);
+  ADD CONSTRAINT `post_comment_relations_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments_posts` (`comment_id`);
+
+--
+-- Constraints for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `ticket_comment_relations`
+--
+ALTER TABLE `ticket_comment_relations`
+  ADD CONSTRAINT `ticket_comment_relations_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
+  ADD CONSTRAINT `ticket_comment_relations_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments_ticket` (`comment_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,7 +11,7 @@ const getUsers = (res) =>
 
 const getNews = (res) =>
   db.query(
-    "SELECT p.*, u.name AS user_name, COUNT(pcr.post_id) AS comment_count FROM posts AS p JOIN users AS u ON p.user_id = u.user_id LEFT JOIN post_comment_relations AS pcr ON p.post_id = pcr.post_id WHERE p.type = 'news' GROUP BY p.post_id, u.name ORDER BY p.created_at ASC",
+    "SELECT p.*, u.name AS user_name, COUNT(pcr.post_id) AS comment_count FROM posts AS p JOIN users AS u ON p.user_id = u.user_id LEFT JOIN post_comment_relations AS pcr ON p.post_id = pcr.post_id WHERE p.type = 'news' GROUP BY p.post_id, u.name ORDER BY p.created_at DESC",
     (err, result) => {
       if (err) {
         if (err) throw err;
@@ -20,15 +20,10 @@ const getNews = (res) =>
       res.send(result);
     }
   );
+
 const updateSingleNews = (req, res) => {
   const { title, content } = req.body;
-
   const id = req.params.id;
-
-  console.log("id", id);
-  console.log("title", title);
-  console.log("content", content);
-
   db.query(
     "UPDATE `posts` SET `title`= ? ,`content`= ? WHERE post_id = ?",
     [title, content, id],
@@ -37,6 +32,25 @@ const updateSingleNews = (req, res) => {
         if (err) throw err;
       }
 
+      res.send(result);
+    }
+  );
+};
+
+const additionalSingleNews = (req, res) => {
+  const { user_id, title, content } = req.body;
+  const attachments = null;
+  const created_at = new Date();
+  const type = "news";
+  const archive = null;
+
+  db.query(
+    "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type, archive) VALUES (?,?,?,?,?,?,?)",
+    [user_id, title, content, attachments, created_at, type, archive],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
       res.send(result);
     }
   );
@@ -89,4 +103,10 @@ const checkPermissions = (request, response) => {
   }
 };
 
-module.exports = { checkPermissions, getUsers, getNews, updateSingleNews };
+module.exports = {
+  checkPermissions,
+  getUsers,
+  getNews,
+  updateSingleNews,
+  additionalSingleNews,
+};

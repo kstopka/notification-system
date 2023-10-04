@@ -1,28 +1,23 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
+import {
+  AppCtx,
+  AuthCtx,
+  useActions,
+  useContextState,
+} from "../../../contexted";
+import { IAuthState } from "../../../contexted/Auth/types";
 import { defaultValues, schema } from "./utils";
-import { useActions, AppCtx } from "../../../contexted";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
 
-interface IResponse {
-  message: string;
-  status: "info" | "error" | "success";
-}
-
-export const useEditSingleNews = ({
-  content,
-  title,
-  post_id,
+export const useAdditionalSingleNews = ({
   getNews,
 }: {
-  content: string;
-  title: string;
-  post_id: number;
   getNews: () => void;
 }) => {
+  const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,6 +25,7 @@ export const useEditSingleNews = ({
     defaultValues,
     resolver: yupResolver(schema),
   });
+
   const { reset, handleSubmit, setValue } = methods;
 
   const onSubmit: SubmitHandler<typeof defaultValues> = async ({
@@ -38,7 +34,7 @@ export const useEditSingleNews = ({
   }) => {
     setIsLoading(true);
     try {
-      await Api.updateSingleNews(title, content, post_id);
+      await Api.additionalSingleNews(user_id, title, content);
       await getNews();
       setAlert({
         isAlertVisible: true,
@@ -46,7 +42,7 @@ export const useEditSingleNews = ({
         message: "response.data.message",
       });
 
-      // reset(defaultValues);
+      reset(defaultValues);
     } catch (error) {
       setAlert({
         isAlertVisible: true,
@@ -57,11 +53,6 @@ export const useEditSingleNews = ({
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    setValue("title", title);
-    setValue("content", content);
-  }, [content, setValue, title]);
 
   return {
     isLoading,

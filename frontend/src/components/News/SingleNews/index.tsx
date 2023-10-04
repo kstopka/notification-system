@@ -14,6 +14,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   title,
   user_name,
   created_at,
+  getNews,
 }) => {
   const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -47,6 +48,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           content={content}
           title={title}
           post_id={post_id}
+          getNews={getNews}
         />
       )}
     </S.SingleNewsWrapper>

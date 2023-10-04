@@ -6,6 +6,7 @@ const {
   checkPermissions,
   getNews,
   updateSingleNews,
+  additionalSingleNews,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -34,6 +35,9 @@ app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
 
 app.post("/update_news/:id", (req, res) =>
   checkToken(req, res, () => updateSingleNews(req, res))
+);
+app.post("/additional_news", (req, res) =>
+  checkToken(req, res, () => additionalSingleNews(req, res))
 );
 
 //Route to add new material

@@ -1,4 +1,4 @@
-export interface SingleNewsProps {
+export interface SingleNewsData {
   archive: null | number;
   attachments: null;
   comment_count: number;
@@ -10,3 +10,9 @@ export interface SingleNewsProps {
   user_id: number;
   user_name: string;
 }
+
+export interface ExternalSingleNewsProps {
+  getNews: () => void;
+}
+
+export type SingleNewsProps = SingleNewsData & ExternalSingleNewsProps & {};

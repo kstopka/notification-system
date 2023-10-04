@@ -26,12 +26,22 @@ class ClassApi {
 
   updateSingleNews(title: string, content: string, post_id: number) {
     const token = Cookies.get("token");
-    console.log("post_id", post_id);
-    console.log("title", title);
-    console.log("content", content);
     return Axios.post(
       `${this.baseUrl}/update_news/${post_id}`,
       {
+        title,
+        content,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
+
+  additionalSingleNews(user_id: number, title: string, content: string) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/additional_news`,
+      {
+        user_id,
         title,
         content,
       },

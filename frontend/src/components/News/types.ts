@@ -1,11 +1,12 @@
-import { SingleNewsProps } from "./SingleNews/types";
+import { SingleNewsData } from "./SingleNews/types";
 
 export interface NewsContentProps {}
 
 export interface ResponseNewsProps {
-  data: SingleNewsProps[];
+  data: SingleNewsData[];
 }
 
 export type UseNewsProps = () => {
-  news: SingleNewsProps[];
+  news: SingleNewsData[];
+  getNews: () => void;
 };
