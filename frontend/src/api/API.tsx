@@ -25,7 +25,7 @@ class ClassApi {
   }
   getTickets() {
     const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_ticktes`, {
+    return Axios.get(`${this.baseUrl}/get_tickets`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
