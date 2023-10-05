@@ -58,7 +58,7 @@ const additionalSingleNews = (req, res) => {
 
 const getTickets = (res) =>
   db.query(
-    "SELECT t.*, u.name AS user_name, COUNT(tcr.ticket_id) AS comment_count FROM tickets AS t LEFT JOIN users AS u ON t.user_id = u.user_id LEFT JOIN ticket_comment_relations AS tcr ON t.ticket_id = tcr.ticket_id GROUP BY t.ticket_id, u.name ORDER BY t.created_at DESC",
+    `SELECT t.*, u1.name AS user_name, u2.name AS owner_name, COUNT(tcr.ticket_id) AS comment_count FROM tickets AS t LEFT JOIN users AS u1 ON t.user_id = u1.user_id LEFT JOIN users AS u2 ON t.owner_id = u2.user_id LEFT JOIN ticket_comment_relations AS tcr ON t.ticket_id = tcr.ticket_id GROUP BY t.ticket_id, user_name, owner_name ORDER BY t.created_at DESC`,
     (err, result) => {
       if (err) {
         if (err) throw err;
