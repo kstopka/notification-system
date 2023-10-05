@@ -4,6 +4,7 @@ import AccountPage from "../templates/account";
 import PanelAdminPage from "../templates/panelAdmin";
 import LoginPage from "../templates/login";
 import NewsPage from "../templates/news";
+import TicketsPage from "../templates/tickets";
 
 export interface URLSinglePath {
   label: string;
@@ -38,6 +39,10 @@ const URL_PATHS: URLPaths = {
     label: "News",
     slug: "/news/",
   },
+  tickets: {
+    label: "Tickets",
+    slug: "/tickets/",
+  },
 };
 
 export const router = createBrowserRouter([
@@ -60,6 +65,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.news.slug,
     element: <NewsPage />,
+  },
+  {
+    path: URL_PATHS.tickets.slug,
+    element: <TicketsPage />,
   },
 ]);
 

@@ -23,6 +23,12 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+  getTickets() {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_ticktes`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 
   updateSingleNews(title: string, content: string, post_id: number) {
     const token = Cookies.get("token");
