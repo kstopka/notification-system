@@ -56,6 +56,18 @@ const additionalSingleNews = (req, res) => {
   );
 };
 
+const getTickets = (res) =>
+  db.query(
+    "SELECT t.*, u.name AS user_name, COUNT(tcr.ticket_id) AS comment_count FROM tickets AS t LEFT JOIN users AS u ON t.user_id = u.user_id LEFT JOIN ticket_comment_relations AS tcr ON t.ticket_id = tcr.ticket_id GROUP BY t.ticket_id, u.name ORDER BY t.created_at DESC",
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+
 const checkPermissions = (request, response) => {
   // Capture the input fields
   let email = request.body.email;
@@ -109,4 +121,5 @@ module.exports = {
   getNews,
   updateSingleNews,
   additionalSingleNews,
+  getTickets,
 };
