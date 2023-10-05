@@ -1,0 +1,39 @@
+.TableWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.WrapperButtons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+table {
+  width: 100%;
+
+  border-spacing: 0;
+  border: solid 1px #000;
+}
+
+thead tr:first-of-type th {
+  border-bottom: 1px solid #000;
+
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+table tr:not(:last-of-type) th,
+table tr:not(:last-of-type) td {
+  border-bottom: 1px solid #000;
+}
+
+table tr td,
+table tr th {
+  margin: 0;
+  padding: 16px 0;
+  text-align: center;
+}

@@ -1,11 +1,11 @@
 import { SingleNewsProps } from "./types";
-import { getDate } from "./utils";
 
 import * as S from "./styles";
 import { useContextState, AuthCtx } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
 import { useState } from "react";
 import EditSingleNewsForm from "../EditSingleNewsForm";
+import { getDate } from "../../../utils";
 
 const SingleNews: React.FC<SingleNewsProps> = ({
   comment_count,

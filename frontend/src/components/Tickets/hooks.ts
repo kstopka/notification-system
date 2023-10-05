@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import Api from "../../api/API";
 import { AxiosResponse } from "axios";
-import { ResponseNewsProps, UseNewsProps } from "./types";
+import { ResponseTicketsProps, SingleTicket, UseNewsProps } from "./types";
 
 export const useTickets: UseNewsProps = () => {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState<SingleTicket[]>([]);
 
   const getTickets = async () => {
     try {
-      const result: AxiosResponse<any, any> = await Api.getTickets();
+      const result: AxiosResponse<any, ResponseTicketsProps> =
+        await Api.getTickets();
       setTickets(result.data);
     } catch (error) {}
   };
