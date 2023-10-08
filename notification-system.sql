@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 08, 2023 at 09:39 AM
+-- Generation Time: Paź 08, 2023 at 10:25 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -117,35 +117,36 @@ DELIMITER ;
 
 CREATE TABLE `post_comment_relations` (
   `post_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL
+  `comment_id` int(11) NOT NULL,
+  `post_comment_relation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `post_comment_relations`
 --
 
-INSERT INTO `post_comment_relations` (`post_id`, `comment_id`) VALUES
-(1, 1),
-(1, 11),
-(2, 2),
-(2, 12),
-(3, 3),
-(3, 13),
-(4, 4),
-(4, 14),
-(5, 5),
-(5, 15),
-(6, 6),
-(6, 16),
-(7, 7),
-(7, 17),
-(8, 8),
-(8, 18),
-(9, 9),
-(9, 19),
-(10, 10),
-(10, 20),
-(10, 21);
+INSERT INTO `post_comment_relations` (`post_id`, `comment_id`, `post_comment_relation_id`) VALUES
+(1, 1, 1),
+(1, 11, 2),
+(2, 2, 3),
+(2, 12, 4),
+(3, 3, 5),
+(3, 13, 6),
+(4, 4, 7),
+(4, 14, 8),
+(5, 5, 9),
+(5, 15, 10),
+(6, 6, 11),
+(6, 16, 12),
+(7, 7, 13),
+(7, 17, 14),
+(8, 8, 15),
+(8, 18, 16),
+(9, 9, 17),
+(9, 19, 18),
+(10, 10, 19),
+(10, 20, 20),
+(10, 21, 21);
 
 -- --------------------------------------------------------
 
@@ -228,27 +229,28 @@ DELIMITER ;
 
 CREATE TABLE `ticket_comment_relations` (
   `ticket_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL
+  `comment_id` int(11) DEFAULT NULL,
+  `ticket_comment_relation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `ticket_comment_relations`
 --
 
-INSERT INTO `ticket_comment_relations` (`ticket_id`, `comment_id`) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(2, 4),
-(2, 5),
-(3, 6),
-(3, 7),
-(3, 8),
-(3, 9),
-(4, 10),
-(5, 11),
-(5, 12),
-(5, 13);
+INSERT INTO `ticket_comment_relations` (`ticket_id`, `comment_id`, `ticket_comment_relation_id`) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(2, 3, 3),
+(2, 4, 4),
+(2, 5, 5),
+(3, 6, 6),
+(3, 7, 7),
+(3, 8, 8),
+(3, 9, 9),
+(4, 10, 10),
+(5, 11, 11),
+(5, 12, 12),
+(5, 13, 13);
 
 -- --------------------------------------------------------
 
@@ -304,8 +306,9 @@ ALTER TABLE `post_comments`
 -- Indeksy dla tabeli `post_comment_relations`
 --
 ALTER TABLE `post_comment_relations`
-  ADD PRIMARY KEY (`post_id`,`comment_id`),
-  ADD KEY `comment_id` (`comment_id`);
+  ADD PRIMARY KEY (`post_comment_relation_id`),
+  ADD KEY `comment_id` (`comment_id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indeksy dla tabeli `tickets`
@@ -327,6 +330,7 @@ ALTER TABLE `ticket_comments`
 -- Indeksy dla tabeli `ticket_comment_relations`
 --
 ALTER TABLE `ticket_comment_relations`
+  ADD PRIMARY KEY (`ticket_comment_relation_id`),
   ADD KEY `ticket_id` (`ticket_id`),
   ADD KEY `comment_id` (`comment_id`);
 
@@ -347,6 +351,12 @@ ALTER TABLE `posts`
   MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `post_comment_relations`
+--
+ALTER TABLE `post_comment_relations`
+  MODIFY `post_comment_relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
@@ -357,6 +367,12 @@ ALTER TABLE `tickets`
 --
 ALTER TABLE `ticket_comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `ticket_comment_relations`
+--
+ALTER TABLE `ticket_comment_relations`
+  MODIFY `ticket_comment_relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
