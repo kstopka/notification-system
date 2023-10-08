@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 08, 2023 at 11:59 AM
+-- Generation Time: Paź 08, 2023 at 12:22 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `archive`
+-- Struktura tabeli dla tabeli `archives`
 --
 
-CREATE TABLE `archive` (
+CREATE TABLE `archives` (
   `archive_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -477,9 +477,9 @@ INSERT INTO `votes` (`vote_id`, `user_id`, `post_id`, `vote_value`, `timestamp`)
 --
 
 --
--- Indeksy dla tabeli `archive`
+-- Indeksy dla tabeli `archives`
 --
-ALTER TABLE `archive`
+ALTER TABLE `archives`
   ADD PRIMARY KEY (`archive_id`);
 
 --
@@ -577,9 +577,9 @@ ALTER TABLE `votes`
 --
 
 --
--- AUTO_INCREMENT for table `archive`
+-- AUTO_INCREMENT for table `archives`
 --
-ALTER TABLE `archive`
+ALTER TABLE `archives`
   MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -656,7 +656,7 @@ ALTER TABLE `votes`
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_archive_id` FOREIGN KEY (`archive_id`) REFERENCES `archive` (`archive_id`),
+  ADD CONSTRAINT `fk_archive_id` FOREIGN KEY (`archive_id`) REFERENCES `archives` (`archive_id`),
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
