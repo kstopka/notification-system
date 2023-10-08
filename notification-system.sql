@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 08, 2023 at 10:25 AM
+-- Generation Time: Paź 08, 2023 at 11:59 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -24,6 +24,48 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `archive`
+--
+
+CREATE TABLE `archive` (
+  `archive_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text DEFAULT NULL,
+  `attachments` blob DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `meetings`
+--
+
+CREATE TABLE `meetings` (
+  `meeting_id` int(11) NOT NULL,
+  `meeting_date` date NOT NULL,
+  `meeting_time` time NOT NULL,
+  `meeting_description` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `meetings`
+--
+
+INSERT INTO `meetings` (`meeting_id`, `meeting_date`, `meeting_time`, `meeting_description`, `address`) VALUES
+(1, '2024-01-06', '20:00:00', 'Spotkanie 1', 'Adres 1'),
+(2, '2024-02-03', '20:00:00', 'Spotkanie 2', 'Adres 2'),
+(3, '2024-03-02', '20:00:00', 'Spotkanie 3', 'Adres 3'),
+(4, '2024-04-06', '20:00:00', 'Spotkanie 4', 'Adres 4'),
+(5, '2024-05-04', '20:00:00', 'Spotkanie 5', 'Adres 5');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `posts`
 --
 
@@ -35,27 +77,44 @@ CREATE TABLE `posts` (
   `attachments` blob DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `type` varchar(255) DEFAULT NULL,
-  `archive` tinyint(1) DEFAULT NULL
+  `archive` tinyint(1) DEFAULT NULL,
+  `archive_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `created_at`, `type`, `archive`) VALUES
-(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-28 08:00:00', 'news', 1),
-(2, 2, 'Drugi post', 'Treść drugiego posta', NULL, '2023-09-21 09:15:00', 'note', 1),
-(3, 1, 'Trzeci post', 'Treść trzeciego posta', NULL, '2023-09-21 10:30:00', 'note', NULL),
-(4, 3, 'Czwarty post', 'Treść czwartego post', NULL, '2023-09-21 12:45:00', 'news', NULL),
-(5, 2, 'Piąty post', 'Treść piątego posta', NULL, '2023-09-21 14:00:00', 'news', NULL),
-(6, 1, 'Szósty post', 'Treść szóstego posta', NULL, '2023-09-21 15:15:00', 'note', NULL),
-(7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note', NULL),
-(8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news', NULL),
-(9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note', NULL),
-(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news', NULL),
-(11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news', NULL),
-(22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news', NULL),
-(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news', NULL);
+INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `created_at`, `type`, `archive`, `archive_id`) VALUES
+(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-28 08:00:00', 'news', NULL, NULL),
+(2, 2, 'Drugi post', 'Treść drugiego posta', NULL, '2023-09-21 09:15:00', 'note', NULL, NULL),
+(3, 1, 'Trzeci post', 'Treść trzeciego posta', NULL, '2023-09-21 10:30:00', 'note', NULL, NULL),
+(4, 3, 'Czwarty post', 'Treść czwartego post', NULL, '2023-09-21 12:45:00', 'news', NULL, NULL),
+(5, 2, 'Piąty post', 'Treść piątego posta', NULL, '2023-09-21 14:00:00', 'news', NULL, NULL),
+(6, 1, 'Szósty post', 'Treść szóstego posta', NULL, '2023-09-21 15:15:00', 'note', NULL, NULL),
+(7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note', NULL, NULL),
+(8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news', NULL, NULL),
+(9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note', NULL, NULL),
+(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news', NULL, NULL),
+(11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news', NULL, NULL),
+(22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news', NULL, NULL),
+(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news', NULL, NULL),
+(24, 1, 'ustawa 1', 'ustawa dotyczy ...', NULL, '2023-10-08 08:40:41', 'laws', NULL, NULL);
+
+--
+-- Wyzwalacze `posts`
+--
+DELIMITER $$
+CREATE TRIGGER `tr_archive_post` AFTER UPDATE ON `posts` FOR EACH ROW BEGIN
+    IF NEW.archive = 1 THEN
+        INSERT INTO archive (post_id, user_id, title, content, attachments, created_at, type)
+        VALUES (OLD.post_id, OLD.user_id, OLD.title, OLD.content, OLD.attachments, OLD.created_at, OLD.type);
+        
+        DELETE FROM posts WHERE post_id = OLD.post_id;
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -116,37 +175,137 @@ DELIMITER ;
 --
 
 CREATE TABLE `post_comment_relations` (
+  `relation_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL,
-  `post_comment_relation_id` int(11) NOT NULL
+  `comment_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `post_comment_relations`
 --
 
-INSERT INTO `post_comment_relations` (`post_id`, `comment_id`, `post_comment_relation_id`) VALUES
+INSERT INTO `post_comment_relations` (`relation_id`, `post_id`, `comment_id`) VALUES
 (1, 1, 1),
-(1, 11, 2),
-(2, 2, 3),
-(2, 12, 4),
-(3, 3, 5),
-(3, 13, 6),
-(4, 4, 7),
-(4, 14, 8),
-(5, 5, 9),
-(5, 15, 10),
-(6, 6, 11),
-(6, 16, 12),
-(7, 7, 13),
-(7, 17, 14),
-(8, 8, 15),
-(8, 18, 16),
-(9, 9, 17),
-(9, 19, 18),
-(10, 10, 19),
-(10, 20, 20),
-(10, 21, 21);
+(2, 1, 11),
+(3, 2, 2),
+(4, 2, 12),
+(5, 3, 3),
+(6, 3, 13),
+(7, 4, 4),
+(8, 4, 14),
+(9, 5, 5),
+(10, 5, 15),
+(11, 6, 6),
+(12, 6, 16),
+(13, 7, 7),
+(14, 7, 17),
+(15, 8, 8),
+(16, 8, 18),
+(17, 9, 9),
+(18, 9, 19),
+(19, 10, 10),
+(20, 10, 20),
+(21, 10, 21);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `service_providers`
+--
+
+CREATE TABLE `service_providers` (
+  `provider_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `service_providers`
+--
+
+INSERT INTO `service_providers` (`provider_id`, `email`, `phone_number`, `name`, `description`, `address`) VALUES
+(1, 'firmaprz@example.com', '123456789', 'Firma Przykładowa 1', 'Opis firmy 1', 'Adres firmy 1'),
+(2, 'firmaabc@example.com', '987654321', 'Firma ABC', 'Opis firmy ABC', 'Adres firmy ABC'),
+(3, 'uslugi@example.com', '111222333', 'Usługi Profesjonalne', 'Opis usług profesjonalnych', 'Adres usług'),
+(4, 'nowafirma@example.com', '444555666', 'Nowa Firma', 'Opis nowej firmy', 'Adres nowej firmy'),
+(5, 'firmaxyz@example.com', '777888999', 'Firma XYZ', 'Opis firmy XYZ', 'Adres firmy XYZ');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `service_provider_request_relations`
+--
+
+CREATE TABLE `service_provider_request_relations` (
+  `relation_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `request_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `service_provider_request_relations`
+--
+
+INSERT INTO `service_provider_request_relations` (`relation_id`, `provider_id`, `request_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 2, 5),
+(6, 2, 6),
+(7, 3, 7),
+(8, 3, 8),
+(9, 4, 9),
+(10, 4, 10),
+(11, 5, 11),
+(12, 5, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `service_requests`
+--
+
+CREATE TABLE `service_requests` (
+  `request_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `request_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `description` text DEFAULT NULL,
+  `status` enum('Pending','In Progress','Completed','Cancelled') DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `service_requests`
+--
+
+INSERT INTO `service_requests` (`request_id`, `user_id`, `provider_id`, `request_date`, `description`, `status`) VALUES
+(1, 1, 1, '2023-10-08 09:36:13', 'Zgłoszenie 1 dla Provider 1', 'Pending'),
+(2, 2, 1, '2023-10-08 09:36:13', 'Zgłoszenie 2 dla Provider 1', 'In Progress'),
+(3, 3, 1, '2023-10-08 09:36:13', 'Zgłoszenie 3 dla Provider 1', 'Completed'),
+(4, 4, 1, '2023-10-08 09:36:13', 'Zgłoszenie 4 dla Provider 1', 'Cancelled'),
+(5, 5, 2, '2023-10-08 09:36:13', 'Zgłoszenie 1 dla Provider 2', 'Pending'),
+(6, 6, 2, '2023-10-08 09:36:13', 'Zgłoszenie 2 dla Provider 2', 'In Progress'),
+(7, 7, 3, '2023-10-08 09:36:13', 'Zgłoszenie 1 dla Provider 3', 'Pending'),
+(8, 8, 3, '2023-10-08 09:36:13', 'Zgłoszenie 2 dla Provider 3', 'In Progress'),
+(9, 9, 4, '2023-10-08 09:36:13', 'Zgłoszenie 1 dla Provider 4', 'Pending'),
+(10, 10, 4, '2023-10-08 09:36:13', 'Zgłoszenie 2 dla Provider 4', 'In Progress'),
+(11, 1, 5, '2023-10-08 09:36:13', 'Zgłoszenie 1 dla Provider 5', 'Pending'),
+(12, 2, 5, '2023-10-08 09:36:13', 'Zgłoszenie 2 dla Provider 5', 'In Progress');
+
+--
+-- Wyzwalacze `service_requests`
+--
+DELIMITER $$
+CREATE TRIGGER `tr_create_relation` AFTER INSERT ON `service_requests` FOR EACH ROW BEGIN
+    INSERT INTO service_provider_request_relations (provider_id, request_id)
+    VALUES (NEW.provider_id, NEW.request_id);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -228,29 +387,29 @@ DELIMITER ;
 --
 
 CREATE TABLE `ticket_comment_relations` (
+  `relation_id` int(11) NOT NULL,
   `ticket_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
-  `ticket_comment_relation_id` int(11) NOT NULL
+  `comment_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `ticket_comment_relations`
 --
 
-INSERT INTO `ticket_comment_relations` (`ticket_id`, `comment_id`, `ticket_comment_relation_id`) VALUES
+INSERT INTO `ticket_comment_relations` (`relation_id`, `ticket_id`, `comment_id`) VALUES
 (1, 1, 1),
-(1, 2, 2),
-(2, 3, 3),
-(2, 4, 4),
-(2, 5, 5),
-(3, 6, 6),
-(3, 7, 7),
-(3, 8, 8),
-(3, 9, 9),
-(4, 10, 10),
-(5, 11, 11),
-(5, 12, 12),
-(5, 13, 13);
+(2, 1, 2),
+(3, 2, 3),
+(4, 2, 4),
+(5, 2, 5),
+(6, 3, 6),
+(7, 3, 7),
+(8, 3, 8),
+(9, 3, 9),
+(10, 4, 10),
+(11, 5, 11),
+(12, 5, 12),
+(13, 5, 13);
 
 -- --------------------------------------------------------
 
@@ -283,16 +442,59 @@ INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`, `permiss
 (9, 'Daniel', 'Murphy', 'daniel@example.com', 'mypass123', 'user'),
 (10, 'Emma', 'Garcia', 'emma@example.com', '12345678', 'user');
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `votes`
+--
+
+CREATE TABLE `votes` (
+  `vote_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `vote_value` enum('upvote','downvote') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`vote_id`, `user_id`, `post_id`, `vote_value`, `timestamp`) VALUES
+(1, 1, 24, 'upvote', '2023-10-08 08:46:24'),
+(2, 2, 24, 'downvote', '2023-10-08 08:46:24'),
+(3, 3, 24, 'upvote', '2023-10-08 08:46:24'),
+(4, 4, 24, 'downvote', '2023-10-08 08:46:24'),
+(5, 5, 24, 'downvote', '2023-10-08 08:46:24'),
+(6, 6, 24, 'upvote', '2023-10-08 08:46:24'),
+(7, 7, 24, 'upvote', '2023-10-08 08:46:24'),
+(8, 8, 24, 'downvote', '2023-10-08 08:46:24'),
+(9, 9, 24, 'downvote', '2023-10-08 08:46:24'),
+(10, 10, 24, 'upvote', '2023-10-08 08:46:24');
+
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `archive`
+--
+ALTER TABLE `archive`
+  ADD PRIMARY KEY (`archive_id`);
+
+--
+-- Indeksy dla tabeli `meetings`
+--
+ALTER TABLE `meetings`
+  ADD PRIMARY KEY (`meeting_id`);
 
 --
 -- Indeksy dla tabeli `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `fk_archive_id` (`archive_id`);
 
 --
 -- Indeksy dla tabeli `post_comments`
@@ -306,9 +508,31 @@ ALTER TABLE `post_comments`
 -- Indeksy dla tabeli `post_comment_relations`
 --
 ALTER TABLE `post_comment_relations`
-  ADD PRIMARY KEY (`post_comment_relation_id`),
+  ADD PRIMARY KEY (`relation_id`),
   ADD KEY `comment_id` (`comment_id`),
   ADD KEY `post_id` (`post_id`);
+
+--
+-- Indeksy dla tabeli `service_providers`
+--
+ALTER TABLE `service_providers`
+  ADD PRIMARY KEY (`provider_id`);
+
+--
+-- Indeksy dla tabeli `service_provider_request_relations`
+--
+ALTER TABLE `service_provider_request_relations`
+  ADD PRIMARY KEY (`relation_id`),
+  ADD KEY `provider_id` (`provider_id`),
+  ADD KEY `request_id` (`request_id`);
+
+--
+-- Indeksy dla tabeli `service_requests`
+--
+ALTER TABLE `service_requests`
+  ADD PRIMARY KEY (`request_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `provider_id` (`provider_id`);
 
 --
 -- Indeksy dla tabeli `tickets`
@@ -330,7 +554,7 @@ ALTER TABLE `ticket_comments`
 -- Indeksy dla tabeli `ticket_comment_relations`
 --
 ALTER TABLE `ticket_comment_relations`
-  ADD PRIMARY KEY (`ticket_comment_relation_id`),
+  ADD PRIMARY KEY (`relation_id`),
   ADD KEY `ticket_id` (`ticket_id`),
   ADD KEY `comment_id` (`comment_id`);
 
@@ -341,20 +565,58 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indeksy dla tabeli `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`vote_id`),
+  ADD UNIQUE KEY `unique_vote` (`user_id`,`post_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `archive`
+--
+ALTER TABLE `archive`
+  MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `meetings`
+--
+ALTER TABLE `meetings`
+  MODIFY `meeting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `post_comment_relations`
 --
 ALTER TABLE `post_comment_relations`
-  MODIFY `post_comment_relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `service_providers`
+--
+ALTER TABLE `service_providers`
+  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `service_provider_request_relations`
+--
+ALTER TABLE `service_provider_request_relations`
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `service_requests`
+--
+ALTER TABLE `service_requests`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tickets`
@@ -372,13 +634,19 @@ ALTER TABLE `ticket_comments`
 -- AUTO_INCREMENT for table `ticket_comment_relations`
 --
 ALTER TABLE `ticket_comment_relations`
-  MODIFY `ticket_comment_relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -388,6 +656,7 @@ ALTER TABLE `users`
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
+  ADD CONSTRAINT `fk_archive_id` FOREIGN KEY (`archive_id`) REFERENCES `archive` (`archive_id`),
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
@@ -403,6 +672,20 @@ ALTER TABLE `post_comments`
 ALTER TABLE `post_comment_relations`
   ADD CONSTRAINT `post_comment_relations_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
   ADD CONSTRAINT `post_comment_relations_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `post_comments` (`comment_id`);
+
+--
+-- Constraints for table `service_provider_request_relations`
+--
+ALTER TABLE `service_provider_request_relations`
+  ADD CONSTRAINT `service_provider_request_relations_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `service_providers` (`provider_id`),
+  ADD CONSTRAINT `service_provider_request_relations_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `service_requests` (`request_id`);
+
+--
+-- Constraints for table `service_requests`
+--
+ALTER TABLE `service_requests`
+  ADD CONSTRAINT `service_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `service_requests_ibfk_2` FOREIGN KEY (`provider_id`) REFERENCES `service_providers` (`provider_id`);
 
 --
 -- Constraints for table `tickets`
@@ -424,6 +707,13 @@ ALTER TABLE `ticket_comments`
 ALTER TABLE `ticket_comment_relations`
   ADD CONSTRAINT `ticket_comment_relations_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
   ADD CONSTRAINT `ticket_comment_relations_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `ticket_comments` (`comment_id`);
+
+--
+-- Constraints for table `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
