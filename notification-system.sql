@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 08, 2023 at 12:22 PM
+-- Generation Time: Paź 30, 2023 at 10:35 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -20,23 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `notification-system`
 --
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `archives`
---
-
-CREATE TABLE `archives` (
-  `archive_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `content` text DEFAULT NULL,
-  `attachments` blob DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `type` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
 
@@ -76,45 +59,28 @@ CREATE TABLE `posts` (
   `content` text DEFAULT NULL,
   `attachments` blob DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `type` varchar(255) DEFAULT NULL,
-  `archive` tinyint(1) DEFAULT NULL,
-  `archive_id` int(11) DEFAULT NULL
+  `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `created_at`, `type`, `archive`, `archive_id`) VALUES
-(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-28 08:00:00', 'news', NULL, NULL),
-(2, 2, 'Drugi post', 'Treść drugiego posta', NULL, '2023-09-21 09:15:00', 'note', NULL, NULL),
-(3, 1, 'Trzeci post', 'Treść trzeciego posta', NULL, '2023-09-21 10:30:00', 'note', NULL, NULL),
-(4, 3, 'Czwarty post', 'Treść czwartego post', NULL, '2023-09-21 12:45:00', 'news', NULL, NULL),
-(5, 2, 'Piąty post', 'Treść piątego posta', NULL, '2023-09-21 14:00:00', 'news', NULL, NULL),
-(6, 1, 'Szósty post', 'Treść szóstego posta', NULL, '2023-09-21 15:15:00', 'note', NULL, NULL),
-(7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note', NULL, NULL),
-(8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news', NULL, NULL),
-(9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note', NULL, NULL),
-(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news', NULL, NULL),
-(11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news', NULL, NULL),
-(22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news', NULL, NULL),
-(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news', NULL, NULL),
-(24, 1, 'ustawa 1', 'ustawa dotyczy ...', NULL, '2023-10-08 08:40:41', 'laws', NULL, NULL);
-
---
--- Wyzwalacze `posts`
---
-DELIMITER $$
-CREATE TRIGGER `tr_archive_post` AFTER UPDATE ON `posts` FOR EACH ROW BEGIN
-    IF NEW.archive = 1 THEN
-        INSERT INTO archive (post_id, user_id, title, content, attachments, created_at, type)
-        VALUES (OLD.post_id, OLD.user_id, OLD.title, OLD.content, OLD.attachments, OLD.created_at, OLD.type);
-        
-        DELETE FROM posts WHERE post_id = OLD.post_id;
-    END IF;
-END
-$$
-DELIMITER ;
+INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `created_at`, `type`) VALUES
+(1, 1, 'Pierwszy post', 'Treść pierwszego posta', NULL, '2023-09-28 08:00:00', 'news'),
+(2, 2, 'Drugi post', 'Treść drugiego posta', NULL, '2023-09-21 09:15:00', 'note'),
+(3, 1, 'Trzeci post', 'Treść trzeciego posta', NULL, '2023-09-21 10:30:00', 'note'),
+(4, 3, 'Czwarty post', 'Treść czwartego post', NULL, '2023-09-21 12:45:00', 'news'),
+(5, 2, 'Piąty post', 'Treść piątego posta', NULL, '2023-09-21 14:00:00', 'news'),
+(6, 1, 'Szósty post', 'Treść szóstego posta', NULL, '2023-09-21 15:15:00', 'note'),
+(7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note'),
+(8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news'),
+(9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note'),
+(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news'),
+(11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news'),
+(22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news'),
+(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news'),
+(24, 1, 'ustawa 1', 'ustawa dotyczy ...', NULL, '2023-10-08 08:40:41', 'laws');
 
 -- --------------------------------------------------------
 
@@ -477,12 +443,6 @@ INSERT INTO `votes` (`vote_id`, `user_id`, `post_id`, `vote_value`, `timestamp`)
 --
 
 --
--- Indeksy dla tabeli `archives`
---
-ALTER TABLE `archives`
-  ADD PRIMARY KEY (`archive_id`);
-
---
 -- Indeksy dla tabeli `meetings`
 --
 ALTER TABLE `meetings`
@@ -493,8 +453,7 @@ ALTER TABLE `meetings`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `fk_archive_id` (`archive_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeksy dla tabeli `post_comments`
@@ -577,12 +536,6 @@ ALTER TABLE `votes`
 --
 
 --
--- AUTO_INCREMENT for table `archives`
---
-ALTER TABLE `archives`
-  MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `meetings`
 --
 ALTER TABLE `meetings`
@@ -646,7 +599,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -656,7 +609,6 @@ ALTER TABLE `votes`
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_archive_id` FOREIGN KEY (`archive_id`) REFERENCES `archives` (`archive_id`),
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
