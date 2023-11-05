@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 30, 2023 at 10:35 PM
+-- Generation Time: Lis 05, 2023 at 09:41 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -24,14 +24,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `laws`
+--
+
+CREATE TABLE `laws` (
+  `law_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `status` enum('Pending','Enacted','Repealed','Amended') DEFAULT NULL,
+  `text` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `laws`
+--
+
+INSERT INTO `laws` (`law_id`, `name`, `description`, `date`, `status`, `text`) VALUES
+(1, 'Law 1', 'Description for Law 1', '2023-01-10', 'Enacted', 'This is the text of Law 1.'),
+(2, 'Law 2', 'Description for Law 2', '2023-02-15', 'Pending', 'This is the text of Law 2.'),
+(3, 'Law 3', 'Description for Law 3', '2023-03-20', 'Enacted', 'This is the text of Law 3.'),
+(4, 'Law 4', 'Description for Law 4', '2023-04-25', 'Amended', 'This is the text of Law 4.'),
+(5, 'Law 5', 'Description for Law 5', '2023-05-30', 'Repealed', 'This is the text of Law 5.'),
+(6, 'Law 6', 'Description for Law 6', '2023-06-05', 'Pending', 'This is the text of Law 6.'),
+(7, 'Law 7', 'Description for Law 7', '2023-07-10', 'Enacted', 'This is the text of Law 7.'),
+(8, 'Law 8', 'Description for Law 8', '2023-08-15', 'Amended', 'This is the text of Law 8.'),
+(9, 'Law 9', 'Description for Law 9', '2023-09-20', 'Pending', 'This is the text of Law 9.'),
+(10, 'Law 10', 'Description for Law 10', '2023-10-25', 'Enacted', 'This is the text of Law 10.');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `meetings`
 --
 
 CREATE TABLE `meetings` (
   `meeting_id` int(11) NOT NULL,
-  `meeting_date` date NOT NULL,
-  `meeting_time` time NOT NULL,
-  `meeting_description` varchar(255) NOT NULL,
+  `date` date DEFAULT NULL,
+  `time` time NOT NULL,
+  `description` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -39,7 +70,7 @@ CREATE TABLE `meetings` (
 -- Dumping data for table `meetings`
 --
 
-INSERT INTO `meetings` (`meeting_id`, `meeting_date`, `meeting_time`, `meeting_description`, `address`) VALUES
+INSERT INTO `meetings` (`meeting_id`, `date`, `time`, `description`, `address`) VALUES
 (1, '2024-01-06', '20:00:00', 'Spotkanie 1', 'Adres 1'),
 (2, '2024-02-03', '20:00:00', 'Spotkanie 2', 'Adres 2'),
 (3, '2024-03-02', '20:00:00', 'Spotkanie 3', 'Adres 3'),
@@ -443,6 +474,12 @@ INSERT INTO `votes` (`vote_id`, `user_id`, `post_id`, `vote_value`, `timestamp`)
 --
 
 --
+-- Indeksy dla tabeli `laws`
+--
+ALTER TABLE `laws`
+  ADD PRIMARY KEY (`law_id`);
+
+--
 -- Indeksy dla tabeli `meetings`
 --
 ALTER TABLE `meetings`
@@ -534,6 +571,12 @@ ALTER TABLE `votes`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `laws`
+--
+ALTER TABLE `laws`
+  MODIFY `law_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `meetings`
