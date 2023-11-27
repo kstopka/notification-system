@@ -5,11 +5,13 @@ import PanelAdminPage from "../templates/panelAdmin";
 import LoginPage from "../templates/login";
 import NewsPage from "../templates/news";
 import TicketsPage from "../templates/tickets";
+import CommentsPage from "../templates/comments";
 
 export interface URLSinglePath {
   label: string;
   slug: string;
   isAdmin?: boolean;
+  isMenu: boolean;
 }
 
 export interface URLPaths {
@@ -20,28 +22,38 @@ const URL_PATHS: URLPaths = {
   home: {
     label: "Home",
     slug: "/",
+    isMenu: true,
   },
-
   login: {
     label: "Login",
     slug: "/login/",
+    isMenu: true,
   },
   admin: {
     label: "Panel Admin",
     slug: "/panel-admin/",
     isAdmin: true,
+    isMenu: true,
   },
   account: {
     label: "Account",
     slug: "/account/",
+    isMenu: true,
   },
   news: {
     label: "News",
     slug: "/news/",
+    isMenu: true,
   },
   tickets: {
     label: "Tickets",
     slug: "/tickets/",
+    isMenu: true,
+  },
+  comments: {
+    label: "Comments",
+    slug: "/comments",
+    isMenu: true,
   },
 };
 
@@ -69,6 +81,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.tickets.slug,
     element: <TicketsPage />,
+  },
+  {
+    path: URL_PATHS.comments.slug,
+    element: <CommentsPage />,
   },
 ]);
 

@@ -5,9 +5,11 @@ const {
   getUsers,
   checkPermissions,
   getNews,
+  getSingleNews,
   updateSingleNews,
   additionalSingleNews,
   getTickets,
+  getSingleNewsComments,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -33,6 +35,13 @@ app.post("/auth", (request, response) => checkPermissions(request, response));
 app.get("/get_users", (req, res) => checkToken(req, res, () => getUsers(res)));
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
+
+app.get("/get_news/:id", (req, res) =>
+  checkToken(req, res, () => getSingleNews(req, res))
+);
+app.get("/get_comments/:id", (req, res) =>
+  checkToken(req, res, () => getSingleNewsComments(req, res))
+);
 
 app.post("/update_news/:id", (req, res) =>
   checkToken(req, res, () => updateSingleNews(req, res))

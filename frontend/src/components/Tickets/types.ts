@@ -1,5 +1,3 @@
-// import { SingleNewsData } from "./SingleNews/types";
-
 export interface SingleTicket {
   comment_count: number;
   created_at: string;

@@ -20,6 +20,35 @@ const getNews = (res) =>
       res.send(result);
     }
   );
+const getSingleNews = (req, res) => {
+  const id = req.params.id;
+  db.query(
+    `SELECT p.*, u.name AS user_name FROM posts p JOIN users u ON p.user_id = u.user_id WHERE p.post_id = ?`,
+    [id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+      console.log("result", result);
+      res.send(result);
+    }
+  );
+};
+
+const getSingleNewsComments = (req, res) => {
+  const id = req.params.id;
+  db.query(
+    `SELECT pc.*, u.name AS user_name FROM post_comments pc JOIN users u ON pc.user_id = u.user_id JOIN post_comment_relations pcr ON pc.comment_id = pcr.comment_id WHERE pcr.post_id = ?
+    `,
+    [id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+      res.send(result);
+    }
+  );
+};
 
 const updateSingleNews = (req, res) => {
   const { title, content } = req.body;
@@ -42,11 +71,10 @@ const additionalSingleNews = (req, res) => {
   const attachments = null;
   const created_at = new Date();
   const type = "news";
-  const archive = null;
 
   db.query(
-    "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type, archive) VALUES (?,?,?,?,?,?,?)",
-    [user_id, title, content, attachments, created_at, type, archive],
+    "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type) VALUES (?,?,?,?,?,?)",
+    [user_id, title, content, attachments, created_at, type],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -122,4 +150,6 @@ module.exports = {
   updateSingleNews,
   additionalSingleNews,
   getTickets,
+  getSingleNews,
+  getSingleNewsComments,
 };

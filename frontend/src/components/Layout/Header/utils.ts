@@ -1,4 +1,6 @@
 import { URLPaths } from "../../../constants/routes";
 
 export const objectToArray = (obj: URLPaths) =>
-  Object.keys(obj).map((key) => obj[key]);
+  Object.keys(obj)
+    .map((key) => obj[key])
+    .filter((el) => el.isMenu);

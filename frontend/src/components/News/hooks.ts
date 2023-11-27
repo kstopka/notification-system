@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Api from "../../api/API";
 import { AxiosResponse } from "axios";
 import { ResponseNewsProps, UseNewsProps } from "./types";
-import { SingleNewsData } from "./SingleNews/types";
+import { SingleNewsData } from "../../types/standard";
 
 export const useNews: UseNewsProps = () => {
   const [news, setNews] = useState<SingleNewsData[]>([]);
@@ -18,6 +18,10 @@ export const useNews: UseNewsProps = () => {
   useEffect(() => {
     getNews();
   }, []);
+
+  useEffect(() => {
+    console.log("news", news);
+  }, [news]);
 
   return {
     news,

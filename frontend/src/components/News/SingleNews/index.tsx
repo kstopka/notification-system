@@ -6,22 +6,27 @@ import { IAuthState } from "../../../contexted/Auth/types";
 import { useState } from "react";
 import EditSingleNewsForm from "../EditSingleNewsForm";
 import { getDate } from "../../../utils";
+import { useNavigate } from "react-router-dom";
+import URL_PATHS from "../../../constants/routes";
 
 const SingleNews: React.FC<SingleNewsProps> = ({
   comment_count,
   content,
   post_id,
+  user_id,
   title,
   user_name,
   created_at,
   getNews,
 }) => {
-  const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
+  const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
     "permissions",
+    "id",
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     setIsEditing((isEditing) => !isEditing);
@@ -35,8 +40,12 @@ const SingleNews: React.FC<SingleNewsProps> = ({
       </S.Header>
       <S.Content>{content}</S.Content>
       <S.ButtonsWrapper>
-        <button>Komentarze: {comment_count}</button>
-        {permissions && permissions === "admin" && (
+        <button
+          onClick={() => navigate(`${URL_PATHS.comments.slug}?id=${post_id}`)}
+        >
+          Komentarze: {comment_count}
+        </button>
+        {((permissions && permissions === "admin") || user_id === id) && (
           <button onClick={handleEdit}>
             {isEditing ? "Zamknij" : "Edytuj"}
           </button>
@@ -49,6 +58,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           title={title}
           post_id={post_id}
           getNews={getNews}
+          handleEdit={handleEdit}
         />
       )}
     </S.SingleNewsWrapper>

@@ -9,12 +9,14 @@ const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
   title,
   post_id,
   getNews,
+  handleEdit,
 }) => {
   const { isLoading, methods, handleSubmit, onSubmit } = useEditSingleNews({
     content,
     title,
     post_id,
     getNews,
+    handleEdit,
   });
 
   return (

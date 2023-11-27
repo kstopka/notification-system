@@ -37,7 +37,7 @@ export const useLogin = (): IUseLogin => {
           status: "success",
           message: res.data.message,
         });
-        navigate(URL_PATHS.account.slug);
+        navigate(URL_PATHS.home.slug);
       })
       // .catch((err: ILoginData) => {
       .catch((err: any) => {

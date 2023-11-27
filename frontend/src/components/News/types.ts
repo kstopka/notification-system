@@ -1,4 +1,4 @@
-import { SingleNewsData } from "./SingleNews/types";
+import { SingleNewsData } from "../../types/standard";
 
 export interface NewsContentProps {}
 

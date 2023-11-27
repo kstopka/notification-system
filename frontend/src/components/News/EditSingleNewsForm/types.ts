@@ -4,6 +4,7 @@ export type EditSingleNewsFormProps = {
   title: string;
   post_id: number;
   getNews: () => void;
+  handleEdit: () => void;
 };
 
 export type DefaultValuesEditSingleNewsForm = {

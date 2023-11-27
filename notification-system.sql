@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 05, 2023 at 09:41 PM
+-- Generation Time: Lis 27, 2023 at 09:50 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -110,7 +110,7 @@ INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `c
 (10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news'),
 (11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news'),
 (22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news'),
-(23, 1, 'praca', 'dziś wolne', NULL, '2023-10-04 19:21:25', 'news'),
+(23, 1, 'praca', 'dziś wolne hah', NULL, '2023-10-04 19:21:25', 'news'),
 (24, 1, 'ustawa 1', 'ustawa dotyczy ...', NULL, '2023-10-08 08:40:41', 'laws');
 
 -- --------------------------------------------------------

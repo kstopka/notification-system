@@ -17,11 +17,13 @@ export const useEditSingleNews = ({
   title,
   post_id,
   getNews,
+  handleEdit,
 }: {
   content: string;
   title: string;
   post_id: number;
   getNews: () => void;
+  handleEdit: () => void;
 }) => {
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +47,7 @@ export const useEditSingleNews = ({
         status: "success",
         message: "response.data.message",
       });
+      handleEdit();
 
       // reset(defaultValues);
     } catch (error) {

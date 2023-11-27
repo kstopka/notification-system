@@ -23,6 +23,20 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  getSingleNews(post_id: string) {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_news/${post_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  getSingleNewsComments(post_id: string) {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_comments/${post_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
   getTickets() {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_tickets`, {
