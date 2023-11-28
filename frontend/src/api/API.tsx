@@ -92,6 +92,25 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+
+  deleteSinglePost(post_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(`${this.baseUrl}/delete_post/${post_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  deleteSinglePostRelations(post_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(`${this.baseUrl}/delete_post_relations/${post_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  deleteSingleComment(post_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(`${this.baseUrl}/delete_post_comment/${post_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }
 
 const Api = new ClassApi();

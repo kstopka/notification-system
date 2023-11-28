@@ -86,13 +86,33 @@ export const GlobalStyles = createGlobalStyle`
             cursor: pointer;
             transition: .3s;
         }
-        
         button:hover{
 
             background-color: ${(props) => props.theme.colors.black};
             color: ${(props) => props.theme.colors.white};
 
         }
+
+
+        button.secondary {
+            color: ${(props) => props.theme.colors.white};
+            background-color: ${(props) => props.theme.colors.black};
+            width: fit-content;
+            padding: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button.secondary:hover{
+
+            background-color: ${(props) => props.theme.colors.white};
+            color: ${(props) => props.theme.colors.black};
+
+        }
+        
+        
     }
 
     #___gatsby {

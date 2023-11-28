@@ -32,3 +32,8 @@ export const ButtonsWrapper = styled.div<{ isActiveComment: boolean }>`
   justify-content: ${({ isActiveComment }) =>
     isActiveComment ? "space-between" : "flex-end"};
 `;
+
+export const ButtonsEndWrapper = styled.div`
+  display: flex;
+  gap: 30px;
+`;

@@ -8,6 +8,8 @@ import EditSingleNewsForm from "../EditSingleNewsForm";
 import { getDate } from "../../../utils";
 import { useNavigate } from "react-router-dom";
 import URL_PATHS from "../../../constants/routes";
+import Modal from "../../atoms/Modal";
+import { useDeletePost } from "./logic";
 
 const SingleNews: React.FC<SingleNewsProps> = ({
   comment_count,
@@ -27,11 +29,22 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+
   const navigate = useNavigate();
 
+  const handleDeleteModalActive = () => {
+    setIsDeleteModalActive((isDeleteModalActive) => !isDeleteModalActive);
+  };
   const handleEdit = () => {
     setIsEditing((isEditing) => !isEditing);
   };
+
+  const { handleDeletePost } = useDeletePost({
+    post_id,
+    handleDeleteModalActive,
+    getNews,
+  });
   return (
     <S.SingleNewsWrapper>
       <S.Title>{title}</S.Title>
@@ -49,9 +62,12 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           </button>
         )}
         {((permissions && permissions === "admin") || user_id === id) && (
-          <button onClick={handleEdit}>
-            {isEditing ? "Zamknij" : "Edytuj"}
-          </button>
+          <S.ButtonsEndWrapper>
+            <button onClick={handleEdit}>
+              {isEditing ? "Zamknij" : "Edytuj"}
+            </button>
+            <button onClick={handleDeleteModalActive}>Usuń</button>
+          </S.ButtonsEndWrapper>
         )}
       </S.ButtonsWrapper>
       {isEditing && (
@@ -62,6 +78,13 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           post_id={post_id}
           getNews={getNews}
           handleEdit={handleEdit}
+        />
+      )}
+      {isDeleteModalActive && (
+        <Modal
+          handleIsActiveModal={handleDeleteModalActive}
+          content="Czy na pewno chcesz usunąć ten post?"
+          handleAcceptance={handleDeletePost}
         />
       )}
     </S.SingleNewsWrapper>

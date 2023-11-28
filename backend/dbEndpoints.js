@@ -128,6 +128,29 @@ const getTickets = (res) =>
     }
   );
 
+const customDelete = (table, id, handler) => {
+  db.query(`DELETE FROM ${table} WHERE post_id= ?`, id, (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+    handler(result);
+  });
+};
+
+const deleteSinglePost = async (req, res) => {
+  const id = req.params.id;
+  customDelete("posts", id, (result) => res.send(result));
+};
+
+const deleteSinglePostRelations = (req, res) => {
+  const id = req.params.id;
+  customDelete("post_comment_relations", id, (result) => res.send(result));
+};
+const deleteSingleComment = (req, res) => {
+  const id = req.params.id;
+  customDelete("post_comments", id, (result) => res.send(result));
+};
+
 const checkPermissions = (request, response) => {
   // Capture the input fields
   let email = request.body.email;
@@ -186,4 +209,7 @@ module.exports = {
   getSingleNews,
   getSingleNewsComments,
   additionalSingleComment,
+  deleteSinglePost,
+  deleteSinglePostRelations,
+  deleteSingleComment,
 };

@@ -12,6 +12,9 @@ const {
   getTickets,
   getSingleNewsComments,
   additionalSingleComment,
+  deleteSinglePost,
+  deleteSinglePostRelations,
+  deleteSingleComment,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -62,6 +65,15 @@ app.get("/get_tickets", (req, res) =>
   checkToken(req, res, () => getTickets(res))
 );
 
+app.delete("/delete_post/:id", (req, res) =>
+  checkToken(req, res, () => deleteSinglePost(req, res))
+);
+app.delete("/delete_post_relations/:id", (req, res) =>
+  checkToken(req, res, () => deleteSinglePostRelations(req, res))
+);
+app.delete("/delete_post_comment/:id", (req, res) =>
+  checkToken(req, res, () => deleteSingleComment(req, res))
+);
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {
 //   console.log("add_material");
