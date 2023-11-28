@@ -20,7 +20,7 @@ export interface URLPaths {
 
 const URL_PATHS: URLPaths = {
   home: {
-    label: "Home",
+    label: "Strona główna",
     slug: "/",
     isMenu: true,
   },
@@ -35,18 +35,14 @@ const URL_PATHS: URLPaths = {
     isAdmin: true,
     isMenu: true,
   },
-  account: {
-    label: "Account",
-    slug: "/account/",
-    isMenu: true,
-  },
+
   news: {
-    label: "News",
+    label: "Aktualności",
     slug: "/news/",
     isMenu: true,
   },
   tickets: {
-    label: "Tickets",
+    label: "Zgłoszenia",
     slug: "/tickets/",
     isMenu: true,
   },
@@ -54,6 +50,11 @@ const URL_PATHS: URLPaths = {
     label: "Comments",
     slug: "/comments",
     isMenu: false,
+  },
+  account: {
+    label: "Konto",
+    slug: "/account/",
+    isMenu: true,
   },
 };
 
