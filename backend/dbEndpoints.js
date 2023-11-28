@@ -66,6 +66,22 @@ const updateSingleNews = (req, res) => {
   );
 };
 
+const updateSingleComment = (req, res) => {
+  const { content } = req.body;
+  const id = req.params.id;
+  db.query(
+    "UPDATE `post_comments` SET `content`= ? WHERE comment_id = ?",
+    [content, id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
+
 const additionalSingleNews = (req, res) => {
   const { user_id, title, content } = req.body;
   const attachments = null;
@@ -75,6 +91,22 @@ const additionalSingleNews = (req, res) => {
   db.query(
     "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type) VALUES (?,?,?,?,?,?)",
     [user_id, title, content, attachments, created_at, type],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
+
+const additionalSingleComment = (req, res) => {
+  const { user_id, post_id, content } = req.body;
+  const created_at = new Date();
+
+  db.query(
+    "INSERT INTO `post_comments` (user_id, post_id, content,  created_at) VALUES (?,?,?,?)",
+    [user_id, post_id, content, created_at],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -148,8 +180,10 @@ module.exports = {
   getUsers,
   getNews,
   updateSingleNews,
+  updateSingleComment,
   additionalSingleNews,
   getTickets,
   getSingleNews,
   getSingleNewsComments,
+  additionalSingleComment,
 };

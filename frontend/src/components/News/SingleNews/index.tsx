@@ -18,6 +18,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   user_name,
   created_at,
   getNews,
+  isActiveComment = false,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -39,12 +40,14 @@ const SingleNews: React.FC<SingleNewsProps> = ({
         <div>{getDate(created_at)}</div>
       </S.Header>
       <S.Content>{content}</S.Content>
-      <S.ButtonsWrapper>
-        <button
-          onClick={() => navigate(`${URL_PATHS.comments.slug}?id=${post_id}`)}
-        >
-          Komentarze: {comment_count}
-        </button>
+      <S.ButtonsWrapper isActiveComment={isActiveComment}>
+        {isActiveComment && (
+          <button
+            onClick={() => navigate(`${URL_PATHS.comments.slug}?id=${post_id}`)}
+          >
+            Komentarze: {comment_count}
+          </button>
+        )}
         {((permissions && permissions === "admin") || user_id === id) && (
           <button onClick={handleEdit}>
             {isEditing ? "Zamknij" : "Edytuj"}

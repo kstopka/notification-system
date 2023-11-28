@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 27, 2023 at 09:50 PM
+-- Generation Time: Lis 28, 2023 at 08:16 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.0.28
 
@@ -107,7 +107,7 @@ INSERT INTO `posts` (`post_id`, `user_id`, `title`, `content`, `attachments`, `c
 (7, 4, 'Siódmy post', 'Treść siódmego posta', NULL, '2023-09-21 16:30:00', 'note'),
 (8, 3, 'Ósmy post', 'Treść ósmego posta', NULL, '2023-09-21 17:45:00', 'news'),
 (9, 4, 'Dziewiąty post', 'Treść dziewiątego posta', NULL, '2023-09-21 19:00:00', 'note'),
-(10, 2, 'Dziesiąty post', 'Treść dziesiątego posta', NULL, '2023-09-21 20:15:00', 'news'),
+(10, 2, 'Dziesiąty post', 'Treść dziesiątego', NULL, '2023-09-21 20:15:00', 'news'),
 (11, 1, 'Pogoda', 'Dziś troszkę wietrzenie', NULL, '2023-10-04 18:55:31', 'news'),
 (22, 1, 'Mecz', 'dziś liga mistrzów', NULL, '2023-10-04 19:20:05', 'news'),
 (23, 1, 'praca', 'dziś wolne hah', NULL, '2023-10-04 19:21:25', 'news'),
@@ -152,7 +152,8 @@ INSERT INTO `post_comments` (`comment_id`, `user_id`, `post_id`, `content`, `cre
 (18, 8, 9, 'Podoba mi się.', '2023-09-22 16:15:00'),
 (19, 9, 10, 'Polecam każdemu.', '2023-09-22 17:30:00'),
 (20, 10, 1, 'Dobry wybór tematu.', '2023-09-22 18:45:00'),
-(21, 1, 10, 'To jest świetny post!', '2023-09-20 08:00:00');
+(21, 1, 10, 'To jest świetny post!', '2023-09-20 08:00:00'),
+(22, 2, 23, 'test', '2023-11-28 12:22:06');
 
 --
 -- Wyzwalacze `post_comments`
@@ -202,7 +203,8 @@ INSERT INTO `post_comment_relations` (`relation_id`, `post_id`, `comment_id`) VA
 (18, 9, 19),
 (19, 10, 10),
 (20, 10, 20),
-(21, 10, 21);
+(21, 10, 21),
+(22, 23, 0);
 
 -- --------------------------------------------------------
 
@@ -591,10 +593,16 @@ ALTER TABLE `posts`
   MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `post_comments`
+--
+ALTER TABLE `post_comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
 -- AUTO_INCREMENT for table `post_comment_relations`
 --
 ALTER TABLE `post_comment_relations`
-  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `service_providers`

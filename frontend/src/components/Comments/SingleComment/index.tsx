@@ -4,6 +4,7 @@ import { IAuthState } from "../../../contexted/Auth/types";
 import { useState } from "react";
 import { SingleCommentProps } from "./types";
 import { getDate } from "../../../utils";
+import EditSingleCommentForm from "./EditSingleCommentForm";
 
 const SingleComment: React.FC<SingleCommentProps> = ({
   user_name,
@@ -26,20 +27,19 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   };
   return (
     <S.CommentWrapper>
-      <div>
-        userName:
+      <S.Header>
         <div>{user_name}</div>
-        Date:
         <div>{getDate(created_at)}</div>
-        Contetn:
-        <div>{content}</div>
+      </S.Header>
+      <S.Content>{content}</S.Content>
+      <S.ButtonsWrapper>
         {user_id === id && (
           <button onClick={handleEdit}>
             {isEditing ? "Zamknij" : "Edytuj"}
           </button>
         )}
-      </div>
-      {/* {isEditing && (
+      </S.ButtonsWrapper>
+      {isEditing && (
         <EditSingleCommentForm
           isEditing={isEditing}
           content={content}
@@ -47,7 +47,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
           updateData={updateData}
           handleEdit={handleEdit}
         />
-      )} */}
+      )}
     </S.CommentWrapper>
   );
 };

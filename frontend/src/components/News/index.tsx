@@ -22,13 +22,18 @@ const NewsContent: React.FC<NewsContentProps> = () => {
       {isAdditionalOpen && <AdditionalSingleNewsForm getNews={getNews} />}
       {permissions && permissions === "admin" && (
         <button onClick={handleAdditionalOpen}>
-          {isAdditionalOpen ? "Zamknij dodawanie" : "Dodaj"}
+          {isAdditionalOpen ? "Zamknij" : "Dodaj"}
         </button>
       )}
       {news &&
         news.length > 0 &&
         news.map((el) => (
-          <SingleNews {...el} key={el.post_id} getNews={getNews} />
+          <SingleNews
+            {...el}
+            key={el.post_id}
+            getNews={getNews}
+            isActiveComment
+          />
         ))}
     </S.NewsWrapper>
   );

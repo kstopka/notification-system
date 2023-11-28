@@ -53,7 +53,7 @@ const URL_PATHS: URLPaths = {
   comments: {
     label: "Comments",
     slug: "/comments",
-    isMenu: true,
+    isMenu: false,
   },
 };
 

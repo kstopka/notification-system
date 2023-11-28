@@ -6,6 +6,7 @@ import { CommentsContentProps } from "./types";
 import SingleNews from "../News/SingleNews";
 import SingleComment from "./SingleComment";
 import { useNavigate } from "react-router-dom";
+import AdditionalSingleCommentForm from "./SingleComment/AdditionalSingleCommentForm";
 
 const CommentsContent: React.FC<CommentsContentProps> = ({
   post,
@@ -17,13 +18,24 @@ const CommentsContent: React.FC<CommentsContentProps> = ({
     "permissions",
     "id",
   ]);
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
+  const handleAdditionalOpen = () => {
+    setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
+  };
 
-  // const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
-  // const handleAdditionalOpen = () => {
-  //   setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
-  // };
   return (
     <S.CommentsWrapper>
+      {isAdditionalOpen && (
+        <AdditionalSingleCommentForm
+          getSingleNews={getSingleNews}
+          post_id={post.post_id}
+          handleAdditionalOpen={handleAdditionalOpen}
+        />
+      )}
+
+      <button onClick={handleAdditionalOpen}>
+        {isAdditionalOpen ? "Zamknij" : "Dodaj komentarz"}
+      </button>
       <SingleNews {...post} key={post.post_id} getNews={getSingleNews} />
       {comments &&
         comments.length > 0 &&
@@ -34,8 +46,17 @@ const CommentsContent: React.FC<CommentsContentProps> = ({
             updateData={getSingleNews}
           />
         ))}
-      {/* <button>Dodaj Komentarz</button> */}
-      {/* <SingleCommentForm /> */}
+      {isAdditionalOpen && (
+        <AdditionalSingleCommentForm
+          getSingleNews={getSingleNews}
+          post_id={post.post_id}
+          handleAdditionalOpen={handleAdditionalOpen}
+        />
+      )}
+
+      <button onClick={handleAdditionalOpen}>
+        {isAdditionalOpen ? "Zamknij" : "Dodaj komentarz"}
+      </button>
     </S.CommentsWrapper>
   );
 };
