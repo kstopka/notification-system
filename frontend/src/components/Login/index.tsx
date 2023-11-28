@@ -5,6 +5,7 @@ import FormTextInput from "../atoms/FormTextInput";
 import { useEffect } from "react";
 import { useActions, AppCtx } from "../../contexted";
 import { IAppActions } from "../../contexted/App/types";
+import * as S from "./styles";
 
 interface LoginFormProps {}
 
@@ -35,7 +36,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
   return (
     <>
-      <div className="LoginWrapper">
+      <S.LoginWrapper>
         <h2>Zaloguj się</h2>
 
         <FormProvider {...methods}>
@@ -55,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
             </button>
           </form>
         </FormProvider>
-      </div>
+      </S.LoginWrapper>
     </>
   );
 };
