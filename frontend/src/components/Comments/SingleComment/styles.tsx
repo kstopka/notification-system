@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: royalblue;
+  background-color: ${(props) => props.theme.colors.tertiary};
   padding: 50px;
   width: 100%;
   max-width: 80%;

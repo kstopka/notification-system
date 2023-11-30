@@ -128,6 +128,8 @@ const nipSchemeValidation = yup
     REGEXPS.nipDash.test(value)
   );
 
+const textArea = yup.string().required("To pole jest wymagane");
+
 export const YUP = {
   polishZipCodeSchemeValidation,
   nipSchemeValidation,
@@ -143,4 +145,5 @@ export const YUP = {
   countrySchemeValidation,
   textBlockSchemeValidation,
   doubleTypeValidation,
+  textArea,
 };

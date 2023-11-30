@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const SingleNewsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: royalblue;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.quaternary};
   padding: 50px;
   width: 100%;
   max-width: 80%;

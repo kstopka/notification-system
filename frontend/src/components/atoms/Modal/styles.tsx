@@ -23,7 +23,8 @@ export const ModalContent = styled.div`
 
   height: 50vh;
   width: 50vw;
-  background-color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.quaternary};
 `;
 
 export const Content = styled.div`

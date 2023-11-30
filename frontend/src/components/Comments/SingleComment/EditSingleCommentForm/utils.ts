@@ -7,5 +7,5 @@ export const defaultValues: DefaultValuesEditSingleCommentForm = {
 };
 
 export const schema = yup.object().shape({
-  content: YUP.nameSchemeValidation,
+  content: YUP.textArea,
 });
