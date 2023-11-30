@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import URL_PATHS from "../../../constants/routes";
 import { AuthCtx, useActions, useContextState } from "../../../contexted";
 import { IAuthActions, IAuthState } from "../../../contexted/Auth/types";
-import "./styles.css";
+import * as S from "./styles";
 
 interface IFooterProps {}
 
@@ -14,10 +14,10 @@ const Footer: React.FC<IFooterProps> = (): JSX.Element => {
   const { logOut } = useActions<IAuthActions>(AuthCtx, ["logOut"]);
   const navigate = useNavigate();
   return (
-    <div className="Footer">
+    <S.Footer>
       {loggedIn && (
         <div>
-          Zalogowano jako: <span className="Name">{name}</span>
+          Zalogowano jako: <S.Name>{name}</S.Name>
         </div>
       )}
       {loggedIn && (
@@ -31,7 +31,7 @@ const Footer: React.FC<IFooterProps> = (): JSX.Element => {
           Logout
         </button>
       )}
-    </div>
+    </S.Footer>
   );
 };
 

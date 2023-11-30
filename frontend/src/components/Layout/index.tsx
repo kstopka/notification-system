@@ -6,7 +6,6 @@ import { IAuthActions, IAuthState } from "../../contexted/Auth/types";
 import Footer from "./Footer";
 import Head from "./Head";
 import Header from "./Header";
-import "./styles.css";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "styled-components";
 import theme from "../../styles/theme";
@@ -14,6 +13,7 @@ import { GlobalStyles } from "../../styles/global";
 import Alert from "../atoms/Alert";
 import { IAppActions, IAppState } from "../../contexted/App/types";
 import { initialAlert } from "../../contexted/App/state";
+import * as S from "./styles";
 
 interface ILayout {
   children: React.ReactNode;
@@ -76,7 +76,7 @@ const Layout: React.FC<ILayout> = ({
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <HelmetProvider>
-        <div className="Layout">
+        <S.Layout className="Layout">
           <Head seo={seo} location={location} />
           <Header />
           {alert.isAlertVisible && (
@@ -88,7 +88,7 @@ const Layout: React.FC<ILayout> = ({
           )}
           <main>{children}</main>
           <Footer />
-        </div>
+        </S.Layout>
       </HelmetProvider>
     </ThemeProvider>
   );

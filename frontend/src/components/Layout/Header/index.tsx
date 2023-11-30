@@ -1,9 +1,9 @@
 import URL_PATHS, { URLSinglePath } from "../../../constants/routes";
-import "./styles.css";
 import { objectToArray } from "./utils";
 import { NavLink } from "react-router-dom";
 import { AuthCtx, useContextState } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
+import * as S from "./styles";
 
 interface IHeaderProps {}
 
@@ -15,8 +15,8 @@ const Header: React.FC<IHeaderProps> = (): JSX.Element => {
   ]);
 
   return (
-    <header className="Header">
-      <nav className="Navigation">
+    <S.Header>
+      <S.Navigation>
         {URL_PATHS_ARRAY && URL_PATHS_ARRAY.length > 0
           ? URL_PATHS_ARRAY.map(({ slug, label, isAdmin }) =>
               (loggedIn && label !== "Login" && !isAdmin) ||
@@ -33,8 +33,8 @@ const Header: React.FC<IHeaderProps> = (): JSX.Element => {
               ) : null
             )
           : null}
-      </nav>
-    </header>
+      </S.Navigation>
+    </S.Header>
   );
 };
 

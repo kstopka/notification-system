@@ -1,6 +1,12 @@
-import { css } from 'styled-components';
-import theme from './theme';
-import { TPrimaryColors, TCustomColors, TColorValues, TBreakpoints, TFontSizes } from './utilsTypes';
+import { css } from "styled-components";
+import theme from "./theme";
+import {
+  TPrimaryColors,
+  TCustomColors,
+  TColorValues,
+  TBreakpoints,
+  TFontSizes,
+} from "./utilsTypes";
 
 export function getColor(type: TCustomColors, hue: TColorValues): string;
 export function getColor(type: TPrimaryColors): string;
@@ -43,21 +49,24 @@ export function getBreakpoint(breakpoint: TBreakpoints): string {
   return theme.breakpoints[breakpoint];
 }
 
-export function getTransition(properties = 'all', type = 'linear', time = '0.25s') {
+export function getTransition(
+  properties = "all",
+  type = "linear",
+  time = "0.25s"
+) {
   return css`
-    transition: ${theme.transitions.time || time} ${theme.transitions.type || type};
+    transition: ${theme.transitions.time || time}
+      ${theme.transitions.type || type};
     transition-property: ${properties};
     will-change: ${properties};
-    `
+  `;
 }
 
-export function getFont(size: TFontSizes, weight = '400', lineHeight = "24") {
+export function getFont(size: TFontSizes, weight = "400", lineHeight = "24") {
   return css`
     font-family: ${theme.fonts.family.main};
     font-size: ${theme.fonts.size[size]};
     font-weight: ${weight};
     line-height: ${lineHeight}px;
-  `
+  `;
 }
-
-

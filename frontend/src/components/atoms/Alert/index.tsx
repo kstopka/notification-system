@@ -2,11 +2,11 @@ import CheckCircleSVG from "../symbols/CheckCircleSVG";
 import InfoSVG from "../symbols/InfoSVG";
 import XSVG from "../symbols/XSVG";
 import { IAlertProps, IAlertStatus } from "./types";
-import "./style.css";
 import AlertSVG from "../symbols/AlertSVG";
 import { useActions, AppCtx } from "../../../contexted";
 import { initialAlert } from "../../../contexted/App/state";
 import { IAppActions } from "../../../contexted/App/types";
+import * as S from "./styles";
 
 export const alertImage = {
   info: <InfoSVG />,
@@ -30,10 +30,8 @@ const Alert = ({
   const handleClose2 = () => setAlert(initialAlert);
 
   return (
-    <div className="FixedWrapper">
-      <div
-        className={`AlertContainer ${getClassName("AlertContainer", status)}`}
-      >
+    <S.FixedWrapper>
+      <S.AlertContainer status={status}>
         <div className="AlertSVGContainer">{alertImage[status]}</div>
         {title.length && (
           <div className="ContentWrapper">
@@ -49,8 +47,8 @@ const Alert = ({
         <div className="CloseButton" onClick={handleClose2}>
           <XSVG />
         </div>
-      </div>
-    </div>
+      </S.AlertContainer>
+    </S.FixedWrapper>
   );
 };
 
