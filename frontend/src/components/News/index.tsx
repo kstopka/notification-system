@@ -31,7 +31,7 @@ const NewsContent: React.FC<NewsContentProps> = () => {
           <SingleNews
             {...el}
             key={el.post_id}
-            getNews={getNews}
+            updateData={getNews}
             isActiveComment
           />
         ))}

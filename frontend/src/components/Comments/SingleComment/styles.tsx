@@ -25,4 +25,5 @@ export const Content = styled.div`
 export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: 30px;
 `;

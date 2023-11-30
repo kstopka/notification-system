@@ -11,7 +11,7 @@ import AdditionalSingleCommentForm from "./SingleComment/AdditionalSingleComment
 const CommentsContent: React.FC<CommentsContentProps> = ({
   post,
   comments,
-  getSingleNews,
+  updateData,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -27,7 +27,7 @@ const CommentsContent: React.FC<CommentsContentProps> = ({
     <S.CommentsWrapper>
       {isAdditionalOpen && (
         <AdditionalSingleCommentForm
-          getSingleNews={getSingleNews}
+          updateData={updateData}
           post_id={post.post_id}
           handleAdditionalOpen={handleAdditionalOpen}
         />
@@ -36,19 +36,15 @@ const CommentsContent: React.FC<CommentsContentProps> = ({
       <button onClick={handleAdditionalOpen}>
         {isAdditionalOpen ? "Zamknij" : "Dodaj komentarz"}
       </button>
-      <SingleNews {...post} key={post.post_id} getNews={getSingleNews} />
+      <SingleNews {...post} key={post.post_id} updateData={updateData} />
       {comments &&
         comments.length > 0 &&
         comments.map((el) => (
-          <SingleComment
-            {...el}
-            key={el.comment_id}
-            updateData={getSingleNews}
-          />
+          <SingleComment {...el} key={el.comment_id} updateData={updateData} />
         ))}
       {isAdditionalOpen && (
         <AdditionalSingleCommentForm
-          getSingleNews={getSingleNews}
+          updateData={updateData}
           post_id={post.post_id}
           handleAdditionalOpen={handleAdditionalOpen}
         />

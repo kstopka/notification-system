@@ -5,6 +5,8 @@ import { useState } from "react";
 import { SingleCommentProps } from "./types";
 import { getDate } from "../../../utils";
 import EditSingleCommentForm from "./EditSingleCommentForm";
+import Modal from "../../atoms/Modal";
+import { useDeleteComment } from "./logic";
 
 const SingleComment: React.FC<SingleCommentProps> = ({
   user_name,
@@ -21,10 +23,22 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+
+  const handleDeleteModalActive = () => {
+    setIsDeleteModalActive((isDeleteModalActive) => !isDeleteModalActive);
+  };
 
   const handleEdit = () => {
     setIsEditing((isEditing) => !isEditing);
   };
+
+  const { handleDeleteComment } = useDeleteComment({
+    comment_id,
+    handleDeleteModalActive,
+    updateData,
+  });
+
   return (
     <S.CommentWrapper>
       <S.Header>
@@ -38,6 +52,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
             {isEditing ? "Zamknij" : "Edytuj"}
           </button>
         )}
+        <button onClick={handleDeleteModalActive}>Usuń</button>
       </S.ButtonsWrapper>
       {isEditing && (
         <EditSingleCommentForm
@@ -46,6 +61,13 @@ const SingleComment: React.FC<SingleCommentProps> = ({
           comment_id={comment_id}
           updateData={updateData}
           handleEdit={handleEdit}
+        />
+      )}
+      {isDeleteModalActive && (
+        <Modal
+          handleIsActiveModal={handleDeleteModalActive}
+          content="Czy na pewno chcesz usunąć ten komentarz?"
+          handleAcceptance={handleDeleteComment}
         />
       )}
     </S.CommentWrapper>

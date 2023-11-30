@@ -13,8 +13,10 @@ const {
   getSingleNewsComments,
   additionalSingleComment,
   deleteSinglePost,
-  deleteSinglePostRelations,
-  deleteSingleComment,
+  deleteSinglePostRelationsByPost,
+  deleteSingleCommentByPost,
+  deleteSinglePostRelationsByComment,
+  deleteSingleCommentByComment,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -69,10 +71,16 @@ app.delete("/delete_post/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePost(req, res))
 );
 app.delete("/delete_post_relations/:id", (req, res) =>
-  checkToken(req, res, () => deleteSinglePostRelations(req, res))
+  checkToken(req, res, () => deleteSinglePostRelationsByPost(req, res))
 );
 app.delete("/delete_post_comment/:id", (req, res) =>
-  checkToken(req, res, () => deleteSingleComment(req, res))
+  checkToken(req, res, () => deleteSingleCommentByPost(req, res))
+);
+app.delete("/delete_comment_relations/:id", (req, res) =>
+  checkToken(req, res, () => deleteSinglePostRelationsByComment(req, res))
+);
+app.delete("/delete_comment/:id", (req, res) =>
+  checkToken(req, res, () => deleteSingleCommentByComment(req, res))
 );
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {

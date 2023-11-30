@@ -4,7 +4,7 @@ import FormTextInput from "../../../atoms/FormTextInput";
 import { useAdditionalSingleComment } from "./logic";
 
 const AdditionalSingleCommentForm: React.FC<EditSingleCommentFormProps> = ({
-  getSingleNews,
+  updateData: getSingleNews,
   post_id,
   handleAdditionalOpen,
 }) => {

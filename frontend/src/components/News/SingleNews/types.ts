@@ -1,7 +1,7 @@
 import { SingleNewsData } from "../../../types/standard";
 
 export interface ExternalSingleNewsProps {
-  getNews: () => void;
+  updateData: () => void;
   isActiveComment?: boolean;
 }
 

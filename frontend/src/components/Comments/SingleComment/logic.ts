@@ -9,25 +9,28 @@ interface IResponse {
   status: "info" | "error" | "success";
 }
 
-export const useDeletePost = ({
-  post_id,
+export const useDeleteComment = ({
+  comment_id,
   handleDeleteModalActive,
-  getNews,
+  updateData,
 }: {
-  post_id: number;
+  comment_id: number;
   handleDeleteModalActive: () => void;
-  getNews: () => void;
+  updateData: () => void;
 }) => {
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleDeletePost = async () => {
+  const handleDeleteComment = async () => {
     setIsLoading(true);
     try {
-      await Api.deleteSinglePostRelationsByPost(post_id);
-      await Api.deleteSingleCommentByPost(post_id);
-      await Api.deleteSinglePost(post_id);
-      await getNews();
+      const result1 = await Api.deleteSinglePostRelationsByComment(comment_id);
+      const result2 = await Api.deleteSingleCommentByComment(comment_id);
+      console.log("result1", result1);
+      console.log("result2", result2);
+      // await Api.deleteSinglePost(post_id);
+
+      await updateData();
       setAlert({
         isAlertVisible: true,
         status: "success",
@@ -47,6 +50,6 @@ export const useDeletePost = ({
 
   return {
     isLoading,
-    handleDeletePost,
+    handleDeleteComment,
   };
 };

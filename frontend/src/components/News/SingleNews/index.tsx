@@ -19,7 +19,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   title,
   user_name,
   created_at,
-  getNews,
+  updateData,
   isActiveComment = false,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
@@ -43,7 +43,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   const { handleDeletePost } = useDeletePost({
     post_id,
     handleDeleteModalActive,
-    getNews,
+    getNews: updateData,
   });
   return (
     <S.SingleNewsWrapper>
@@ -76,7 +76,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           content={content}
           title={title}
           post_id={post_id}
-          getNews={getNews}
+          getNews={updateData}
           handleEdit={handleEdit}
         />
       )}

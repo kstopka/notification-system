@@ -1,6 +1,6 @@
 export type EditSingleCommentFormProps = {
   post_id: number;
-  getSingleNews: () => void;
+  updateData: () => void;
   handleAdditionalOpen: () => void;
 };
 

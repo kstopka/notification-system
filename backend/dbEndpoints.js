@@ -128,8 +128,8 @@ const getTickets = (res) =>
     }
   );
 
-const customDelete = (table, id, handler) => {
-  db.query(`DELETE FROM ${table} WHERE post_id= ?`, id, (err, result) => {
+const customDelete = (table, idName, id, handler) => {
+  db.query(`DELETE FROM ${table} WHERE ${idName}= ?`, id, (err, result) => {
     if (err) {
       if (err) throw err;
     }
@@ -139,16 +139,28 @@ const customDelete = (table, id, handler) => {
 
 const deleteSinglePost = async (req, res) => {
   const id = req.params.id;
-  customDelete("posts", id, (result) => res.send(result));
+  customDelete("posts", "post_id", id, (result) => res.send(result));
 };
 
-const deleteSinglePostRelations = (req, res) => {
+const deleteSinglePostRelationsByPost = (req, res) => {
   const id = req.params.id;
-  customDelete("post_comment_relations", id, (result) => res.send(result));
+  customDelete("post_comment_relations", "post_id", id, (result) =>
+    res.send(result)
+  );
 };
-const deleteSingleComment = (req, res) => {
+const deleteSingleCommentByPost = (req, res) => {
   const id = req.params.id;
-  customDelete("post_comments", id, (result) => res.send(result));
+  customDelete("post_comments", "post_id", id, (result) => res.send(result));
+};
+const deleteSinglePostRelationsByComment = (req, res) => {
+  const id = req.params.id;
+  customDelete("post_comment_relations", "comment_id", id, (result) =>
+    res.send(result)
+  );
+};
+const deleteSingleCommentByComment = (req, res) => {
+  const id = req.params.id;
+  customDelete("post_comments", "comment_id", id, (result) => res.send(result));
 };
 
 const checkPermissions = (request, response) => {
@@ -210,6 +222,8 @@ module.exports = {
   getSingleNewsComments,
   additionalSingleComment,
   deleteSinglePost,
-  deleteSinglePostRelations,
-  deleteSingleComment,
+  deleteSinglePostRelationsByPost,
+  deleteSingleCommentByPost,
+  deleteSinglePostRelationsByComment,
+  deleteSingleCommentByComment,
 };

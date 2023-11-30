@@ -14,7 +14,7 @@ const CommentsPage: React.FC<CommentsProps> = () => {
   const [comments, setComments] = useState<CommentData[]>([]);
 
   const post_id = getParamFromURL("id");
-  const getSingleNews = async () => {
+  const getSingleNewsAndComments = async () => {
     try {
       if (post_id === null) return;
       const posts: AxiosResponse<any, any> = await Api.getSingleNews(post_id);
@@ -27,7 +27,7 @@ const CommentsPage: React.FC<CommentsProps> = () => {
   };
 
   useEffect(() => {
-    getSingleNews();
+    getSingleNewsAndComments();
   }, []);
 
   if (!post) return null;
@@ -37,7 +37,7 @@ const CommentsPage: React.FC<CommentsProps> = () => {
       <CommentsContent
         post={post}
         comments={comments}
-        getSingleNews={getSingleNews}
+        updateData={getSingleNewsAndComments}
       />
     </Layout>
   );
