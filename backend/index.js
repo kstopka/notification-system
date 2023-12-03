@@ -10,6 +10,7 @@ const {
   updateSingleComment,
   additionalSingleNews,
   getTickets,
+  additionalTicket,
   getSingleNewsComments,
   additionalSingleComment,
   deleteSinglePost,
@@ -65,6 +66,9 @@ app.post("/additional_comment", (req, res) =>
 
 app.get("/get_tickets", (req, res) =>
   checkToken(req, res, () => getTickets(res))
+);
+app.post("/additional_ticket", (req, res) =>
+  checkToken(req, res, () => additionalTicket(req, res))
 );
 
 app.delete("/delete_post/:id", (req, res) =>

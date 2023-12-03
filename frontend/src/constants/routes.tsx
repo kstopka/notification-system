@@ -6,6 +6,7 @@ import LoginPage from "../templates/login";
 import NewsPage from "../templates/news";
 import TicketsPage from "../templates/tickets";
 import CommentsPage from "../templates/comments";
+import AdditionalTicketPage from "../templates/additionalTicket";
 
 export interface URLSinglePath {
   label: string;
@@ -39,6 +40,11 @@ const URL_PATHS: URLPaths = {
   news: {
     label: "Aktualności",
     slug: "/news/",
+    isMenu: true,
+  },
+  additionalTicket: {
+    label: "Dodaj zgłoszenie",
+    slug: "/new-ticket/",
     isMenu: true,
   },
   tickets: {
@@ -86,6 +92,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.comments.slug,
     element: <CommentsPage />,
+  },
+  {
+    path: URL_PATHS.additionalTicket.slug,
+    element: <AdditionalTicketPage />,
   },
 ]);
 

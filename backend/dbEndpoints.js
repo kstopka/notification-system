@@ -103,7 +103,7 @@ const additionalSingleNews = (req, res) => {
 const additionalSingleComment = (req, res) => {
   const { user_id, post_id, content } = req.body;
   const created_at = new Date();
-
+  console.log("sadasdsadsa");
   db.query(
     "INSERT INTO `post_comments` (user_id, post_id, content,  created_at) VALUES (?,?,?,?)",
     [user_id, post_id, content, created_at],
@@ -127,6 +127,24 @@ const getTickets = (res) =>
       res.send(result);
     }
   );
+
+const additionalTicket = (req, res) => {
+  const { user_id, subject, description } = req.body;
+  const created_at = new Date();
+  const priority = "niski";
+  const status = "otwarte";
+
+  db.query(
+    "INSERT INTO `tickets` (subject, description, priority, status, created_at, user_id) VALUES (?,?,?,?,?,?)",
+    [subject, description, priority, status, created_at, user_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
 
 const customDelete = (table, idName, id, handler) => {
   db.query(`DELETE FROM ${table} WHERE ${idName}= ?`, id, (err, result) => {
@@ -218,6 +236,7 @@ module.exports = {
   updateSingleComment,
   additionalSingleNews,
   getTickets,
+  additionalTicket,
   getSingleNews,
   getSingleNewsComments,
   additionalSingleComment,

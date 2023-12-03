@@ -92,6 +92,19 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+  additionalTicket(user_id: number, subject: string, description: string) {
+    console.log("user_id", user_id, subject, description);
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/additional_ticket`,
+      {
+        user_id,
+        subject,
+        description,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
 
   deleteSinglePost(post_id: number) {
     const token = Cookies.get("token");

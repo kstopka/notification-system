@@ -1,40 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import AlertSVG from "../symbols/AlertSVG";
 import CheckCircleSVG from "../symbols/CheckCircleSVG";
-
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import * as S from "./styles";
-import { StatusType } from "./types";
+import { StatusType, FormTextInputProps } from "./types";
 
-interface FormTextInputProps {
-  name: string;
-  placeholder: string;
-  label?: string;
-  type?: string;
-  direction?: "row" | "column";
-  isDisabled?: boolean;
-  className?: string;
-  isDark?: boolean;
-}
-
-const FormTextInput: React.FC<FormTextInputProps> = ({
+const FormTextareaInput: React.FC<FormTextInputProps> = ({
   name,
   placeholder,
   label = "",
-  type = "text",
   direction = "column",
   isDisabled = false,
   className = "",
+  maxLength,
   isDark = false,
 }): JSX.Element => {
   const { register, setValue, formState, clearErrors } = useFormContext();
-
   const { errors, dirtyFields } = formState;
 
   const [status, setStatus] = useState<StatusType>("default");
-  const [isTyping, setIsTyping] = useState(false);
   const [errorMessage, setErrorMessage] = useState<any>("");
 
   useEffect(() => {
@@ -56,20 +41,18 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
     }
   }, [name, errors, dirtyFields, formState]);
 
-  const onBlur = useCallback(({ target }: { target: { value: string } }) => {
+  const onBlur = ({ target }: { target: { value: string } }) => {
     clearErrors(name);
-    setValue(name, target.value.trim().replace(/\s\s+/g, " "), {
+    setValue(name, target.value.trim(), {
       shouldValidate: true,
       shouldTouch: true,
     });
-    setIsTyping(false);
-  }, []);
+  };
 
-  const onChange = useCallback(({ target }: { target: { value: string } }) => {
+  const onChange = ({ target }: { target: { value: string } }) => {
     clearErrors(name);
-    setIsTyping(true);
     setValue(name, target.value);
-  }, []);
+  };
 
   return (
     <>
@@ -85,21 +68,21 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
         <S.InputContainer isDark={isDark}>
           <S.TextInput
             id={name}
-            type={type}
             status={status}
             placeholder={placeholder}
             disabled={isDisabled}
             {...register(name, { onBlur, onChange })}
-            className="textInput"
+            className="textArea"
+            maxLength={maxLength}
             isDark={isDark}
           />
-          {status !== "default" && !isTyping ? (
+          {status !== "default" ? (
             <S.SVGContainer status={status}>
               {status === "success" ? <CheckCircleSVG /> : <AlertSVG />}
             </S.SVGContainer>
           ) : null}
         </S.InputContainer>
-        {!isTyping && status === "error" ? (
+        {status === "error" ? (
           <S.StyledDescription status={status}>
             {errorMessage}
           </S.StyledDescription>
@@ -109,4 +92,4 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
   );
 };
 
-export default FormTextInput;
+export default FormTextareaInput;
