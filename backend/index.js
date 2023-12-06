@@ -20,6 +20,7 @@ const {
   deleteSingleCommentByPost,
   deleteSinglePostRelationsByComment,
   deleteSingleCommentByComment,
+  updateSingleTicket,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -61,6 +62,9 @@ app.get("/get_ticket_comments/:id", (req, res) =>
 
 app.post("/update_news/:id", (req, res) =>
   checkToken(req, res, () => updateSingleNews(req, res))
+);
+app.patch("/patch_ticket/:id", (req, res) =>
+  checkToken(req, res, () => updateSingleTicket(req, res))
 );
 app.post("/update_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleComment(req, res))

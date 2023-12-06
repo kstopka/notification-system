@@ -10,6 +10,7 @@ import { SingleTicketProps } from "./types";
 import Select from "../../atoms/Select";
 import { priorityArray, statusArray } from "./utils";
 import { IUsersState } from "../../../contexted/Users/types";
+import Api from "../../../api/API";
 
 const SingleTicket: React.FC<SingleTicketProps> = ({
   created_at,
@@ -20,6 +21,7 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
   subject,
   owner_name,
   owner_id,
+  ticket_id,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -35,6 +37,11 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
     { value: string | number; label: string }[]
   >([]);
 
+  // ticket_id,
+  // priority,
+  // status,
+  // owner_id,
+
   const handleOwnerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOwner(Number(e.target.value));
     console.log(e.target.value);
@@ -47,6 +54,15 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
     setPriority(e.target.value);
     console.log(e.target.value);
   };
+
+  useEffect(() => {
+    Api.updateSingleTicket({
+      ticket_id,
+      priority,
+      status,
+      owner_id: selectedOwner,
+    });
+  }, [selectedOwner, status, priority, ticket_id]);
 
   useEffect(() => {
     setTransformedAdmins(

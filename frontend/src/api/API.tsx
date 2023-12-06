@@ -78,6 +78,28 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+  updateSingleTicket({
+    ticket_id,
+    priority,
+    status,
+    owner_id,
+  }: {
+    ticket_id: number;
+    priority: string;
+    status: string;
+    owner_id: number;
+  }) {
+    const token = Cookies.get("token");
+    return Axios.patch(
+      `${this.baseUrl}/patch_ticket/${ticket_id}`,
+      {
+        priority,
+        status,
+        owner_id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
 
   additionalSingleNews(user_id: number, title: string, content: string) {
     const token = Cookies.get("token");

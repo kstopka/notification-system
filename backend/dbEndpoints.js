@@ -106,6 +106,23 @@ const updateSingleNews = (req, res) => {
   );
 };
 
+const updateSingleTicket = (req, res) => {
+  const { priority, status, owner_id } = req.body;
+  const id = req.params.id;
+  console.log("update ticket");
+  db.query(
+    "UPDATE `tickets` SET `priority`= ? ,`status`= ?, `owner_id`= ?  WHERE ticket_id = ?",
+    [priority, status, owner_id, id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
+
 const updateSingleComment = (req, res) => {
   const { content } = req.body;
   const id = req.params.id;
@@ -288,4 +305,5 @@ module.exports = {
   deleteSingleCommentByPost,
   deleteSinglePostRelationsByComment,
   deleteSingleCommentByComment,
+  updateSingleTicket,
 };
