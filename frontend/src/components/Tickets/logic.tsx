@@ -1,7 +1,10 @@
+import URL_PATHS from "../../constants/routes";
 import { getDate } from "../../utils";
 import { SingleTicket } from "./types";
+import { useNavigate } from "react-router-dom";
 
 export const useDefaultColumns = () => {
+  const navigate = useNavigate();
   return {
     columns: [
       {
@@ -53,8 +56,15 @@ export const useDefaultColumns = () => {
         Cell: (e: { value: string }) => `${getDate(e.value)}`,
       },
       {
+        accessor: "ticket_id",
         id: "openTicket",
-        Cell: (e: { value: string }) => <button>otwórz</button>,
+        Cell: (e: { value: string }) => (
+          <button
+            onClick={() => navigate(`${URL_PATHS.ticket.slug}?id=${e.value}`)}
+          >
+            otwórz
+          </button>
+        ),
       },
     ],
   };

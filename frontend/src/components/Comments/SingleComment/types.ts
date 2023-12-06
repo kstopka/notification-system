@@ -1,7 +1,8 @@
-import { CommentData } from "../../../types/standard";
+import { PostCommentData } from "../../../types/standard";
 
 export interface ExternalSingleCommentProps {
   updateData: () => void;
 }
 
-export type SingleCommentProps = CommentData & ExternalSingleCommentProps & {};
+export type SingleCommentProps = PostCommentData &
+  ExternalSingleCommentProps & {};

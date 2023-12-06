@@ -4,14 +4,14 @@ import LoginForm from "../components/Login";
 import { getParamFromURL } from "../utils";
 import Api from "../api/API";
 import { AxiosResponse } from "axios";
-import { CommentData, SingleNewsData } from "../types/standard";
+import { PostCommentData, SingleNewsData } from "../types/standard";
 import CommentsContent from "../components/Comments";
 
 interface CommentsProps {}
 
 const CommentsPage: React.FC<CommentsProps> = () => {
   const [post, setPost] = useState<SingleNewsData>();
-  const [comments, setComments] = useState<CommentData[]>([]);
+  const [comments, setComments] = useState<PostCommentData[]>([]);
 
   const post_id = getParamFromURL("id");
   const getSingleNewsAndComments = async () => {

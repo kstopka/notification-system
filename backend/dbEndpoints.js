@@ -34,11 +34,51 @@ const getSingleNews = (req, res) => {
     }
   );
 };
+const getSingleTicket = (req, res) => {
+  const id = req.params.id;
+  db.query(
+    // `SELECT t.*, u.name AS user_name FROM tickets t JOIN users u ON t.user_id = u.user_id WHERE t.ticket_id = ?`,
+    `SELECT 
+      t.*,
+      u.name AS user_name,
+      o.name AS owner_name
+      FROM
+      tickets t 
+      JOIN
+      users u ON t.user_id = u.user_id
+      LEFT JOIN 
+      users o ON t.owner_id = o.user_id
+      WHERE t.ticket_id = ?`,
+    [id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+      console.log("result", result);
+      res.send(result);
+    }
+  );
+};
 
 const getSingleNewsComments = (req, res) => {
   const id = req.params.id;
   db.query(
     `SELECT pc.*, u.name AS user_name FROM post_comments pc JOIN users u ON pc.user_id = u.user_id JOIN post_comment_relations pcr ON pc.comment_id = pcr.comment_id WHERE pcr.post_id = ?
+    `,
+    [id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+      res.send(result);
+    }
+  );
+};
+
+const getSingleTicketComments = (req, res) => {
+  const id = req.params.id;
+  db.query(
+    `SELECT tc.*, u.name AS user_name FROM ticket_comments tc JOIN users u ON tc.user_id = u.user_id JOIN ticket_comment_relations tcr ON tc.comment_id = tcr.comment_id WHERE tcr.ticket_id = ?
     `,
     [id],
     (err, result) => {
@@ -133,10 +173,11 @@ const additionalTicket = (req, res) => {
   const created_at = new Date();
   const priority = "niski";
   const status = "otwarte";
+  const owner_id = 11;
 
   db.query(
-    "INSERT INTO `tickets` (subject, description, priority, status, created_at, user_id) VALUES (?,?,?,?,?,?)",
-    [subject, description, priority, status, created_at, user_id],
+    "INSERT INTO `tickets` (subject, description, priority, status, created_at, user_id, owner_id) VALUES (?,?,?,?,?,?,?)",
+    [subject, description, priority, status, created_at, user_id, owner_id],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -238,7 +279,9 @@ module.exports = {
   getTickets,
   additionalTicket,
   getSingleNews,
+  getSingleTicket,
   getSingleNewsComments,
+  getSingleTicketComments,
   additionalSingleComment,
   deleteSinglePost,
   deleteSinglePostRelationsByPost,

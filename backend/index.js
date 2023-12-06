@@ -6,12 +6,14 @@ const {
   checkPermissions,
   getNews,
   getSingleNews,
+  getSingleTicket,
   updateSingleNews,
   updateSingleComment,
   additionalSingleNews,
   getTickets,
   additionalTicket,
   getSingleNewsComments,
+  getSingleTicketComments,
   additionalSingleComment,
   deleteSinglePost,
   deleteSinglePostRelationsByPost,
@@ -47,8 +49,14 @@ app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
 app.get("/get_news/:id", (req, res) =>
   checkToken(req, res, () => getSingleNews(req, res))
 );
+app.get("/get_ticket/:id", (req, res) =>
+  checkToken(req, res, () => getSingleTicket(req, res))
+);
 app.get("/get_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleNewsComments(req, res))
+);
+app.get("/get_ticket_comments/:id", (req, res) =>
+  checkToken(req, res, () => getSingleTicketComments(req, res))
 );
 
 app.post("/update_news/:id", (req, res) =>
