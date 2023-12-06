@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useContextState, AuthCtx } from "../../../contexted";
+import { useEffect, useState } from "react";
+import { useContextState, AuthCtx, UsersCtx } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
 import { getDate } from "../../../utils";
 import EditSingleCommentForm from "../../Comments/SingleComment/EditSingleCommentForm";
@@ -9,6 +9,7 @@ import * as S from "./styles";
 import { SingleTicketProps } from "./types";
 import Select from "../../atoms/Select";
 import { priorityArray, statusArray } from "./utils";
+import { IUsersState } from "../../../contexted/Users/types";
 
 const SingleTicket: React.FC<SingleTicketProps> = ({
   created_at,
@@ -25,10 +26,14 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
     "permissions",
     "id",
   ]);
+  const { admins } = useContextState<IUsersState>(UsersCtx, ["admins"]);
 
   const [selectedOwner, setSelectedOwner] = useState(owner_id);
   const [status, setStatus] = useState(statusTicket);
   const [priority, setPriority] = useState(priorityTicket);
+  const [transformedAdmins, setTransformedAdmins] = useState<
+    { value: string | number; label: string }[]
+  >([]);
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOwner(Number(e.target.value));
@@ -42,6 +47,15 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
     setPriority(e.target.value);
     console.log(e.target.value);
   };
+
+  useEffect(() => {
+    setTransformedAdmins(
+      admins.map(({ user_id, name }) => ({
+        value: user_id,
+        label: name,
+      }))
+    );
+  }, [admins]);
   // const [isEditing, setIsEditing] = useState(false);
   // const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
 
@@ -96,10 +110,7 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
             <Select
               name={"ownerTicket"}
               initialValue={selectedOwner}
-              options={[
-                { value: 11, label: "brak" },
-                { value: 1, label: "John" },
-              ]}
+              options={transformedAdmins}
               handleChange={handleOwnerChange}
             />
           ) : (

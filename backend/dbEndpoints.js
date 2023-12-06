@@ -29,7 +29,7 @@ const getSingleNews = (req, res) => {
       if (err) {
         if (err) throw err;
       }
-      console.log("result", result);
+      // console.log("result", result);
       res.send(result);
     }
   );
@@ -54,7 +54,7 @@ const getSingleTicket = (req, res) => {
       if (err) {
         if (err) throw err;
       }
-      console.log("result", result);
+      // console.log("result", result);
       res.send(result);
     }
   );

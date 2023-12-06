@@ -2,7 +2,12 @@
 import { WindowProviderProps } from "./types";
 import throttle from "lodash.throttle";
 
-import React, { useReducer, useCallback, useLayoutEffect } from "react";
+import React, {
+  useReducer,
+  useCallback,
+  useLayoutEffect,
+  useEffect,
+} from "react";
 
 import WindowCtx from "./ctx";
 import reducer from "./reducer";
@@ -64,6 +69,10 @@ const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
   // useEffect(() => {
   //   onStateChange(state)
   // }, [state])
+
+  // useEffect(() => {
+  //   console.log("WindowProvider STATE: ", state);
+  // }, [state]);
 
   return (
     <WindowCtx.Provider

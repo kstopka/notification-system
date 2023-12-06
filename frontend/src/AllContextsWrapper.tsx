@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AppProvider, WindowProvider, AuthProvider } from "./contexted";
+import { UsersProvider } from "./contexted/Users/Provider";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -11,7 +12,11 @@ interface ContextsWrapperProps {
 }
 
 const InnerProviders: React.FC<ProviderProps> = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <UsersProvider>{children}</UsersProvider>
+    </AuthProvider>
+  );
 };
 
 const OuterProviders: React.FC<ProviderProps> = ({ children }) => {

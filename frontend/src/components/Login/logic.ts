@@ -31,7 +31,6 @@ export const useLogin = (): IUseLogin => {
       .then((res: any) => {
         logIn(res.data);
         reset();
-        console.log("res", res);
         setAlert({
           isAlertVisible: true,
           status: "success",

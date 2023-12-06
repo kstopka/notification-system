@@ -1,5 +1,6 @@
 import { useContext, Context } from "react";
 
+import { UsersProvider, UsersCtx } from "./Users/Provider";
 import { AuthProvider, AuthCtx } from "./Auth/Provider";
 import { WindowProvider, WindowCtx } from "./Window/Provider";
 import { AppCtx, AppProvider } from "./App/Provider";
@@ -64,4 +65,6 @@ export {
   AuthCtx,
   WindowProvider,
   WindowCtx,
+  UsersProvider,
+  UsersCtx,
 };
