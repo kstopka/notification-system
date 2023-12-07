@@ -4,6 +4,7 @@ const { checkToken } = require("./middleware");
 const {
   getUsers,
   getProviders,
+  getMeetings,
   checkPermissions,
   getNews,
   getSingleNews,
@@ -50,8 +51,12 @@ app.use(express.static(path.join(__dirname, "static")));
 app.post("/auth", (request, response) => checkPermissions(request, response));
 
 app.get("/get_users", (req, res) => checkToken(req, res, () => getUsers(res)));
+
 app.get("/get_providers", (req, res) =>
   checkToken(req, res, () => getProviders(res))
+);
+app.get("/get_meetings", (req, res) =>
+  checkToken(req, res, () => getMeetings(res))
 );
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));

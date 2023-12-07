@@ -41,3 +41,20 @@ export interface TicketCommentData {
 }
 
 export type TypeOfComment = "post" | "ticket";
+
+export interface MeetingsData {
+  address: string;
+  date: string;
+  description: string;
+  meeting_id: number;
+  time: string;
+}
+
+export interface PreparedMeetings {
+  id: number;
+  title: string;
+  start: Date;
+  end: Date;
+  description: string;
+  location: string;
+}
