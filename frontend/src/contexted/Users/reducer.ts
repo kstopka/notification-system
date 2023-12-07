@@ -10,6 +10,8 @@ function usersReducer(
   switch (action.type) {
     case "getUsers":
       return actions.getUsers(state, action);
+    case "getProviders":
+      return actions.getProviders(state, action);
 
     default:
       throw new Error("Wrong action type in Users reducer");

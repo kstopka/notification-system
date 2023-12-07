@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IUser, UsersProviderProps } from "./types";
+import { IProviders, IUser, UsersProviderProps } from "./types";
 
 import React, { useReducer, useEffect, useLayoutEffect, useState } from "react";
 
@@ -35,6 +35,18 @@ const UsersProvider: React.FC<UsersProviderProps> = ({
         };
 
         getDataUsers();
+
+        const getDataProviders = async () => {
+          try {
+            const providers = await Api.getProviders();
+            dispatch({
+              type: "getProviders",
+              payload: providers.data as IProviders[],
+            });
+          } catch (error) {}
+        };
+
+        getDataProviders();
       } catch (error) {}
     }
   }, [loggedIn]);

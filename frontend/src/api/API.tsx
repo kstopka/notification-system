@@ -9,6 +9,12 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+  getProviders() {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_providers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 
   login({ email, password }: { email: string; password: string }) {
     return Axios.post(`${this.baseUrl}/auth`, {
