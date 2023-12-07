@@ -41,12 +41,18 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} className="LoginForm">
-            <FormTextInput name="email" label="E-mail" placeholder="E-mail" />
+            <FormTextInput
+              name="email"
+              label="E-mail"
+              placeholder="E-mail"
+              isDark
+            />
             <FormTextInput
               type="password"
               name="password"
               label="Hasło"
               placeholder="Hasło"
+              isDark
             />
             <button
               type="submit"

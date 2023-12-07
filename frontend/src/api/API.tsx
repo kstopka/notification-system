@@ -78,6 +78,16 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+  updateSingleTicketComment(comment_text: string, comment_id: number) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/update_ticket_comment/${comment_id}`,
+      {
+        comment_text,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
   updateSingleTicket({
     ticket_id,
     priority,
@@ -126,6 +136,22 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+  additionalSingleTicketComment(
+    user_id: number,
+    ticket_id: number,
+    comment_text: string
+  ) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/additional_ticket_comment`,
+      {
+        user_id,
+        ticket_id,
+        comment_text,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
   additionalTicket(user_id: number, subject: string, description: string) {
     console.log("user_id", user_id, subject, description);
     const token = Cookies.get("token");
@@ -170,6 +196,21 @@ class ClassApi {
   deleteSingleCommentByComment(comment_id: number) {
     const token = Cookies.get("token");
     return Axios.delete(`${this.baseUrl}/delete_comment/${comment_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  deleteSingleTicketRelationsByComment(comment_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(
+      `${this.baseUrl}/delete_ticket_comment_relations/${comment_id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  }
+  deleteSingleTicketCommentByComment(comment_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(`${this.baseUrl}/delete_ticket_comment/${comment_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

@@ -6,20 +6,28 @@ import { defaultValues, schema } from "./utils";
 import { useActions, AppCtx } from "../../../../contexted";
 import { IAppActions } from "../../../../contexted/App/types";
 import Api from "../../../../api/API";
+import { TypeOfComment } from "../../../../types/standard";
 
 interface IResponse {
   message: string;
   status: "info" | "error" | "success";
 }
 
+const getApiFunction = {
+  post: Api.updateSingleComment.bind(Api),
+  ticket: Api.updateSingleTicketComment.bind(Api),
+};
+
 export const useEditSingleComment = ({
   content,
   comment_id,
+  type,
   updateData,
   handleEdit,
 }: {
   content: string;
   comment_id: number;
+  type: TypeOfComment;
   updateData: () => void;
   handleEdit: () => void;
 }) => {
@@ -35,7 +43,7 @@ export const useEditSingleComment = ({
   const onSubmit: SubmitHandler<typeof defaultValues> = async ({ content }) => {
     setIsLoading(true);
     try {
-      await Api.updateSingleComment(content, comment_id);
+      await getApiFunction[type](content, comment_id);
       await updateData();
       setAlert({
         isAlertVisible: true,

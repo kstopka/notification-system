@@ -1,5 +1,8 @@
+import { TypeOfComment } from "../../../../types/standard";
+
 export type EditSingleCommentFormProps = {
-  post_id: number;
+  id: number;
+  type: TypeOfComment;
   updateData: () => void;
   handleAdditionalOpen: () => void;
 };

@@ -138,6 +138,21 @@ const updateSingleComment = (req, res) => {
     }
   );
 };
+const updateSingleTicketComment = (req, res) => {
+  const { comment_text } = req.body;
+  const id = req.params.id;
+  db.query(
+    "UPDATE `ticket_comments` SET `comment_text`= ? WHERE comment_id = ?",
+    [comment_text, id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
 
 const additionalSingleNews = (req, res) => {
   const { user_id, title, content } = req.body;
@@ -160,10 +175,24 @@ const additionalSingleNews = (req, res) => {
 const additionalSingleComment = (req, res) => {
   const { user_id, post_id, content } = req.body;
   const created_at = new Date();
-  console.log("sadasdsadsa");
   db.query(
     "INSERT INTO `post_comments` (user_id, post_id, content,  created_at) VALUES (?,?,?,?)",
     [user_id, post_id, content, created_at],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
+
+const additionalSingleTicketComment = (req, res) => {
+  const { user_id, ticket_id, comment_text } = req.body;
+  const comment_date = new Date();
+  db.query(
+    "INSERT INTO `ticket_comments` (user_id, ticket_id, comment_text,  comment_date) VALUES (?,?,?,?)",
+    [user_id, ticket_id, comment_text, comment_date],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -238,6 +267,18 @@ const deleteSingleCommentByComment = (req, res) => {
   const id = req.params.id;
   customDelete("post_comments", "comment_id", id, (result) => res.send(result));
 };
+const deleteSingleTicketRelationsByComment = (req, res) => {
+  const id = req.params.id;
+  customDelete("ticket_comment_relations", "comment_id", id, (result) =>
+    res.send(result)
+  );
+};
+const deleteSingleTicketCommentByComment = (req, res) => {
+  const id = req.params.id;
+  customDelete("ticket_comments", "comment_id", id, (result) =>
+    res.send(result)
+  );
+};
 
 const checkPermissions = (request, response) => {
   // Capture the input fields
@@ -306,4 +347,8 @@ module.exports = {
   deleteSinglePostRelationsByComment,
   deleteSingleCommentByComment,
   updateSingleTicket,
+  deleteSingleTicketRelationsByComment,
+  deleteSingleTicketCommentByComment,
+  additionalSingleTicketComment,
+  updateSingleTicketComment,
 };

@@ -2,8 +2,8 @@ import * as S from "./styles";
 import { ModalProps } from "./types";
 
 const Modal: React.FC<ModalProps> = ({
-  handleIsActiveModal,
   content,
+  handleIsActiveModal,
   handleAcceptance,
 }) => {
   const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {

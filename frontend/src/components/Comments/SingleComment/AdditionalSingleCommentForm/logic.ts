@@ -12,14 +12,22 @@ import { useState } from "react";
 import { IAppActions } from "../../../../contexted/App/types";
 import Api from "../../../../api/API";
 import { scrollToBottom } from "../../../../utils";
+import { TypeOfComment } from "../../../../types/standard";
+
+const getApiFunction = {
+  post: Api.additionalSingleComment.bind(Api),
+  ticket: Api.additionalSingleTicketComment.bind(Api),
+};
 
 export const useAdditionalSingleComment = ({
-  post_id,
-  getSingleNews,
+  id,
+  updateData,
   handleAdditionalOpen,
+  type,
 }: {
-  post_id: number;
-  getSingleNews: () => void;
+  id: number;
+  type: TypeOfComment;
+  updateData: () => void;
   handleAdditionalOpen: () => void;
 }) => {
   const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
@@ -36,8 +44,8 @@ export const useAdditionalSingleComment = ({
   const onSubmit: SubmitHandler<typeof defaultValues> = async ({ content }) => {
     setIsLoading(true);
     try {
-      await Api.additionalSingleComment(user_id, post_id, content);
-      await getSingleNews();
+      await getApiFunction[type](user_id, id, content);
+      await updateData();
       setAlert({
         isAlertVisible: true,
         status: "success",

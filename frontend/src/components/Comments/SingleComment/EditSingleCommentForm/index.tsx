@@ -2,11 +2,13 @@ import { FormProvider } from "react-hook-form";
 import { EditSingleCommentFormProps } from "./types";
 import { useEditSingleComment } from "./logic";
 import FormTextInput from "../../../atoms/FormTextInput";
+import FormTextareaInput from "../../../atoms/FormTextareaInput";
 
 const EditSingleCommentForm: React.FC<EditSingleCommentFormProps> = ({
   isEditing,
   content,
   comment_id,
+  type,
   updateData,
   handleEdit,
 }) => {
@@ -15,13 +17,18 @@ const EditSingleCommentForm: React.FC<EditSingleCommentFormProps> = ({
     comment_id,
     updateData,
     handleEdit,
+    type,
   });
 
   return (
     <div>
       <FormProvider {...methods}>
         <form id="edit-single-comment-form" onSubmit={handleSubmit(onSubmit)}>
-          <FormTextInput name="content" placeholder="Treść:" label="Treść:" />
+          <FormTextareaInput
+            name="content"
+            placeholder="Treść:"
+            label="Treść:"
+          />
 
           <div className="wrapperButton">
             <button className={`${isLoading ? "loading" : ""}`}>

@@ -22,6 +22,7 @@ export interface SingleTicketData {
   user_id: number;
   user_name: string;
 }
+
 export interface PostCommentData {
   comment_id: number;
   content: string;
@@ -38,3 +39,5 @@ export interface TicketCommentData {
   user_id: number;
   user_name: string;
 }
+
+export type TypeOfComment = "post" | "ticket";

@@ -7,29 +7,37 @@ import SingleNews from "../News/SingleNews";
 import SingleComment from "./SingleComment";
 import { useNavigate } from "react-router-dom";
 import AdditionalSingleCommentForm from "./SingleComment/AdditionalSingleCommentForm";
+import { useComment } from "./logic";
 
 const CommentsContent: React.FC<CommentsContentProps> = ({
   post,
   comments,
   updateData,
 }) => {
+  const type = "post";
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
     "permissions",
     "id",
   ]);
-  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
-  const handleAdditionalOpen = () => {
-    setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
-  };
+
+  const {
+    isLoading,
+    isDeleteModalActive,
+    isAdditionalOpen,
+    handleDeleteComment,
+    handleDeleteModalActive,
+    handleAdditionalOpen,
+  } = useComment(updateData);
 
   return (
     <S.CommentsWrapper>
       {isAdditionalOpen && (
         <AdditionalSingleCommentForm
           updateData={updateData}
-          post_id={post.post_id}
+          id={post.post_id}
           handleAdditionalOpen={handleAdditionalOpen}
+          type={type}
         />
       )}
 
@@ -40,13 +48,22 @@ const CommentsContent: React.FC<CommentsContentProps> = ({
       {comments &&
         comments.length > 0 &&
         comments.map((el) => (
-          <SingleComment {...el} key={el.comment_id} updateData={updateData} />
+          <SingleComment
+            {...el}
+            type={type}
+            key={el.comment_id}
+            updateData={updateData}
+            handleDeleteModalActive={handleDeleteModalActive}
+            isDeleteModalActive={isDeleteModalActive}
+            handleDeleteComment={handleDeleteComment}
+          />
         ))}
       {isAdditionalOpen && (
         <AdditionalSingleCommentForm
           updateData={updateData}
-          post_id={post.post_id}
+          id={post.post_id}
           handleAdditionalOpen={handleAdditionalOpen}
+          type="post"
         />
       )}
 

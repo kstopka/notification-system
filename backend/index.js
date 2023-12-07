@@ -21,6 +21,10 @@ const {
   deleteSinglePostRelationsByComment,
   deleteSingleCommentByComment,
   updateSingleTicket,
+  deleteSingleTicketRelationsByComment,
+  deleteSingleTicketCommentByComment,
+  additionalSingleTicketComment,
+  updateSingleTicketComment,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -69,11 +73,17 @@ app.patch("/patch_ticket/:id", (req, res) =>
 app.post("/update_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleComment(req, res))
 );
+app.post("/update_ticket_comment/:id", (req, res) =>
+  checkToken(req, res, () => updateSingleTicketComment(req, res))
+);
 app.post("/additional_news", (req, res) =>
   checkToken(req, res, () => additionalSingleNews(req, res))
 );
 app.post("/additional_comment", (req, res) =>
   checkToken(req, res, () => additionalSingleComment(req, res))
+);
+app.post("/additional_ticket_comment", (req, res) =>
+  checkToken(req, res, () => additionalSingleTicketComment(req, res))
 );
 
 app.get("/get_tickets", (req, res) =>
@@ -97,6 +107,12 @@ app.delete("/delete_comment_relations/:id", (req, res) =>
 );
 app.delete("/delete_comment/:id", (req, res) =>
   checkToken(req, res, () => deleteSingleCommentByComment(req, res))
+);
+app.delete("/delete_ticket_comment_relations/:id", (req, res) =>
+  checkToken(req, res, () => deleteSingleTicketRelationsByComment(req, res))
+);
+app.delete("/delete_ticket_comment/:id", (req, res) =>
+  checkToken(req, res, () => deleteSingleTicketCommentByComment(req, res))
 );
 //Route to add new material
 // app.post("/api/add_material", (req, res) => {

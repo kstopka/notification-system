@@ -6,7 +6,6 @@ import { SingleCommentProps } from "./types";
 import { getDate } from "../../../utils";
 import EditSingleCommentForm from "./EditSingleCommentForm";
 import Modal from "../../atoms/Modal";
-import { useDeleteComment } from "./logic";
 
 const SingleComment: React.FC<SingleCommentProps> = ({
   user_name,
@@ -14,7 +13,11 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   content,
   user_id,
   comment_id,
+  isDeleteModalActive,
+  type,
   updateData,
+  handleDeleteModalActive,
+  handleDeleteComment,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -23,21 +26,14 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
-
-  const handleDeleteModalActive = () => {
-    setIsDeleteModalActive((isDeleteModalActive) => !isDeleteModalActive);
-  };
 
   const handleEdit = () => {
     setIsEditing((isEditing) => !isEditing);
   };
 
-  const { handleDeleteComment } = useDeleteComment({
-    comment_id,
-    handleDeleteModalActive,
-    updateData,
-  });
+  const handleDelete = () => {
+    handleDeleteComment(comment_id);
+  };
 
   return (
     <S.CommentWrapper>
@@ -61,13 +57,14 @@ const SingleComment: React.FC<SingleCommentProps> = ({
           comment_id={comment_id}
           updateData={updateData}
           handleEdit={handleEdit}
+          type={type}
         />
       )}
       {isDeleteModalActive && (
         <Modal
-          handleIsActiveModal={handleDeleteModalActive}
           content="Czy na pewno chcesz usunąć ten komentarz?"
-          handleAcceptance={handleDeleteComment}
+          handleIsActiveModal={handleDeleteModalActive}
+          handleAcceptance={handleDelete}
         />
       )}
     </S.CommentWrapper>

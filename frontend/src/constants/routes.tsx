@@ -8,6 +8,7 @@ import TicketsPage from "../templates/tickets";
 import CommentsPage from "../templates/comments";
 import AdditionalTicketPage from "../templates/additionalTicket";
 import SingleTicketPage from "../templates/singleTicket";
+import AdditionalServiceRequestPage from "../templates/additionalServiceRequest";
 
 export interface URLSinglePath {
   label: string;
@@ -68,6 +69,12 @@ const URL_PATHS: URLPaths = {
     slug: "/ticket",
     isMenu: false,
   },
+  serviceRequest: {
+    label: "Services",
+    slug: "/service",
+    isAdmin: true,
+    isMenu: true,
+  },
 };
 
 export const router = createBrowserRouter([
@@ -106,6 +113,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.ticket.slug,
     element: <SingleTicketPage />,
+  },
+  {
+    path: URL_PATHS.serviceRequest.slug,
+    element: <AdditionalServiceRequestPage />,
   },
 ]);
 
