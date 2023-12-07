@@ -37,22 +37,14 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
     { value: string | number; label: string }[]
   >([]);
 
-  // ticket_id,
-  // priority,
-  // status,
-  // owner_id,
-
   const handleOwnerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOwner(Number(e.target.value));
-    console.log(e.target.value);
   };
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStatus(e.target.value);
-    console.log(e.target.value);
   };
   const handlePriorityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPriority(e.target.value);
-    console.log(e.target.value);
   };
 
   useEffect(() => {

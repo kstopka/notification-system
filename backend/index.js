@@ -26,6 +26,7 @@ const {
   deleteSingleTicketCommentByComment,
   additionalSingleTicketComment,
   updateSingleTicketComment,
+  additionalServiceRequest,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -95,6 +96,9 @@ app.get("/get_tickets", (req, res) =>
 );
 app.post("/additional_ticket", (req, res) =>
   checkToken(req, res, () => additionalTicket(req, res))
+);
+app.post("/additional_service_request", (req, res) =>
+  checkToken(req, res, () => additionalServiceRequest(req, res))
 );
 
 app.delete("/delete_post/:id", (req, res) =>

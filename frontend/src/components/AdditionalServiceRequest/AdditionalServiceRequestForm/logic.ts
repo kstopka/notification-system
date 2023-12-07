@@ -13,7 +13,7 @@ import { IAppActions } from "../../../contexted/App/types";
 import { IAuthState } from "../../../contexted/Auth/types";
 import Api from "../../../api/API";
 
-export const useAdditionalServiceRequest = () => {
+export const useAdditionalServiceRequest = (provider_id: number) => {
   const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,13 +26,16 @@ export const useAdditionalServiceRequest = () => {
   const { reset, handleSubmit, setValue } = methods;
 
   const onSubmit: SubmitHandler<typeof defaultValues> = async ({
-    subject,
     description,
   }) => {
     setIsLoading(true);
     try {
-      await Api.additionalTicket(user_id, subject, description);
-      // await getSingleNews();
+      const response = await Api.additionalServiceRequest(
+        user_id,
+        provider_id,
+        description
+      );
+      // console.log("response.data.message", response.data.message);
       setAlert({
         isAlertVisible: true,
         status: "success",
@@ -40,7 +43,6 @@ export const useAdditionalServiceRequest = () => {
       });
 
       reset(defaultValues);
-      // handleAdditionalOpen();
     } catch (error) {
       setAlert({
         isAlertVisible: true,
