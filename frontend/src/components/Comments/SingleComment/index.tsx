@@ -3,7 +3,7 @@ import { useContextState, AuthCtx } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
 import { useState } from "react";
 import { SingleCommentProps } from "./types";
-import { getDate } from "../../../utils";
+import { getStringDate } from "../../../utils";
 import EditSingleCommentForm from "./EditSingleCommentForm";
 import Modal from "../../atoms/Modal";
 
@@ -39,7 +39,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
     <S.CommentWrapper>
       <S.Header>
         <div>{user_name}</div>
-        <div>{getDate(created_at)}</div>
+        <div>{getStringDate(created_at)}</div>
       </S.Header>
       <S.Content>{content}</S.Content>
       <S.ButtonsWrapper>
@@ -62,10 +62,18 @@ const SingleComment: React.FC<SingleCommentProps> = ({
       )}
       {isDeleteModalActive && (
         <Modal
-          content="Czy na pewno chcesz usunąć ten komentarz?"
           handleIsActiveModal={handleDeleteModalActive}
-          handleAcceptance={handleDelete}
-        />
+          buttons={[
+            <button className="secondary" onClick={handleDelete}>
+              Potwierdzam
+            </button>,
+            <button className="secondary" onClick={handleDeleteModalActive}>
+              Anuluj
+            </button>,
+          ]}
+        >
+          <p>Czy na pewno chcesz usunąć ten komentarz?</p>
+        </Modal>
       )}
     </S.CommentWrapper>
   );

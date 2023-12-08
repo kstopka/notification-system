@@ -11,6 +11,7 @@ export const ModalWrapper = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 `;
 
 export const ModalContent = styled.div`
@@ -29,4 +30,10 @@ export const ModalContent = styled.div`
 
 export const Content = styled.div`
   width: 80%;
+`;
+export const Footer = styled.div`
+  display: flex;
+  gap: 30px;
+  justify-content: flex-end;
+  width: 60%;
 `;

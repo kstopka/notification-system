@@ -1,6 +1,4 @@
-export const getDate = (value: string) => {
-  const date = new Date(value);
-
+export const getDate = (date: Date) => {
   const dzien = date.getDate();
   const miesiac = date.getMonth() + 1;
   const rok = date.getFullYear();
@@ -12,4 +10,9 @@ export const getDate = (value: string) => {
   }${miesiac}-${rok} ${godzina < 10 ? "0" : ""}${godzina}:${
     minuta < 10 ? "0" : ""
   }${minuta}`;
+};
+
+export const getStringDate = (value: string) => {
+  const date = new Date(value);
+  return getDate(date);
 };

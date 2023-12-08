@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useContextState, AuthCtx, UsersCtx } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
-import { getDate } from "../../../utils";
+import { getStringDate } from "../../../utils";
 import EditSingleCommentForm from "../../Comments/SingleComment/EditSingleCommentForm";
 import Modal from "../../atoms/Modal";
 import { useDeleteComment } from "./logic";
@@ -64,22 +64,6 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
       }))
     );
   }, [admins]);
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
-
-  // const handleDeleteModalActive = () => {
-  //   setIsDeleteModalActive((isDeleteModalActive) => !isDeleteModalActive);
-  // };
-
-  // const handleEdit = () => {
-  //   setIsEditing((isEditing) => !isEditing);
-  // };
-
-  // const { handleDeleteComment } = useDeleteComment({
-  //   comment_id,
-  //   handleDeleteModalActive,
-  //   updateData,
-  // });
 
   return (
     <S.TicketWrapper>
@@ -126,33 +110,9 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
           )}
         </div>
 
-        <S.WrapperLabel>{getDate(created_at)}</S.WrapperLabel>
+        <S.WrapperLabel>{getStringDate(created_at)}</S.WrapperLabel>
       </S.Header>
       <S.Content>{description}</S.Content>
-      {/* <S.ButtonsWrapper>
-        {user_id === id && (
-          <button onClick={handleEdit}>
-            {isEditing ? "Zamknij" : "Edytuj"}
-          </button>
-        )}
-        <button onClick={handleDeleteModalActive}>Usuń</button>
-      </S.ButtonsWrapper> */}
-      {/* {isEditing && (
-        <EditSingleCommentForm
-          isEditing={isEditing}
-          content={content}
-          comment_id={comment_id}
-          updateData={updateData}
-          handleEdit={handleEdit}
-        />
-      )} */}
-      {/* {isDeleteModalActive && (
-        <Modal
-          handleIsActiveModal={handleDeleteModalActive}
-          content="Czy na pewno chcesz usunąć ten komentarz?"
-          handleAcceptance={handleDeleteComment}
-        />
-      )} */}
     </S.TicketWrapper>
   );
 };

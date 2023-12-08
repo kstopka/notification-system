@@ -81,7 +81,7 @@ export const GlobalStyles = createGlobalStyle`
             color: ${(props) => props.theme.colors.quaternary};
             background-color: ${(props) => props.theme.colors.secondary};
             width: fit-content;
-            padding: 10px;
+            padding: 10px 20px;
             text-decoration: none;
             border: none;
             cursor: pointer;
@@ -99,7 +99,7 @@ export const GlobalStyles = createGlobalStyle`
             color: ${(props) => props.theme.colors.quaternary};
             background-color: ${(props) => props.theme.colors.primary};
             width: fit-content;
-            padding: 10px;
+            padding: 10px 20px;
             text-decoration: none;
             border: none;
             cursor: pointer;

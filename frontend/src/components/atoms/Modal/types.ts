@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 export interface ModalProps {
-  content: string;
+  children: ReactNode;
   handleIsActiveModal: () => void;
-  handleAcceptance: () => void;
+  buttons?: ReactNode[];
 }

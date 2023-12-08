@@ -5,7 +5,7 @@ import { useContextState, AuthCtx } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
 import { useState } from "react";
 import EditSingleNewsForm from "../EditSingleNewsForm";
-import { getDate } from "../../../utils";
+import { getStringDate } from "../../../utils";
 import { useNavigate } from "react-router-dom";
 import URL_PATHS from "../../../constants/routes";
 import Modal from "../../atoms/Modal";
@@ -50,7 +50,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
       <S.Title>{title}</S.Title>
       <S.Header>
         <div>{user_name}</div>
-        <div>{getDate(created_at)}</div>
+        <div>{getStringDate(created_at)}</div>
       </S.Header>
       <S.Content>{content}</S.Content>
       <S.ButtonsWrapper isActiveComment={isActiveComment}>
@@ -83,9 +83,17 @@ const SingleNews: React.FC<SingleNewsProps> = ({
       {isDeleteModalActive && (
         <Modal
           handleIsActiveModal={handleDeleteModalActive}
-          content="Czy na pewno chcesz usunąć ten post?"
-          handleAcceptance={handleDeletePost}
-        />
+          buttons={[
+            <button className="secondary" onClick={handleDeletePost}>
+              Potwierdzam
+            </button>,
+            <button className="secondary" onClick={handleDeleteModalActive}>
+              Anuluj
+            </button>,
+          ]}
+        >
+          <p>Czy na pewno chcesz usunąć ten komentarz?</p>
+        </Modal>
       )}
     </S.SingleNewsWrapper>
   );

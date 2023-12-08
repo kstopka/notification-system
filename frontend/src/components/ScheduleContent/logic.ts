@@ -4,6 +4,22 @@ import { PreparedMeetings, MeetingsData } from "../../types/standard";
 
 export const useCalendar = () => {
   const [meetings, setMeetings] = useState<PreparedMeetings[]>([]);
+  const [selectedEvent, setSetselectedEvent] = useState<PreparedMeetings>();
+  const [isActiveModal, setIsActiveModal] = useState(false);
+
+  const handleActiveModal = () => {
+    setIsActiveModal((isActiveModal) => !isActiveModal);
+  };
+
+  const handleSelectEvent = (e: PreparedMeetings) => {
+    setSetselectedEvent(e);
+    handleActiveModal();
+  };
+
+  useEffect(() => {
+    console.log("selectedEvent", selectedEvent);
+  }, [selectedEvent]);
+
   const getMeetings = async () => {
     try {
       const { data } = await Api.getMeetings();
@@ -28,5 +44,9 @@ export const useCalendar = () => {
 
   return {
     meetings,
+    selectedEvent,
+    isActiveModal,
+    handleSelectEvent,
+    handleActiveModal,
   };
 };

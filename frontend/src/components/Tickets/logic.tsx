@@ -1,5 +1,5 @@
 import URL_PATHS from "../../constants/routes";
-import { getDate } from "../../utils";
+import { getStringDate } from "../../utils";
 import { SingleTicket } from "./types";
 import { useNavigate } from "react-router-dom";
 
@@ -53,7 +53,7 @@ export const useDefaultColumns = () => {
         Header: "Data utworzenia",
         accessor: "created_at",
         name: "created_at",
-        Cell: (e: { value: string }) => `${getDate(e.value)}`,
+        Cell: (e: { value: string }) => `${getStringDate(e.value)}`,
       },
       {
         accessor: "ticket_id",

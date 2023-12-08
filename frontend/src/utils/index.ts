@@ -1,5 +1,5 @@
-import { getDate } from "./getDate";
+import { getStringDate, getDate } from "./getDate";
 import { getParamFromURL } from "./getParamFromUrl";
 import { scrollToBottom } from "./scrollToBottom";
 
-export { getDate, getParamFromURL, scrollToBottom };
+export { getStringDate, getParamFromURL, scrollToBottom, getDate };
