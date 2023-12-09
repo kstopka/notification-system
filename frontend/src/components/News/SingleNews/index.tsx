@@ -21,6 +21,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
   created_at,
   updateData,
   isActiveComment = false,
+  isVoteOpen = false,
 }) => {
   const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
     "loggedIn",
@@ -30,26 +31,33 @@ const SingleNews: React.FC<SingleNewsProps> = ({
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+  const [isVoteModalActive, setIsVoteModalActive] = useState(false);
+  const [vote, setVote] = useState<boolean | null>(null);
 
   const navigate = useNavigate();
 
   const handleDeleteModalActive = () => {
     setIsDeleteModalActive((isDeleteModalActive) => !isDeleteModalActive);
   };
+  const handleVoteModalActive = (value: boolean | null) => {
+    setIsVoteModalActive((isVoteModalActive) => !isVoteModalActive);
+    setVote(value);
+  };
   const handleEdit = () => {
     setIsEditing((isEditing) => !isEditing);
   };
 
-  const { handleDeletePost } = useDeletePost({
+  const { handleDeletePost, handleVote } = useDeletePost({
     post_id,
     handleDeleteModalActive,
-    getNews: updateData,
+    handleVoteModalActive,
+    updateData,
   });
   return (
     <S.SingleNewsWrapper>
       <S.Title>{title}</S.Title>
       <S.Header>
-        <div>{user_name}</div>
+        {user_name && <div>{user_name}</div>}
         <div>{getStringDate(created_at)}</div>
       </S.Header>
       <S.Content>{content}</S.Content>
@@ -70,6 +78,18 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           </S.ButtonsEndWrapper>
         )}
       </S.ButtonsWrapper>
+      {isVoteOpen && permissions === "user" && (
+        <div>
+          <S.ButtonsEndWrapper>
+            <button onClick={() => handleVoteModalActive(true)}>
+              JESTEM ZA!
+            </button>
+            <button onClick={() => handleVoteModalActive(false)}>
+              JESTEM PRZECIW!
+            </button>
+          </S.ButtonsEndWrapper>
+        </div>
+      )}
       {isEditing && (
         <EditSingleNewsForm
           isEditing={isEditing}
@@ -79,6 +99,34 @@ const SingleNews: React.FC<SingleNewsProps> = ({
           getNews={updateData}
           handleEdit={handleEdit}
         />
+      )}
+      {isVoteModalActive && (
+        <Modal
+          handleIsActiveModal={() => handleVoteModalActive(null)}
+          buttons={[
+            <button className="secondary" onClick={() => handleVote(vote)}>
+              Potwierdzam
+            </button>,
+            <button
+              className="secondary"
+              onClick={() => handleVoteModalActive(null)}
+            >
+              Anuluj
+            </button>,
+          ]}
+        >
+          {vote ? (
+            <>
+              <div>Jesteś ZA!</div>
+              <div>Proszę potwierdź swój wybór</div>
+            </>
+          ) : (
+            <>
+              <div>Wyrażasz swój sprzeciw</div>
+              <div>Proszę potwierdź swój wybór</div>
+            </>
+          )}
+        </Modal>
       )}
       {isDeleteModalActive && (
         <Modal

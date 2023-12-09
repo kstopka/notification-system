@@ -7,6 +7,7 @@ const {
   getMeetings,
   checkPermissions,
   getNews,
+  getVoteLaw,
   getSingleNews,
   getSingleTicket,
   updateSingleNews,
@@ -28,6 +29,7 @@ const {
   additionalSingleTicketComment,
   updateSingleTicketComment,
   additionalServiceRequest,
+  additionalVotes,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -61,6 +63,10 @@ app.get("/get_meetings", (req, res) =>
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
 
+app.get("/get_vote_law/:id", (req, res) =>
+  checkToken(req, res, () => getVoteLaw(req, res))
+);
+
 app.get("/get_news/:id", (req, res) =>
   checkToken(req, res, () => getSingleNews(req, res))
 );
@@ -85,6 +91,9 @@ app.post("/update_comment/:id", (req, res) =>
 );
 app.post("/update_ticket_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleTicketComment(req, res))
+);
+app.post("/additional_votes", (req, res) =>
+  checkToken(req, res, () => additionalVotes(req, res))
 );
 app.post("/additional_news", (req, res) =>
   checkToken(req, res, () => additionalSingleNews(req, res))

@@ -16,10 +16,6 @@ export const useCalendar = () => {
     handleActiveModal();
   };
 
-  useEffect(() => {
-    console.log("selectedEvent", selectedEvent);
-  }, [selectedEvent]);
-
   const getMeetings = async () => {
     try {
       const { data } = await Api.getMeetings();

@@ -1,8 +1,14 @@
 import { useState } from "react";
 
-import { useActions, AppCtx } from "../../../contexted";
+import {
+  useActions,
+  AppCtx,
+  AuthCtx,
+  useContextState,
+} from "../../../contexted";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import { IAuthState } from "../../../contexted/Auth/types";
 
 interface IResponse {
   message: string;
@@ -12,12 +18,16 @@ interface IResponse {
 export const useDeletePost = ({
   post_id,
   handleDeleteModalActive,
-  getNews,
+  handleVoteModalActive,
+  updateData,
 }: {
   post_id: number;
   handleDeleteModalActive: () => void;
-  getNews: () => void;
+  handleVoteModalActive: (value: boolean | null) => void;
+  updateData: () => void;
 }) => {
+  const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
+
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +37,7 @@ export const useDeletePost = ({
       await Api.deleteSinglePostRelationsByPost(post_id);
       await Api.deleteSingleCommentByPost(post_id);
       await Api.deleteSinglePost(post_id);
-      await getNews();
+      await updateData();
       setAlert({
         isAlertVisible: true,
         status: "success",
@@ -45,8 +55,32 @@ export const useDeletePost = ({
     }
   };
 
+  const handleVote = async (value: boolean | null) => {
+    if (value === null) return;
+    setIsLoading(true);
+    try {
+      await Api.additionalVotes(user_id, post_id, value);
+      await updateData();
+      setAlert({
+        isAlertVisible: true,
+        status: "success",
+        message: "response.data.message",
+      });
+      handleVoteModalActive(null);
+    } catch (error) {
+      setAlert({
+        isAlertVisible: true,
+        status: "error",
+        message: "error.response.data",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isLoading,
     handleDeletePost,
+    handleVote,
   };
 };

@@ -10,6 +10,7 @@ import AdditionalTicketPage from "../templates/additionalTicket";
 import SingleTicketPage from "../templates/singleTicket";
 import AdditionalServiceRequestPage from "../templates/additionalServiceRequest";
 import SchedulePage from "../templates/schedule";
+import VotesPage from "../templates/votes";
 
 export interface URLSinglePath {
   label: string;
@@ -81,6 +82,11 @@ const URL_PATHS: URLPaths = {
     slug: "/schedule",
     isMenu: true,
   },
+  votes: {
+    label: "Głosuj",
+    slug: "/votes",
+    isMenu: true,
+  },
 };
 
 export const router = createBrowserRouter([
@@ -127,6 +133,10 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.schedule.slug,
     element: <SchedulePage />,
+  },
+  {
+    path: URL_PATHS.votes.slug,
+    element: <VotesPage />,
   },
 ]);
 

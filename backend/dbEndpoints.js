@@ -36,6 +36,26 @@ const getNews = (res) =>
       res.send(result);
     }
   );
+const getVoteLaw = (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    `SELECT p.*
+     FROM posts p
+     LEFT JOIN votes v ON p.post_id = v.post_id AND v.user_id = ?
+     WHERE p.type = 'laws'
+     AND v.vote_id IS NULL
+     ORDER BY p.created_at DESC;`,
+    [id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
 const getSingleNews = (req, res) => {
   const id = req.params.id;
   db.query(
@@ -170,11 +190,25 @@ const updateSingleTicketComment = (req, res) => {
   );
 };
 
+const additionalVotes = (req, res) => {
+  const { user_id, post_id, vote_value } = req.body;
+  const timestamp = new Date();
+
+  db.query(
+    "INSERT INTO `votes` (user_id, post_id, vote_value, timestamp) VALUES (?,?,?,?)",
+    [user_id, post_id, vote_value, timestamp],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
 const additionalSingleNews = (req, res) => {
-  const { user_id, title, content } = req.body;
+  const { user_id, title, content, type } = req.body;
   const attachments = null;
   const created_at = new Date();
-  const type = "news";
 
   db.query(
     "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type) VALUES (?,?,?,?,?,?)",
@@ -365,6 +399,7 @@ module.exports = {
   getUsers,
   getProviders,
   getNews,
+  getVoteLaw,
   getMeetings,
   updateSingleNews,
   updateSingleComment,
@@ -387,4 +422,5 @@ module.exports = {
   additionalSingleTicketComment,
   updateSingleTicketComment,
   additionalServiceRequest,
+  additionalVotes,
 };

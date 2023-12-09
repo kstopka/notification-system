@@ -1,14 +1,17 @@
-export interface SingleNewsData {
+export type BasicPostData = {
   attachments: null;
-  comment_count?: number;
   content: string;
   created_at: string;
   post_id: number;
   title: string;
   type: string;
   user_id: number;
-  user_name: string;
-}
+};
+
+export type SingleNewsData = {
+  comment_count?: number;
+  user_name?: string;
+} & BasicPostData;
 export interface SingleTicketData {
   created_at: string;
   description: string;

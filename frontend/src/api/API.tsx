@@ -36,6 +36,14 @@ class ClassApi {
     });
   }
 
+  getVoteLaw(user_id: number) {
+    const token = Cookies.get("token");
+    console.log("user_id", user_id);
+    return Axios.get(`${this.baseUrl}/get_vote_law/${user_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
   getSingleNews(post_id: string) {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_news/${post_id}`, {
@@ -123,7 +131,12 @@ class ClassApi {
     );
   }
 
-  additionalSingleNews(user_id: number, title: string, content: string) {
+  additionalSingleNews(
+    user_id: number,
+    title: string,
+    content: string,
+    type: string
+  ) {
     const token = Cookies.get("token");
     return Axios.post(
       `${this.baseUrl}/additional_news`,
@@ -131,6 +144,19 @@ class ClassApi {
         user_id,
         title,
         content,
+        type,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
+  additionalVotes(user_id: number, post_id: number, vote_value: boolean) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/additional_votes`,
+      {
+        user_id,
+        post_id,
+        vote_value,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );

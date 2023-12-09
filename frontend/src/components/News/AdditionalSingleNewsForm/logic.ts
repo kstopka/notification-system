@@ -12,10 +12,14 @@ import { useState } from "react";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
 
-export const useAdditionalSingleNews = ({
-  getNews,
+export const useAdditionalSinglePost = ({
+  type,
+  updateData,
+  handleAdditionalOpen,
 }: {
-  getNews: () => void;
+  type: string;
+  updateData: () => void;
+  handleAdditionalOpen: () => void;
 }) => {
   const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
@@ -34,8 +38,9 @@ export const useAdditionalSingleNews = ({
   }) => {
     setIsLoading(true);
     try {
-      await Api.additionalSingleNews(user_id, title, content);
-      await getNews();
+      await Api.additionalSingleNews(user_id, title, content, type);
+      await updateData();
+      handleAdditionalOpen();
       setAlert({
         isAlertVisible: true,
         status: "success",

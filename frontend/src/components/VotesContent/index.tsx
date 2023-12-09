@@ -1,18 +1,19 @@
-import SingleNews from "./SingleNews";
-import { useNews } from "./hooks";
 import { NewsContentProps } from "./types";
 import * as S from "./styles";
 import { useContextState, AuthCtx } from "../../contexted";
 import { IAuthState } from "../../contexted/Auth/types";
 import { useState } from "react";
-import AdditionalSinglePostForm from "./AdditionalSingleNewsForm";
+import SingleNews from "../News/SingleNews";
+import { useVoteLaw } from "./hooks";
+import AdditionalSinglePostForm from "../News/AdditionalSingleNewsForm";
 
 const NewsContent: React.FC<NewsContentProps> = () => {
-  const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
+  const { loggedIn, permissions, id } = useContextState<IAuthState>(AuthCtx, [
+    "id",
     "loggedIn",
     "permissions",
   ]);
-  const { news, getNews } = useNews();
+  const { voteLaw, getVoteLaw } = useVoteLaw();
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
   const handleAdditionalOpen = () => {
     setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
@@ -21,8 +22,8 @@ const NewsContent: React.FC<NewsContentProps> = () => {
     <S.NewsWrapper>
       {isAdditionalOpen && (
         <AdditionalSinglePostForm
-          updateData={getNews}
-          type="news"
+          updateData={getVoteLaw}
+          type="laws"
           handleAdditionalOpen={handleAdditionalOpen}
         />
       )}
@@ -31,14 +32,14 @@ const NewsContent: React.FC<NewsContentProps> = () => {
           {isAdditionalOpen ? "Zamknij" : "Dodaj"}
         </button>
       )}
-      {news &&
-        news.length > 0 &&
-        news.map((el) => (
+      {voteLaw &&
+        voteLaw.length > 0 &&
+        voteLaw.map((el) => (
           <SingleNews
             {...el}
             key={el.post_id}
-            updateData={getNews}
-            isActiveComment
+            updateData={getVoteLaw}
+            isVoteOpen
           />
         ))}
     </S.NewsWrapper>

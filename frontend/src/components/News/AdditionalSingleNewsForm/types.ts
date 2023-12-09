@@ -1,5 +1,7 @@
 export type EditSingleNewsFormProps = {
-  getNews: () => void;
+  type: string;
+  updateData: () => void;
+  handleAdditionalOpen: () => void;
 };
 
 export type DefaultValuesEditSingleNewsForm = {
