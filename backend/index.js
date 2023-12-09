@@ -33,6 +33,7 @@ const {
   additionalServiceRequest,
   additionalVotes,
   setSingleLaw,
+  updateSingleLaw,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -93,6 +94,9 @@ app.post("/update_news/:id", (req, res) =>
 );
 app.patch("/patch_ticket/:id", (req, res) =>
   checkToken(req, res, () => updateSingleTicket(req, res))
+);
+app.patch("/patch_law/:id", (req, res) =>
+  checkToken(req, res, () => updateSingleLaw(req, res))
 );
 app.post("/update_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleComment(req, res))

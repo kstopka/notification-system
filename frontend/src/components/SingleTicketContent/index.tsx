@@ -1,17 +1,10 @@
 import * as S from "./styles";
-import { useContextState, AuthCtx } from "../../contexted";
-import { IAuthState } from "../../contexted/Auth/types";
-import { useState } from "react";
-// import { CommentsContentProps } from "./types";
-import SingleNews from "../News/SingleNews";
-// import SingleComment from "./SingleComment";
-import { useNavigate } from "react-router-dom";
+
 import { SingleTicketContentProps } from "./types";
 import SingleTicket from "./SingleTicket";
 import SingleComment from "../Comments/SingleComment";
 import { useComment } from "./logic";
 import AdditionalSingleCommentForm from "../Comments/SingleComment/AdditionalSingleCommentForm";
-// import AdditionalSingleCommentForm from "./SingleComment/AdditionalSingleCommentForm";
 
 const SingleTicketContent: React.FC<SingleTicketContentProps> = ({
   ticket,

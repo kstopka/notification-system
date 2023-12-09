@@ -154,6 +154,16 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+  updateSingleLaw(status: string, law_id: number) {
+    const token = Cookies.get("token");
+    return Axios.patch(
+      `${this.baseUrl}/patch_law/${law_id}`,
+      {
+        status,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
 
   additionalSingleNews(
     user_id: number,

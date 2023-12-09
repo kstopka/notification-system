@@ -188,6 +188,22 @@ const updateSingleTicket = (req, res) => {
   );
 };
 
+const updateSingleLaw = (req, res) => {
+  const { status } = req.body;
+  const id = req.params.id;
+  db.query(
+    "UPDATE `laws` SET `status`= ?  WHERE law_id = ?",
+    [status, id],
+    (err, result) => {
+      if (err) {
+        if (err) throw err;
+      }
+
+      res.send(result);
+    }
+  );
+};
+
 const updateSingleComment = (req, res) => {
   const { content } = req.body;
   const id = req.params.id;
@@ -472,4 +488,5 @@ module.exports = {
   additionalServiceRequest,
   additionalVotes,
   setSingleLaw,
+  updateSingleLaw,
 };
