@@ -105,6 +105,25 @@ const getSingleTicket = (req, res) => {
     }
   );
 };
+const getSingleLaw = (req, res) => {
+  const id = req.params.id;
+  db.query(`SELECT * FROM laws WHERE law_id = ?`, [id], (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+    // console.log("result", result);
+    res.send(result);
+  });
+};
+
+// const getLaws = (res) =>
+//   db.query("SELECT * FROM `laws` ORDER BY date DESC", (err, result) => {
+//     if (err) {
+//       if (err) throw err;
+//     }
+
+//     res.send(result);
+//   });
 
 const getSingleNewsComments = (req, res) => {
   const id = req.params.id;
@@ -419,6 +438,7 @@ module.exports = {
   additionalTicket,
   getSingleNews,
   getSingleTicket,
+  getSingleLaw,
   getSingleNewsComments,
   getSingleTicketComments,
   additionalSingleComment,

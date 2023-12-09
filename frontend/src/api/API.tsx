@@ -62,6 +62,12 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+  getSingleLaw(law_id: string) {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_law/${law_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
   getSingleNewsComments(post_id: string) {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_comments/${post_id}`, {

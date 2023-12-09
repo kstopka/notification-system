@@ -11,6 +11,7 @@ const {
   getVoteLaw,
   getSingleNews,
   getSingleTicket,
+  getSingleLaw,
   updateSingleNews,
   updateSingleComment,
   additionalSingleNews,
@@ -75,6 +76,9 @@ app.get("/get_news/:id", (req, res) =>
 );
 app.get("/get_ticket/:id", (req, res) =>
   checkToken(req, res, () => getSingleTicket(req, res))
+);
+app.get("/get_law/:id", (req, res) =>
+  checkToken(req, res, () => getSingleLaw(req, res))
 );
 app.get("/get_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleNewsComments(req, res))
