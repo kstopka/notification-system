@@ -11,6 +11,8 @@ import SingleTicketPage from "../templates/singleTicket";
 import AdditionalServiceRequestPage from "../templates/additionalServiceRequest";
 import SchedulePage from "../templates/schedule";
 import VotesPage from "../templates/votes";
+import LawsPage from "../templates/laws";
+import SingleLawPage from "../templates/singleLaw";
 
 export interface URLSinglePath {
   label: string;
@@ -87,6 +89,16 @@ const URL_PATHS: URLPaths = {
     slug: "/votes",
     isMenu: true,
   },
+  laws: {
+    label: "Ustawy",
+    slug: "/laws",
+    isMenu: true,
+  },
+  law: {
+    label: "Ustawa",
+    slug: "/law",
+    isMenu: false,
+  },
 };
 
 export const router = createBrowserRouter([
@@ -137,6 +149,14 @@ export const router = createBrowserRouter([
   {
     path: URL_PATHS.votes.slug,
     element: <VotesPage />,
+  },
+  {
+    path: URL_PATHS.laws.slug,
+    element: <LawsPage />,
+  },
+  {
+    path: URL_PATHS.law.slug,
+    element: <SingleLawPage />,
   },
 ]);
 

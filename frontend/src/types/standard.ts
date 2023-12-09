@@ -61,3 +61,12 @@ export interface PreparedMeetings {
   description: string;
   location: string;
 }
+
+export type BasicSingeLawData = {
+  date: string;
+  description: string;
+  law_id: number;
+  name: string;
+  status: string;
+  text: string;
+};

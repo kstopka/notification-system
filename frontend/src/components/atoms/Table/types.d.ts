@@ -124,6 +124,6 @@ declare module "react-table" {
 }
 
 export interface ITableProps {
-  data: SingleTicket[];
+  data: SingleTicket[] | BasicSingeLawData[];
   columns: Column<IPart>[];
 }

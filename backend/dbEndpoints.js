@@ -36,6 +36,16 @@ const getNews = (res) =>
       res.send(result);
     }
   );
+
+const getLaws = (res) =>
+  db.query("SELECT * FROM `laws` ORDER BY date DESC", (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+
+    res.send(result);
+  });
+
 const getVoteLaw = (req, res) => {
   const id = req.params.id;
 
@@ -399,6 +409,7 @@ module.exports = {
   getUsers,
   getProviders,
   getNews,
+  getLaws,
   getVoteLaw,
   getMeetings,
   updateSingleNews,

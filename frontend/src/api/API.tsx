@@ -35,6 +35,12 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+  getLaws() {
+    const token = Cookies.get("token");
+    return Axios.get(`${this.baseUrl}/get_laws`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 
   getVoteLaw(user_id: number) {
     const token = Cookies.get("token");

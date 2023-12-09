@@ -7,6 +7,7 @@ const {
   getMeetings,
   checkPermissions,
   getNews,
+  getLaws,
   getVoteLaw,
   getSingleNews,
   getSingleTicket,
@@ -62,6 +63,8 @@ app.get("/get_meetings", (req, res) =>
 );
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
+
+app.get("/get_laws", (req, res) => checkToken(req, res, () => getLaws(res)));
 
 app.get("/get_vote_law/:id", (req, res) =>
   checkToken(req, res, () => getVoteLaw(req, res))
