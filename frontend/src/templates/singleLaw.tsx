@@ -10,8 +10,6 @@ import SingleLawContent from "../components/SingleLawContent";
 interface SingleTicketProps {}
 
 const SingleLawPage: React.FC<SingleTicketProps> = () => {
-  // const [ticket, setTicket] = useState<SingleTicketData>();
-  // const [comments, setComments] = useState<TicketCommentData[]>([]);
   const [law, setLaw] = useState();
 
   const law_id = getParamFromURL("id");

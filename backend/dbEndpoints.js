@@ -251,6 +251,23 @@ const additionalSingleNews = (req, res) => {
   );
 };
 
+const setSingleLaw = (req, res) => {
+  const { name, description, text } = req.body;
+  const status = "Pending";
+  const date = new Date();
+
+  db.query(
+    "INSERT INTO `laws` (name, description, text, status, date) VALUES (?,?,?,?,?)",
+    [name, description, text, status, date],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
+
 const additionalSingleComment = (req, res) => {
   const { user_id, post_id, content } = req.body;
   const created_at = new Date();
@@ -454,4 +471,5 @@ module.exports = {
   updateSingleTicketComment,
   additionalServiceRequest,
   additionalVotes,
+  setSingleLaw,
 };

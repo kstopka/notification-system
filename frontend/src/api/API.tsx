@@ -88,6 +88,18 @@ class ClassApi {
     });
   }
 
+  setSingleLaw(name: string, description: string, text: string) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/set_single_law`,
+      {
+        name,
+        description,
+        text,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
   updateSingleNews(title: string, content: string, post_id: number) {
     const token = Cookies.get("token");
     return Axios.post(
