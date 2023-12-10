@@ -266,6 +266,20 @@ const additionalSingleNews = (req, res) => {
     }
   );
 };
+const additionalMeeting = (req, res) => {
+  const { address, description, time, date } = req.body;
+
+  db.query(
+    `INSERT INTO meetings (address, description, time, date ) VALUES (?,?,?,?)`,
+    [address, description, time, date],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+};
 
 const setSingleLaw = (req, res) => {
   const { name, description, text } = req.body;
@@ -489,4 +503,5 @@ module.exports = {
   additionalVotes,
   setSingleLaw,
   updateSingleLaw,
+  additionalMeeting,
 };

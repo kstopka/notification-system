@@ -7,15 +7,23 @@ import { ScheduleContentProps } from "./types";
 import { useCalendar } from "./logic";
 import Modal from "../atoms/Modal";
 import { getDate } from "../../utils/getDate";
+import { useContextState, AuthCtx } from "../../contexted";
+import { IAuthState } from "../../contexted/Auth/types";
+import AdditionalMeetingForm from "./AdditionalMeetingForm";
+
 const localizer = globalizeLocalizer(globalize);
 
 const ScheduleContent: React.FC<ScheduleContentProps> = () => {
+  const { permissions } = useContextState<IAuthState>(AuthCtx, ["permissions"]);
   const {
     meetings,
     selectedEvent,
     isActiveModal,
+    isAdditionalOpen,
+    handleAdditionalOpen,
     handleSelectEvent,
     handleActiveModal,
+    getMeetings,
   } = useCalendar();
   return (
     <S.ScheduleWrapper>
@@ -44,6 +52,20 @@ const ScheduleContent: React.FC<ScheduleContentProps> = () => {
             <div>Adres: {selectedEvent.location}</div>
           </div>
         </Modal>
+      )}
+      {permissions && permissions === "admin" && (
+        <S.ButtonWrapper>
+          <h5>Zaplanuj nowe spotkanie: </h5>
+          <button onClick={handleAdditionalOpen}>
+            {isAdditionalOpen ? "Zamknij" : "Dodaj"}
+          </button>
+        </S.ButtonWrapper>
+      )}
+      {isAdditionalOpen && (
+        <AdditionalMeetingForm
+          updateData={getMeetings}
+          handleAdditionalOpen={handleAdditionalOpen}
+        />
       )}
     </S.ScheduleWrapper>
   );

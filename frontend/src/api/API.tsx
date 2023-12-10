@@ -183,6 +183,30 @@ class ClassApi {
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
+
+  additionalMeeting({
+    address,
+    description,
+    time,
+    date,
+  }: {
+    address: string;
+    description: string;
+    time: string;
+    date: string;
+  }) {
+    const token = Cookies.get("token");
+    return Axios.post(
+      `${this.baseUrl}/additional_meeting`,
+      {
+        address,
+        description,
+        time,
+        date,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
   additionalVotes(user_id: number, post_id: number, vote_value: boolean) {
     const token = Cookies.get("token");
     return Axios.post(

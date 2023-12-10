@@ -6,3 +6,7 @@ export const ScheduleWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ButtonWrapper = styled.div`
+  margin-top: 100px;
+`;

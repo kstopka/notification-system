@@ -34,6 +34,7 @@ const {
   additionalVotes,
   setSingleLaw,
   updateSingleLaw,
+  additionalMeeting,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -109,6 +110,9 @@ app.post("/additional_votes", (req, res) =>
 );
 app.post("/additional_news", (req, res) =>
   checkToken(req, res, () => additionalSingleNews(req, res))
+);
+app.post("/additional_meeting", (req, res) =>
+  checkToken(req, res, () => additionalMeeting(req, res))
 );
 app.post("/set_single_law", (req, res) =>
   checkToken(req, res, () => setSingleLaw(req, res))

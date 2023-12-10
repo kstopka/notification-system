@@ -6,6 +6,10 @@ export const useCalendar = () => {
   const [meetings, setMeetings] = useState<PreparedMeetings[]>([]);
   const [selectedEvent, setSetselectedEvent] = useState<PreparedMeetings>();
   const [isActiveModal, setIsActiveModal] = useState(false);
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
+  const handleAdditionalOpen = () => {
+    setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
+  };
 
   const handleActiveModal = () => {
     setIsActiveModal((isActiveModal) => !isActiveModal);
@@ -34,6 +38,8 @@ export const useCalendar = () => {
     } catch (error) {}
   };
 
+  const additionalMeeting = async () => {};
+
   useEffect(() => {
     getMeetings();
   }, []);
@@ -42,7 +48,10 @@ export const useCalendar = () => {
     meetings,
     selectedEvent,
     isActiveModal,
+    isAdditionalOpen,
+    handleAdditionalOpen,
     handleSelectEvent,
     handleActiveModal,
+    getMeetings,
   };
 };
