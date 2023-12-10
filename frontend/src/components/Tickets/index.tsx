@@ -17,6 +17,7 @@ const TicketsContent: React.FC<NewsContentProps> = () => {
 
   return (
     <S.TicketsWrapper>
+      <h1>Lista Zgłoszeń</h1>
       <Table columns={columns} data={tickets} />
     </S.TicketsWrapper>
   );

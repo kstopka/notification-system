@@ -22,6 +22,7 @@ const LawsContent: React.FC<LawsContentProps> = () => {
 
   return (
     <S.LawsWrapper>
+      <h1>Lista Ustaw</h1>
       {isAdditionalOpen && (
         <AdditionalLawsForm
           updateData={getLaws}

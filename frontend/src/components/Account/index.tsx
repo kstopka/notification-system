@@ -24,6 +24,7 @@ const AccountContent: React.FC<AccountContentProps> = () => {
   };
   return (
     <S.AccountWrapper>
+      <h1 style={{ marginBottom: "50px" }}>KONTO</h1>
       {permissions === "admin" && (
         <button onClick={() => navigate(URL_PATHS.admin.slug)}>
           Panel Admin

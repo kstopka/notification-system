@@ -19,6 +19,7 @@ const NewsContent: React.FC<NewsContentProps> = () => {
   };
   return (
     <S.NewsWrapper>
+      <h1>AKTUALNOŚCI</h1>
       {isAdditionalOpen && (
         <AdditionalSinglePostForm
           updateData={getNews}

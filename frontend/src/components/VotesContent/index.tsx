@@ -20,6 +20,7 @@ const NewsContent: React.FC<NewsContentProps> = () => {
   };
   return (
     <S.NewsWrapper>
+      <h1>Zagłosuj!</h1>
       {isAdditionalOpen && (
         <AdditionalSinglePostForm
           updateData={getVoteLaw}
@@ -32,6 +33,7 @@ const NewsContent: React.FC<NewsContentProps> = () => {
           {isAdditionalOpen ? "Zamknij" : "Dodaj"}
         </button>
       )}
+      {voteLaw.length === 0 && <h3>Wszystkie głosy już oddane </h3>}
       {voteLaw &&
         voteLaw.length > 0 &&
         voteLaw.map((el) => (
