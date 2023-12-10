@@ -385,6 +385,10 @@ const customDelete = (table, idName, id, handler) => {
   });
 };
 
+const deleteMeeting = async (req, res) => {
+  const id = req.params.id;
+  customDelete("meetings", "meeting_id", id, (result) => res.send(result));
+};
 const deleteSinglePost = async (req, res) => {
   const id = req.params.id;
   customDelete("posts", "post_id", id, (result) => res.send(result));
@@ -504,4 +508,5 @@ module.exports = {
   setSingleLaw,
   updateSingleLaw,
   additionalMeeting,
+  deleteMeeting,
 };

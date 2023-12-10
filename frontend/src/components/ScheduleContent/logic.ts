@@ -1,23 +1,31 @@
 import { useState, useEffect } from "react";
 import Api from "../../api/API";
 import { PreparedMeetings, MeetingsData } from "../../types/standard";
+import { useActions, AppCtx } from "../../contexted";
+import { IAppActions } from "../../contexted/App/types";
 
 export const useCalendar = () => {
+  const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
   const [meetings, setMeetings] = useState<PreparedMeetings[]>([]);
-  const [selectedEvent, setSetselectedEvent] = useState<PreparedMeetings>();
-  const [isActiveModal, setIsActiveModal] = useState(false);
+  const [selectedEvent, setSetselectedEvent] =
+    useState<PreparedMeetings | null>();
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleAdditionalOpen = () => {
     setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);
   };
 
-  const handleActiveModal = () => {
-    setIsActiveModal((isActiveModal) => !isActiveModal);
+  const handleDeleteOpen = () => {
+    setIsDeleteOpen((isDeleteOpen) => !isDeleteOpen);
+  };
+  const handleEditOpen = () => {
+    setIsEditOpen((isEditOpen) => !isEditOpen);
   };
 
   const handleSelectEvent = (e: PreparedMeetings) => {
     setSetselectedEvent(e);
-    handleActiveModal();
   };
 
   const getMeetings = async () => {
@@ -38,7 +46,29 @@ export const useCalendar = () => {
     } catch (error) {}
   };
 
-  const additionalMeeting = async () => {};
+  const handleDeleteMeeting = async () => {
+    if (!selectedEvent) return;
+    setIsLoading(true);
+    try {
+      await Api.deleteMeeting(selectedEvent.id);
+      await getMeetings();
+      setAlert({
+        isAlertVisible: true,
+        status: "success",
+        message: "response.data.message",
+      });
+      handleDeleteOpen();
+      setSetselectedEvent(null);
+    } catch (error) {
+      setAlert({
+        isAlertVisible: true,
+        status: "error",
+        message: "error.response.data",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     getMeetings();
@@ -47,11 +77,14 @@ export const useCalendar = () => {
   return {
     meetings,
     selectedEvent,
-    isActiveModal,
     isAdditionalOpen,
+    isDeleteOpen,
+    isEditOpen,
+    handleDeleteOpen,
+    handleEditOpen,
     handleAdditionalOpen,
     handleSelectEvent,
-    handleActiveModal,
     getMeetings,
+    handleDeleteMeeting,
   };
 };

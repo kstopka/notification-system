@@ -18,41 +18,43 @@ const ScheduleContent: React.FC<ScheduleContentProps> = () => {
   const {
     meetings,
     selectedEvent,
-    isActiveModal,
     isAdditionalOpen,
+    isDeleteOpen,
+    isEditOpen,
+    handleDeleteOpen,
+    handleEditOpen,
     handleAdditionalOpen,
     handleSelectEvent,
-    handleActiveModal,
     getMeetings,
+    handleDeleteMeeting,
   } = useCalendar();
   return (
     <S.ScheduleWrapper>
+      <h1>HARMONOGRAM</h1>
       <Calendar
         localizer={localizer}
         events={meetings}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500 }}
-        onDoubleClickEvent={handleSelectEvent}
+        onSelectEvent={handleSelectEvent}
       />
-      {isActiveModal && selectedEvent && (
-        <Modal
-          handleIsActiveModal={handleActiveModal}
-          buttons={[
-            <button className="secondary" onClick={handleActiveModal}>
-              Wyjdź
-            </button>,
-          ]}
-        >
-          <div>
-            <h5>Detale:</h5>
-            <div>Tytuł: {selectedEvent.title}</div>
-            <div>Opis: {selectedEvent.description}</div>
-            <div>Data: {getDate(selectedEvent.start)}</div>
-            <div>Adres: {selectedEvent.location}</div>
-          </div>
-        </Modal>
+      {selectedEvent && (
+        <div>
+          <h5>Detale:</h5>
+          <div>Tytuł: {selectedEvent.title}</div>
+          <div>Opis: {selectedEvent.description}</div>
+          <div>Data: {getDate(selectedEvent.start)}</div>
+          <div>Adres: {selectedEvent.location}</div>
+          {permissions && permissions === "admin" && (
+            <S.EventButtons>
+              <button onClick={handleEditOpen}>Edytuj</button>
+              <button onClick={handleDeleteOpen}>Usuń</button>
+            </S.EventButtons>
+          )}
+        </div>
       )}
+
       {permissions && permissions === "admin" && (
         <S.ButtonWrapper>
           <h5>Zaplanuj nowe spotkanie: </h5>
@@ -66,6 +68,21 @@ const ScheduleContent: React.FC<ScheduleContentProps> = () => {
           updateData={getMeetings}
           handleAdditionalOpen={handleAdditionalOpen}
         />
+      )}
+      {isDeleteOpen && (
+        <Modal
+          handleIsActiveModal={handleDeleteOpen}
+          buttons={[
+            <button className="secondary" onClick={handleDeleteMeeting}>
+              Potwierdzam
+            </button>,
+            <button className="secondary" onClick={handleDeleteOpen}>
+              Anuluj
+            </button>,
+          ]}
+        >
+          <p>Czy na pewno chcesz usunąć to spotkanie?</p>
+        </Modal>
       )}
     </S.ScheduleWrapper>
   );

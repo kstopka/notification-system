@@ -35,6 +35,7 @@ const {
   setSingleLaw,
   updateSingleLaw,
   additionalMeeting,
+  deleteMeeting,
 } = require("./dbEndpoints");
 const cors = require("cors");
 const session = require("express-session");
@@ -134,6 +135,9 @@ app.post("/additional_service_request", (req, res) =>
   checkToken(req, res, () => additionalServiceRequest(req, res))
 );
 
+app.delete("/delete_meeting/:id", (req, res) =>
+  checkToken(req, res, () => deleteMeeting(req, res))
+);
 app.delete("/delete_post/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePost(req, res))
 );

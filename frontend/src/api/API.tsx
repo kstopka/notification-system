@@ -283,6 +283,12 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+  deleteMeeting(meeting_id: number) {
+    const token = Cookies.get("token");
+    return Axios.delete(`${this.baseUrl}/delete_meeting/${meeting_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
   deleteSinglePostRelationsByPost(post_id: number) {
     const token = Cookies.get("token");
     return Axios.delete(`${this.baseUrl}/delete_post_relations/${post_id}`, {
