@@ -44,11 +44,13 @@ const SingleComment: React.FC<SingleCommentProps> = ({
       <S.Content>{content}</S.Content>
       <S.ButtonsWrapper>
         {user_id === id && (
-          <button onClick={handleEdit}>
+          <button onClick={handleEdit} className="secondary">
             {isEditing ? "Zamknij" : "Edytuj"}
           </button>
         )}
-        <button onClick={handleDeleteModalActive}>Usuń</button>
+        <button onClick={handleDeleteModalActive} className="secondary">
+          Usuń
+        </button>
       </S.ButtonsWrapper>
       {isEditing && (
         <EditSingleCommentForm

@@ -5,9 +5,9 @@ export const Footer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 30px;
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.secondary};
   min-height: 100px;
-  color: ${(props) => props.theme.colors.quaternary};
+  color: ${(props) => props.theme.colors.primary};
 `;
 export const Name = styled.span`
   font-weight: 700;

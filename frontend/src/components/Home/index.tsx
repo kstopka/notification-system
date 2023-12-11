@@ -6,6 +6,7 @@ const HomeContent: React.FC<HomeContentProps> = () => {
   return (
     <S.HomeWrapper>
       <h1>Home</h1>
+      <button className="secondary">HOME</button>
     </S.HomeWrapper>
   );
 };

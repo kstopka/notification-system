@@ -6,5 +6,5 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: ${(props) => props.theme.colors.quaternary};
+  background: ${(props) => props.theme.colors.primary};
 `;

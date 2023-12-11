@@ -13,7 +13,7 @@ export const Header = styled.header`
 
   height: auto;
   min-height: 88px;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.secondary};
 `;
 
 export const Navigation = styled.nav`
@@ -22,17 +22,17 @@ export const Navigation = styled.nav`
   gap: 10px;
 
   a {
-    color: ${(props) => props.theme.colors.quaternary};
+    color: ${(props) => props.theme.colors.primary};
     padding: 10px;
     text-decoration: none;
   }
 
   a.active {
-    color: ${(props) => props.theme.colors.tertiary};
-    background-color: ${(props) => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.primary};
   }
   a:hover {
-    color: ${(props) => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.primary};
     background-color: ${(props) => props.theme.colors.tertiary};
   }
 `;

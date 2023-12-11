@@ -5,6 +5,7 @@ export const Select = styled.select`
   height: fit-content;
   padding: 10px 40px 10px 12px;
   border-radius: 4px;
+  color: ${(props) => props.theme.colors.primary};
 
   border: 1px solid ${(props) => props.theme.colors.primary};
   cursor: pointer;
@@ -19,5 +20,6 @@ export const Select = styled.select`
 
   option {
     margin: 10px 0;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;

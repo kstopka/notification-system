@@ -54,10 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               placeholder="Hasło"
               isDark
             />
-            <button
-              type="submit"
-              className={`primaryBtn ${isLoading ? "loading" : ""}`}
-            >
+            <button type="submit" className={`${isLoading ? "loading" : ""}`}>
               {isLoading ? "Proszę czekać" : "Zaloguj się"}
             </button>
           </form>

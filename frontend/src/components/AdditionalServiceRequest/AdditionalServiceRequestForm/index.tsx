@@ -55,11 +55,7 @@ const AdditionalServiceRequestForm: React.FC<
         />
 
         <S.ButtonWrapper>
-          <button
-            type="submit"
-            className={`primaryBtn ${isLoading ? "loading" : ""}`}
-            disabled={isLoading}
-          >
+          <button className="secondary" type="submit" disabled={isLoading}>
             {isLoading ? "Proszę czekać" : "Wyślij"}
           </button>
         </S.ButtonWrapper>

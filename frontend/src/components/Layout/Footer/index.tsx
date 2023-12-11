@@ -22,7 +22,7 @@ const Footer: React.FC<IFooterProps> = (): JSX.Element => {
       )}
       {loggedIn && (
         <button
-          className={`primaryBtn`}
+          className="secondary"
           onClick={() => {
             logOut();
             navigate(URL_PATHS.login.slug);

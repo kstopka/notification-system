@@ -28,8 +28,8 @@ export const TextWrapper = styled.div`
   min-height: 30vh;
   padding: 30px;
 
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const DetailsWrapper = styled.div`

@@ -37,15 +37,9 @@ const AdditionalMeetingForm: React.FC<AdditionalMeetingFormProps> = ({
             name="description"
             placeholder="Opis:"
             label="Opis:"
-            isDark
           />
 
-          <FormTextInput
-            name="address"
-            placeholder="Adres:"
-            label="Adres:"
-            isDark
-          />
+          <FormTextInput name="address" placeholder="Adres:" label="Adres:" />
 
           <DatePicker
             selected={startDate}

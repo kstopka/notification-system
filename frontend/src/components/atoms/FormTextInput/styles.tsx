@@ -17,7 +17,7 @@ export const TextInput = styled.input<InputProps>`
   border-radius: 4px;
 
   background: ${({ isDark, theme }) =>
-    isDark ? theme.colors.primary : theme.colors.quaternary};
+    isDark ? theme.colors.primary : theme.colors.secondary};
 
   font-family: ${(props) => props.theme.fonts.family.main};
   color: ${({ isDark, theme }) =>
@@ -43,7 +43,7 @@ export const TextInput = styled.input<InputProps>`
   &:disabled,
   &[disabled] {
     background: ${({ isDark, theme }) =>
-      isDark ? theme.colors.primary : theme.colors.quaternary};
+      isDark ? theme.colors.primary : theme.colors.secondary};
 
     color: ${({ isDark, theme }) =>
       isDark ? theme.colors.secondary : theme.colors.primary};
@@ -93,7 +93,7 @@ export const StyledLabel = styled.label<{ isDark: boolean }>`
   font-size: 16px;
   line-height: 24px;
   color: ${({ isDark, theme }) =>
-    isDark ? theme.colors.primary : theme.colors.quaternary};
+    isDark ? theme.colors.primary : theme.colors.secondary};
 `;
 
 export const StyledDescription = styled.p<StyledDescriptionProps>`

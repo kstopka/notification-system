@@ -28,7 +28,7 @@ const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
           <FormTextInput name="content" placeholder="Treść:" label="Treść:" />
 
           <div className="wrapperButton">
-            <button className={`${isLoading ? "loading" : ""}`}>
+            <button className="secondary">
               {isLoading ? "Proszę czekać" : "Wyślij"}
             </button>
           </div>

@@ -20,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         font-family: ${({ theme }) => theme.fonts.family.main};
         overflow: hidden;
         overflow-y: scroll;
-        color:${({ theme }) => theme.colors.primary};
+        color:${({ theme }) => theme.colors.secondary};
 
         &.blocked {
             overflow-y: hidden
@@ -78,7 +78,7 @@ export const GlobalStyles = createGlobalStyle`
         }
 
         button {
-            color: ${(props) => props.theme.colors.quaternary};
+            color: ${(props) => props.theme.colors.primary};
             background-color: ${(props) => props.theme.colors.secondary};
             width: fit-content;
             padding: 10px 20px;
@@ -89,14 +89,14 @@ export const GlobalStyles = createGlobalStyle`
         }
         button:hover{
 
-            color: ${(props) => props.theme.colors.secondary};
+            color: ${(props) => props.theme.colors.primary};
             background-color: ${(props) => props.theme.colors.tertiary};
 
         }
 
 
         button.secondary {
-            color: ${(props) => props.theme.colors.quaternary};
+            color: ${(props) => props.theme.colors.secondary};
             background-color: ${(props) => props.theme.colors.primary};
             width: fit-content;
             padding: 10px 20px;
@@ -108,7 +108,7 @@ export const GlobalStyles = createGlobalStyle`
 
         button.secondary:hover{
 
-            color: ${(props) => props.theme.colors.secondary};
+            color: ${(props) => props.theme.colors.primary};
             background-color: ${(props) => props.theme.colors.tertiary};
 
         }

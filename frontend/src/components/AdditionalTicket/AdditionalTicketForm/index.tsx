@@ -29,7 +29,7 @@ const AdditionalTicketForm: React.FC<AdditionalTicketContentProps> = () => {
         <S.ButtonWrapper>
           <button
             type="submit"
-            className={`primaryBtn ${isLoading ? "loading" : ""}`}
+            className={`${isLoading ? "loading" : ""}`}
             disabled={isLoading}
           >
             {isLoading ? "Proszę czekać" : "Wyślij"}

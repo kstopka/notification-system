@@ -64,6 +64,7 @@ const SingleNews: React.FC<SingleNewsProps> = ({
       <S.ButtonsWrapper isActiveComment={isActiveComment}>
         {isActiveComment && (
           <button
+            className="secondary"
             onClick={() => navigate(`${URL_PATHS.comments.slug}?id=${post_id}`)}
           >
             Komentarze: {comment_count}
@@ -71,21 +72,35 @@ const SingleNews: React.FC<SingleNewsProps> = ({
         )}
         {((permissions && permissions === "admin") || user_id === id) && (
           <S.ButtonsEndWrapper>
-            <button onClick={handleEdit}>
+            <button className="secondary" onClick={handleEdit}>
               {isEditing ? "Zamknij" : "Edytuj"}
             </button>
-            <button onClick={handleDeleteModalActive}>Usuń</button>
+            <button className="secondary" onClick={handleDeleteModalActive}>
+              Usuń
+            </button>
           </S.ButtonsEndWrapper>
         )}
       </S.ButtonsWrapper>
       {isVoteOpen && permissions === "user" && (
         <div>
           <S.ButtonsEndWrapper>
-            <button onClick={() => handleVoteModalActive(true)}>
+            <button
+              className="secondary"
+              onClick={() => handleVoteModalActive(true)}
+            >
               JESTEM ZA!
             </button>
-            <button onClick={() => handleVoteModalActive(false)}>
+            <button
+              className="secondary"
+              onClick={() => handleVoteModalActive(false)}
+            >
               JESTEM PRZECIW!
+            </button>
+            <button
+              className="secondary"
+              onClick={() => handleVoteModalActive(null)}
+            >
+              WSTRZYMUJE SIĘ
             </button>
           </S.ButtonsEndWrapper>
         </div>

@@ -12,10 +12,10 @@ const Table = ({ columns, data }: ITableProps): JSX.Element => {
   return (
     <div className="TableWrapper">
       {/* <div className="WrapperButtons">
-        <button className="primaryBtn" onClick={() => handleAddPart()}>
+        <button  onClick={() => handleAddPart()}>
           Dodaj Część
         </button>
-        <button className="primaryBtn" onClick={() => handleAddMaterial()}>
+        <button onClick={() => handleAddMaterial()}>
           Dodaj Materiał
         </button>
       </div> */}
@@ -47,10 +47,10 @@ const Table = ({ columns, data }: ITableProps): JSX.Element => {
         </tbody>
       </table>
       {/* <div className="WrapperButtons">
-        <button className="primaryBtn" onClick={() => handleAddPart()}>
+        <button  onClick={() => handleAddPart()}>
           Dodaj Część
         </button>
-        <button className="primaryBtn" onClick={() => handleAddMaterial()}>
+        <button  onClick={() => handleAddMaterial()}>
           Dodaj Materiał
         </button>
       </div> */}

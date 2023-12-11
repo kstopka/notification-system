@@ -5,10 +5,10 @@ declare module "styled-components" {
     layout: LayouObject;
     breakpoints: IBreakpoints;
     colors: {
-      primary: "#355461";
-      secondary: "#c9726d";
-      tertiary: "#f6b36f";
-      quaternary: "#ffd9cb";
+      primary: "#F7F7FF";
+      secondary: "#1c3942";
+      tertiary: "#0E4EB4";
+
       neutral: "#6C8193";
       error: "#FF2B00";
       warning: "#FFAB00";
