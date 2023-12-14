@@ -4,7 +4,6 @@ const { checkToken } = require("./middleware");
 const {
   getUsers,
   getProviders,
-  getMeetings,
   checkPermissions,
   getNews,
   getLaws,
@@ -34,9 +33,8 @@ const {
   additionalVotes,
   setSingleLaw,
   updateSingleLaw,
-  additionalMeeting,
-  deleteMeeting,
 } = require("./dbEndpoints");
+const Meetings = require("./endpoints/meetings");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -64,7 +62,7 @@ app.get("/get_providers", (req, res) =>
   checkToken(req, res, () => getProviders(res))
 );
 app.get("/get_meetings", (req, res) =>
-  checkToken(req, res, () => getMeetings(res))
+  checkToken(req, res, () => Meetings.getMeetings(res))
 );
 
 app.get("/get_news", (req, res) => checkToken(req, res, () => getNews(res)));
@@ -113,7 +111,7 @@ app.post("/additional_news", (req, res) =>
   checkToken(req, res, () => additionalSingleNews(req, res))
 );
 app.post("/additional_meeting", (req, res) =>
-  checkToken(req, res, () => additionalMeeting(req, res))
+  checkToken(req, res, () => Meetings.additionalMeeting(req, res))
 );
 app.post("/set_single_law", (req, res) =>
   checkToken(req, res, () => setSingleLaw(req, res))
@@ -136,7 +134,7 @@ app.post("/additional_service_request", (req, res) =>
 );
 
 app.delete("/delete_meeting/:id", (req, res) =>
-  checkToken(req, res, () => deleteMeeting(req, res))
+  checkToken(req, res, () => Meetings.deleteMeeting(req, res))
 );
 app.delete("/delete_post/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePost(req, res))

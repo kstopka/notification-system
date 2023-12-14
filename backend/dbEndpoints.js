@@ -17,14 +17,6 @@ const getProviders = (res) =>
     res.send(result);
   });
 
-const getMeetings = (res) =>
-  db.query("SELECT * FROM `meetings`", (err, result) => {
-    if (err) {
-      if (err) throw err;
-    }
-    res.send(result);
-  });
-
 const getNews = (res) =>
   db.query(
     "SELECT p.*, u.name AS user_name, COUNT(pcr.post_id) AS comment_count FROM posts AS p JOIN users AS u ON p.user_id = u.user_id LEFT JOIN post_comment_relations AS pcr ON p.post_id = pcr.post_id WHERE p.type = 'news' GROUP BY p.post_id, u.name ORDER BY p.created_at DESC",
@@ -266,20 +258,6 @@ const additionalSingleNews = (req, res) => {
     }
   );
 };
-const additionalMeeting = (req, res) => {
-  const { address, description, time, date } = req.body;
-
-  db.query(
-    `INSERT INTO meetings (address, description, time, date ) VALUES (?,?,?,?)`,
-    [address, description, time, date],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result);
-    }
-  );
-};
 
 const setSingleLaw = (req, res) => {
   const { name, description, text } = req.body;
@@ -385,10 +363,6 @@ const customDelete = (table, idName, id, handler) => {
   });
 };
 
-const deleteMeeting = async (req, res) => {
-  const id = req.params.id;
-  customDelete("meetings", "meeting_id", id, (result) => res.send(result));
-};
 const deleteSinglePost = async (req, res) => {
   const id = req.params.id;
   customDelete("posts", "post_id", id, (result) => res.send(result));
@@ -481,7 +455,6 @@ module.exports = {
   getNews,
   getLaws,
   getVoteLaw,
-  getMeetings,
   updateSingleNews,
   updateSingleComment,
   additionalSingleNews,
@@ -507,6 +480,4 @@ module.exports = {
   additionalVotes,
   setSingleLaw,
   updateSingleLaw,
-  additionalMeeting,
-  deleteMeeting,
 };
