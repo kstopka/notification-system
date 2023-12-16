@@ -2,22 +2,23 @@ const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
   deleteSinglePostRelationsByPost,
-
   deleteSinglePostRelationsByComment,
-
   deleteSingleTicketRelationsByComment,
-
   additionalServiceRequest,
   additionalVotes,
 } = require("./dbEndpoints");
-const meetingRoutes = require("./routes/meetingRoutes");
-const usersRoutes = require("./routes/usersRoutes");
-const postsRoutes = require("./routes/postsRoutes");
-const serviceProvidersRoutes = require("./routes/serviceProvidersRoutes");
-const lawsRoutes = require("./routes/lawsRoutes");
-const ticketsRoutes = require("./routes/ticketsRoutes");
-const postComments = require("./routes/postCommentsRoutes");
-const ticketComments = require("./routes/ticketComments");
+
+const {
+  meetingRoutes,
+  usersRoutes,
+  postsRoutes,
+  serviceProvidersRoutes,
+  lawsRoutes,
+  ticketsRoutes,
+  postComments,
+  ticketComments,
+} = require("./routes/index");
+
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
