@@ -12,6 +12,7 @@ import {
 import { IAppActions } from "../../../contexted/App/types";
 import { IAuthState } from "../../../contexted/Auth/types";
 import Api from "../../../api/API";
+import ServiceRequestsApi from "../../../api/ServiceRequests";
 
 export const useAdditionalServiceRequest = (provider_id: number) => {
   const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
@@ -30,12 +31,11 @@ export const useAdditionalServiceRequest = (provider_id: number) => {
   }) => {
     setIsLoading(true);
     try {
-      const response = await Api.additionalServiceRequest(
+      await ServiceRequestsApi.additionalServiceRequest(
         user_id,
         provider_id,
         description
       );
-      // console.log("response.data.message", response.data.message);
       setAlert({
         isAlertVisible: true,
         status: "success",
