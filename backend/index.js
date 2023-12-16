@@ -3,10 +3,11 @@ const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
 const express = require("express");
+
 const app = express();
-module.exports = app;
 
 const PORT = 3002;
+
 app.use(
   session({
     secret: "secret",
@@ -16,6 +17,7 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
 
