@@ -6,6 +6,7 @@ import Api from "../api/API";
 import { AxiosResponse } from "axios";
 import { PostCommentData, SingleNewsData } from "../types/standard";
 import CommentsContent from "../components/Comments";
+import PostsApi from "../api/PostsApi";
 
 interface CommentsProps {}
 
@@ -17,7 +18,9 @@ const CommentsPage: React.FC<CommentsProps> = () => {
   const getSingleNewsAndComments = async () => {
     try {
       if (post_id === null) return;
-      const posts: AxiosResponse<any, any> = await Api.getSingleNews(post_id);
+      const posts: AxiosResponse<any, any> = await PostsApi.getSingleNews(
+        post_id
+      );
       setPost(posts.data[0]);
       const comments: AxiosResponse<any, any> = await Api.getSingleNewsComments(
         post_id

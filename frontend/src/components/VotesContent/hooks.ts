@@ -6,6 +6,7 @@ import { ResponseNewsProps, UseVoteLawProps } from "./types";
 import { BasicPostData } from "../../types/standard";
 import { useContextState, AuthCtx } from "../../contexted";
 import { IAuthState } from "../../contexted/Auth/types";
+import PostsApi from "../../api/PostsApi";
 
 export const useVoteLaw: UseVoteLawProps = () => {
   const { id } = useContextState<IAuthState>(AuthCtx, ["id"]);
@@ -15,7 +16,7 @@ export const useVoteLaw: UseVoteLawProps = () => {
   const getVoteLaw = async () => {
     try {
       const result: AxiosResponse<any, ResponseNewsProps> =
-        await Api.getVoteLaw(id);
+        await PostsApi.getVoteLaw(id);
       console.log("result.data", result.data);
       setVoteLaw(result.data);
     } catch (error) {}

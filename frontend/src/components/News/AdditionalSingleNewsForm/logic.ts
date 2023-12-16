@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import PostsApi from "../../../api/PostsApi";
 
 export const useAdditionalSinglePost = ({
   type,
@@ -38,7 +39,7 @@ export const useAdditionalSinglePost = ({
   }) => {
     setIsLoading(true);
     try {
-      await Api.additionalSingleNews(user_id, title, content, type);
+      await PostsApi.additionalSingleNews(user_id, title, content, type);
       await updateData();
       handleAdditionalOpen();
       setAlert({

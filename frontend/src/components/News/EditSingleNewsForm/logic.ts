@@ -6,6 +6,7 @@ import { defaultValues, schema } from "./utils";
 import { useActions, AppCtx } from "../../../contexted";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import PostsApi from "../../../api/PostsApi";
 
 interface IResponse {
   message: string;
@@ -40,7 +41,7 @@ export const useEditSingleNews = ({
   }) => {
     setIsLoading(true);
     try {
-      await Api.updateSingleNews(title, content, post_id);
+      await PostsApi.updateSingleNews(title, content, post_id);
       await getNews();
       setAlert({
         isAlertVisible: true,
