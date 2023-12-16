@@ -47,7 +47,7 @@ class UsersClass {
         }
       );
     } else {
-      response.send("Please enter email and Password!");
+      response.send("Proszę wprowadzić email i hasło!");
       response.end();
     }
   };
