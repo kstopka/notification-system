@@ -35,6 +35,59 @@ class PostsClass {
       }
     );
   };
+
+  getSingleNews = (req, res) => {
+    const id = req.params.id;
+    db.query(
+      `SELECT p.*, u.name AS user_name FROM posts p JOIN users u ON p.user_id = u.user_id WHERE p.post_id = ?`,
+      [id],
+      (err, result) => {
+        if (err) {
+          if (err) throw err;
+        }
+        // console.log("result", result);
+        res.send(result);
+      }
+    );
+  };
+
+  updateSingleNews = (req, res) => {
+    const { title, content } = req.body;
+    const id = req.params.id;
+    db.query(
+      "UPDATE `posts` SET `title`= ? ,`content`= ? WHERE post_id = ?",
+      [title, content, id],
+      (err, result) => {
+        if (err) {
+          if (err) throw err;
+        }
+
+        res.send(result);
+      }
+    );
+  };
+
+  additionalSingleNews = (req, res) => {
+    const { user_id, title, content, type } = req.body;
+    const attachments = null;
+    const created_at = new Date();
+
+    db.query(
+      "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type) VALUES (?,?,?,?,?,?)",
+      [user_id, title, content, attachments, created_at, type],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+        res.send(result);
+      }
+    );
+  };
+
+  deleteSinglePost = async (req, res) => {
+    const id = req.params.id;
+    customDelete("posts", "post_id", id, (result) => res.send(result));
+  };
 }
 
 const Posts = new PostsClass();

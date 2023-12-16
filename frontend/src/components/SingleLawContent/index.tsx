@@ -7,6 +7,7 @@ import { IAuthState } from "../../contexted/Auth/types";
 import { useEffect, useState } from "react";
 import { statusLawArray } from "./utils";
 import Api from "../../api/API";
+import LawsApi from "../../api/LawsApi";
 
 const SingleLawContent: React.FC<SingleLawContentProps> = ({
   law: { date, description, law_id, name, status, text },
@@ -22,7 +23,7 @@ const SingleLawContent: React.FC<SingleLawContentProps> = ({
   };
 
   useEffect(() => {
-    Api.updateSingleLaw(statusLaw, law_id);
+    LawsApi.updateSingleLaw(statusLaw, law_id);
   }, [statusLaw]);
   return (
     <S.ContentWrapper>

@@ -9,6 +9,7 @@ import {
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
 import { IAuthState } from "../../../contexted/Auth/types";
+import PostsApi from "../../../api/PostsApi";
 
 interface IResponse {
   message: string;
@@ -36,7 +37,7 @@ export const useDeletePost = ({
     try {
       await Api.deleteSinglePostRelationsByPost(post_id);
       await Api.deleteSingleCommentByPost(post_id);
-      await Api.deleteSinglePost(post_id);
+      await PostsApi.deleteSinglePost(post_id);
       await updateData();
       setAlert({
         isAlertVisible: true,

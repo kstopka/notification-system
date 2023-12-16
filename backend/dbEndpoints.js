@@ -1,20 +1,6 @@
 const db = require("./config/db");
 const jwt = require("jsonwebtoken");
 
-const getSingleNews = (req, res) => {
-  const id = req.params.id;
-  db.query(
-    `SELECT p.*, u.name AS user_name FROM posts p JOIN users u ON p.user_id = u.user_id WHERE p.post_id = ?`,
-    [id],
-    (err, result) => {
-      if (err) {
-        if (err) throw err;
-      }
-      // console.log("result", result);
-      res.send(result);
-    }
-  );
-};
 const getSingleTicket = (req, res) => {
   const id = req.params.id;
   db.query(
@@ -39,16 +25,6 @@ const getSingleTicket = (req, res) => {
       res.send(result);
     }
   );
-};
-const getSingleLaw = (req, res) => {
-  const id = req.params.id;
-  db.query(`SELECT * FROM laws WHERE law_id = ?`, [id], (err, result) => {
-    if (err) {
-      if (err) throw err;
-    }
-    // console.log("result", result);
-    res.send(result);
-  });
 };
 
 const getSingleNewsComments = (req, res) => {
@@ -81,22 +57,6 @@ const getSingleTicketComments = (req, res) => {
   );
 };
 
-const updateSingleNews = (req, res) => {
-  const { title, content } = req.body;
-  const id = req.params.id;
-  db.query(
-    "UPDATE `posts` SET `title`= ? ,`content`= ? WHERE post_id = ?",
-    [title, content, id],
-    (err, result) => {
-      if (err) {
-        if (err) throw err;
-      }
-
-      res.send(result);
-    }
-  );
-};
-
 const updateSingleTicket = (req, res) => {
   const { priority, status, owner_id } = req.body;
   const id = req.params.id;
@@ -104,22 +64,6 @@ const updateSingleTicket = (req, res) => {
   db.query(
     "UPDATE `tickets` SET `priority`= ? ,`status`= ?, `owner_id`= ?  WHERE ticket_id = ?",
     [priority, status, owner_id, id],
-    (err, result) => {
-      if (err) {
-        if (err) throw err;
-      }
-
-      res.send(result);
-    }
-  );
-};
-
-const updateSingleLaw = (req, res) => {
-  const { status } = req.body;
-  const id = req.params.id;
-  db.query(
-    "UPDATE `laws` SET `status`= ?  WHERE law_id = ?",
-    [status, id],
     (err, result) => {
       if (err) {
         if (err) throw err;
@@ -168,39 +112,6 @@ const additionalVotes = (req, res) => {
   db.query(
     "INSERT INTO `votes` (user_id, post_id, vote_value, timestamp) VALUES (?,?,?,?)",
     [user_id, post_id, vote_value, timestamp],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result);
-    }
-  );
-};
-const additionalSingleNews = (req, res) => {
-  const { user_id, title, content, type } = req.body;
-  const attachments = null;
-  const created_at = new Date();
-
-  db.query(
-    "INSERT INTO `posts` (user_id, title, content, attachments, created_at, type) VALUES (?,?,?,?,?,?)",
-    [user_id, title, content, attachments, created_at, type],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result);
-    }
-  );
-};
-
-const setSingleLaw = (req, res) => {
-  const { name, description, text } = req.body;
-  const status = "Pending";
-  const date = new Date();
-
-  db.query(
-    "INSERT INTO `laws` (name, description, text, status, date) VALUES (?,?,?,?,?)",
-    [name, description, text, status, date],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -297,11 +208,6 @@ const customDelete = (table, idName, id, handler) => {
   });
 };
 
-const deleteSinglePost = async (req, res) => {
-  const id = req.params.id;
-  customDelete("posts", "post_id", id, (result) => res.send(result));
-};
-
 const deleteSinglePostRelationsByPost = (req, res) => {
   const id = req.params.id;
   customDelete("post_comment_relations", "post_id", id, (result) =>
@@ -336,18 +242,13 @@ const deleteSingleTicketCommentByComment = (req, res) => {
 };
 
 module.exports = {
-  updateSingleNews,
   updateSingleComment,
-  additionalSingleNews,
   getTickets,
   additionalTicket,
-  getSingleNews,
   getSingleTicket,
-  getSingleLaw,
   getSingleNewsComments,
   getSingleTicketComments,
   additionalSingleComment,
-  deleteSinglePost,
   deleteSinglePostRelationsByPost,
   deleteSingleCommentByPost,
   deleteSinglePostRelationsByComment,
@@ -359,7 +260,5 @@ module.exports = {
   updateSingleTicketComment,
   additionalServiceRequest,
   additionalVotes,
-  setSingleLaw,
-  updateSingleLaw,
   customDelete,
 };

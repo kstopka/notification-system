@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import LawsApi from "../../../api/LawsApi";
 
 export const useAdditionalSingleLaw = ({
   updateData,
@@ -37,7 +38,7 @@ export const useAdditionalSingleLaw = ({
   }) => {
     setIsLoading(true);
     try {
-      await Api.setSingleLaw(name, description, text);
+      await LawsApi.setSingleLaw(name, description, text);
       await updateData();
       handleAdditionalOpen();
       setAlert({

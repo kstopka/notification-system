@@ -24,12 +24,8 @@ export const useDeleteComment = ({
   const handleDeleteComment = async () => {
     setIsLoading(true);
     try {
-      const result1 = await Api.deleteSinglePostRelationsByComment(comment_id);
-      const result2 = await Api.deleteSingleCommentByComment(comment_id);
-      console.log("result1", result1);
-      console.log("result2", result2);
-      // await Api.deleteSinglePost(post_id);
-
+      await Api.deleteSinglePostRelationsByComment(comment_id);
+      await Api.deleteSingleCommentByComment(comment_id);
       await updateData();
       setAlert({
         isAlertVisible: true,

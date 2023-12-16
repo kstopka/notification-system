@@ -1,18 +1,13 @@
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
-  getSingleNews,
   getSingleTicket,
-  getSingleLaw,
-  updateSingleNews,
   updateSingleComment,
-  additionalSingleNews,
   getTickets,
   additionalTicket,
   getSingleNewsComments,
   getSingleTicketComments,
   additionalSingleComment,
-  deleteSinglePost,
   deleteSinglePostRelationsByPost,
   deleteSingleCommentByPost,
   deleteSinglePostRelationsByComment,
@@ -24,8 +19,6 @@ const {
   updateSingleTicketComment,
   additionalServiceRequest,
   additionalVotes,
-  setSingleLaw,
-  updateSingleLaw,
 } = require("./dbEndpoints");
 const meetingRoutes = require("./routes/meetingRoutes");
 const usersRoutes = require("./routes/usersRoutes");
@@ -63,15 +56,12 @@ app.use("/service_providers", serviceProvidersRoutes);
 
 app.use("/laws", lawsRoutes);
 
-app.get("/get_news/:id", (req, res) =>
-  checkToken(req, res, () => getSingleNews(req, res))
-);
+//Refactor:
+
 app.get("/get_ticket/:id", (req, res) =>
   checkToken(req, res, () => getSingleTicket(req, res))
 );
-app.get("/get_law/:id", (req, res) =>
-  checkToken(req, res, () => getSingleLaw(req, res))
-);
+
 app.get("/get_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleNewsComments(req, res))
 );
@@ -79,15 +69,10 @@ app.get("/get_ticket_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleTicketComments(req, res))
 );
 
-app.post("/update_news/:id", (req, res) =>
-  checkToken(req, res, () => updateSingleNews(req, res))
-);
 app.patch("/patch_ticket/:id", (req, res) =>
   checkToken(req, res, () => updateSingleTicket(req, res))
 );
-app.patch("/patch_law/:id", (req, res) =>
-  checkToken(req, res, () => updateSingleLaw(req, res))
-);
+
 app.post("/update_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleComment(req, res))
 );
@@ -97,13 +82,7 @@ app.post("/update_ticket_comment/:id", (req, res) =>
 app.post("/additional_votes", (req, res) =>
   checkToken(req, res, () => additionalVotes(req, res))
 );
-app.post("/additional_news", (req, res) =>
-  checkToken(req, res, () => additionalSingleNews(req, res))
-);
 
-app.post("/set_single_law", (req, res) =>
-  checkToken(req, res, () => setSingleLaw(req, res))
-);
 app.post("/additional_comment", (req, res) =>
   checkToken(req, res, () => additionalSingleComment(req, res))
 );
@@ -121,9 +100,6 @@ app.post("/additional_service_request", (req, res) =>
   checkToken(req, res, () => additionalServiceRequest(req, res))
 );
 
-app.delete("/delete_post/:id", (req, res) =>
-  checkToken(req, res, () => deleteSinglePost(req, res))
-);
 app.delete("/delete_post_relations/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePostRelationsByPost(req, res))
 );

@@ -4,32 +4,13 @@ import Cookies from "js-cookie";
 class ClassApi {
   baseUrl = "http://localhost:3002";
 
-  getVoteLaw(user_id: number) {
-    const token = Cookies.get("token");
-    console.log("user_id", user_id);
-    return Axios.get(`${this.baseUrl}/posts/get_vote_law/${user_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
-
-  getSingleNews(post_id: string) {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_news/${post_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
   getSingleTicket(ticket_id: string) {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_ticket/${ticket_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
-  getSingleLaw(law_id: string) {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_law/${law_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
+
   getSingleNewsComments(post_id: string) {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_comments/${post_id}`, {
@@ -48,30 +29,6 @@ class ClassApi {
     return Axios.get(`${this.baseUrl}/get_tickets`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-  }
-
-  setSingleLaw(name: string, description: string, text: string) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/set_single_law`,
-      {
-        name,
-        description,
-        text,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
-  updateSingleNews(title: string, content: string, post_id: number) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/update_news/${post_id}`,
-      {
-        title,
-        content,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
   }
 
   updateSingleComment(content: string, comment_id: number) {
@@ -112,35 +69,6 @@ class ClassApi {
         priority,
         status,
         owner_id,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
-  updateSingleLaw(status: string, law_id: number) {
-    const token = Cookies.get("token");
-    return Axios.patch(
-      `${this.baseUrl}/patch_law/${law_id}`,
-      {
-        status,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
-
-  additionalSingleNews(
-    user_id: number,
-    title: string,
-    content: string,
-    type: string
-  ) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/additional_news`,
-      {
-        user_id,
-        title,
-        content,
-        type,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -214,13 +142,6 @@ class ClassApi {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-  }
-
-  deleteSinglePost(post_id: number) {
-    const token = Cookies.get("token");
-    return Axios.delete(`${this.baseUrl}/delete_post/${post_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
   }
 
   deleteSinglePostRelationsByPost(post_id: number) {
