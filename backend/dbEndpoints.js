@@ -480,4 +480,5 @@ module.exports = {
   additionalVotes,
   setSingleLaw,
   updateSingleLaw,
+  customDelete,
 };

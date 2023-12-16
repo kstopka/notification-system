@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import MeetingsApi from "../../../api/MeetingsApi";
 
 export const useAdditionalMeeting = ({
   updateData,
@@ -40,7 +41,7 @@ export const useAdditionalMeeting = ({
     const date = startDate.toISOString().split("T")[0];
     setIsLoading(true);
     try {
-      await Api.additionalMeeting({ address, description, time, date });
+      await MeetingsApi.add({ address, description, time, date });
       await updateData();
       handleAdditionalOpen();
       setAlert({

@@ -11,7 +11,7 @@ class ClassApi {
   }
   getMeetings() {
     const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_meetings`, {
+    return Axios.get(`${this.baseUrl}/meetings/get`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
@@ -197,7 +197,7 @@ class ClassApi {
   }) {
     const token = Cookies.get("token");
     return Axios.post(
-      `${this.baseUrl}/additional_meeting`,
+      `${this.baseUrl}/meetings/post`,
       {
         address,
         description,
@@ -285,7 +285,7 @@ class ClassApi {
   }
   deleteMeeting(meeting_id: number) {
     const token = Cookies.get("token");
-    return Axios.delete(`${this.baseUrl}/delete_meeting/${meeting_id}`, {
+    return Axios.delete(`${this.baseUrl}/meetings/delete/${meeting_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

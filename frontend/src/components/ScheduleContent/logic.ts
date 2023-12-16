@@ -3,6 +3,7 @@ import Api from "../../api/API";
 import { PreparedMeetings, MeetingsData } from "../../types/standard";
 import { useActions, AppCtx } from "../../contexted";
 import { IAppActions } from "../../contexted/App/types";
+import MeetingsApi from "../../api/MeetingsApi";
 
 export const useCalendar = () => {
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
@@ -30,7 +31,7 @@ export const useCalendar = () => {
 
   const getMeetings = async () => {
     try {
-      const { data } = await Api.getMeetings();
+      const { data } = await MeetingsApi.get();
       const dataMeetings = data as MeetingsData[];
       const preparedMeetings = dataMeetings.map(
         ({ meeting_id, date, description, address }) => ({
@@ -50,7 +51,7 @@ export const useCalendar = () => {
     if (!selectedEvent) return;
     setIsLoading(true);
     try {
-      await Api.deleteMeeting(selectedEvent.id);
+      await MeetingsApi.del(selectedEvent.id);
       await getMeetings();
       setAlert({
         isAlertVisible: true,
