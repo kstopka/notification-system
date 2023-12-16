@@ -1,16 +1,12 @@
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
-  getSingleTicketComments,
-
   deleteSinglePostRelationsByPost,
 
   deleteSinglePostRelationsByComment,
 
   deleteSingleTicketRelationsByComment,
-  deleteSingleTicketCommentByComment,
-  additionalSingleTicketComment,
-  updateSingleTicketComment,
+
   additionalServiceRequest,
   additionalVotes,
 } = require("./dbEndpoints");
@@ -21,6 +17,7 @@ const serviceProvidersRoutes = require("./routes/serviceProvidersRoutes");
 const lawsRoutes = require("./routes/lawsRoutes");
 const ticketsRoutes = require("./routes/ticketsRoutes");
 const postComments = require("./routes/postCommentsRoutes");
+const ticketComments = require("./routes/ticketComments");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -56,21 +53,12 @@ app.use("/tickets", ticketsRoutes);
 
 app.use("/post_comments", postComments);
 
+app.use("/ticket_comments", ticketComments);
+
 //Refactor:
 
-app.get("/get_ticket_comments/:id", (req, res) =>
-  checkToken(req, res, () => getSingleTicketComments(req, res))
-);
-
-app.post("/update_ticket_comment/:id", (req, res) =>
-  checkToken(req, res, () => updateSingleTicketComment(req, res))
-);
 app.post("/additional_votes", (req, res) =>
   checkToken(req, res, () => additionalVotes(req, res))
-);
-
-app.post("/additional_ticket_comment", (req, res) =>
-  checkToken(req, res, () => additionalSingleTicketComment(req, res))
 );
 
 app.post("/additional_service_request", (req, res) =>
@@ -87,9 +75,6 @@ app.delete("/delete_comment_relations/:id", (req, res) =>
 
 app.delete("/delete_ticket_comment_relations/:id", (req, res) =>
   checkToken(req, res, () => deleteSingleTicketRelationsByComment(req, res))
-);
-app.delete("/delete_ticket_comment/:id", (req, res) =>
-  checkToken(req, res, () => deleteSingleTicketCommentByComment(req, res))
 );
 
 app.listen(PORT, () => {

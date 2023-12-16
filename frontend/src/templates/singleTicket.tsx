@@ -6,6 +6,7 @@ import { AxiosResponse } from "axios";
 import { SingleTicketData, TicketCommentData } from "../types/standard";
 import SingleTicketContent from "../components/SingleTicketContent";
 import TicketsApi from "../api/TicketsApi";
+import TicketCommentsApi from "../api/TicketComments";
 
 interface SingleTicketProps {}
 
@@ -22,7 +23,7 @@ const SingleTicketPage: React.FC<SingleTicketProps> = () => {
       );
       setTicket(tickets.data[0]);
       const comments: AxiosResponse<any, any> =
-        await Api.getSingleTicketComments(ticket_id);
+        await TicketCommentsApi.getSingleTicketComments(ticket_id);
       console.log("comments.data", comments.data);
       setComments(comments.data);
     } catch (error) {}

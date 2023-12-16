@@ -61,7 +61,6 @@ class TicketsClass {
   updateSingleTicket = (req, res) => {
     const { priority, status, owner_id } = req.body;
     const id = req.params.id;
-    console.log("update ticket");
     db.query(
       "UPDATE `tickets` SET `priority`= ? ,`status`= ?, `owner_id`= ?  WHERE ticket_id = ?",
       [priority, status, owner_id, id],

@@ -8,6 +8,7 @@ import { IAppActions } from "../../../../contexted/App/types";
 import Api from "../../../../api/API";
 import { TypeOfComment } from "../../../../types/standard";
 import PostCommentsApi from "../../../../api/PostComments";
+import TicketCommentsApi from "../../../../api/TicketComments";
 
 interface IResponse {
   message: string;
@@ -16,7 +17,7 @@ interface IResponse {
 
 const getApiFunction = {
   post: PostCommentsApi.updateSingleComment.bind(PostCommentsApi),
-  ticket: Api.updateSingleTicketComment.bind(Api),
+  ticket: TicketCommentsApi.updateSingleTicketComment.bind(TicketCommentsApi),
 };
 
 export const useEditSingleComment = ({

@@ -14,10 +14,12 @@ import Api from "../../../../api/API";
 import { scrollToBottom } from "../../../../utils";
 import { TypeOfComment } from "../../../../types/standard";
 import PostCommentsApi from "../../../../api/PostComments";
+import TicketCommentsApi from "../../../../api/TicketComments";
 
 const getApiFunction = {
   post: PostCommentsApi.additionalSingleComment.bind(PostCommentsApi),
-  ticket: Api.additionalSingleTicketComment.bind(Api),
+  ticket:
+    TicketCommentsApi.additionalSingleTicketComment.bind(TicketCommentsApi),
 };
 
 export const useAdditionalSingleComment = ({
