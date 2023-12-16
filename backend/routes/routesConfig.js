@@ -1,4 +1,3 @@
-const { checkToken } = require("../middleware");
 const meetingRoutes = require("./meetingRoutes");
 const usersRoutes = require("./usersRoutes");
 const postsRoutes = require("./postsRoutes");
@@ -9,11 +8,8 @@ const postCommentsRoutes = require("./postCommentsRoutes");
 const ticketCommentsRoutes = require("./ticketCommentsRoutes");
 const votesRoutes = require("./votesRoutes");
 const serviceRequestsRoutes = require("./serviceRequestsRoutes");
-const {
-  deleteSinglePostRelationsByPost,
-  deleteSinglePostRelationsByComment,
-  deleteSingleTicketRelationsByComment,
-} = require("../dbEndpoints");
+const postCommentsRelationsRoutes = require("./postCommentsRelationsRoutes");
+const ticketCommentsRelationsRoutes = require("./ticketCommentsRelationsRoutes");
 
 const configureRoutes = (app) => {
   app.use("/meetings", meetingRoutes);
@@ -26,20 +22,8 @@ const configureRoutes = (app) => {
   app.use("/ticket_comments", ticketCommentsRoutes);
   app.use("/votes", votesRoutes);
   app.use("/service_requests", serviceRequestsRoutes);
-
-  //Refactor:
-
-  app.delete("/delete_post_relations/:id", (req, res) =>
-    checkToken(req, res, () => deleteSinglePostRelationsByPost(req, res))
-  );
-
-  app.delete("/delete_comment_relations/:id", (req, res) =>
-    checkToken(req, res, () => deleteSinglePostRelationsByComment(req, res))
-  );
-
-  app.delete("/delete_ticket_comment_relations/:id", (req, res) =>
-    checkToken(req, res, () => deleteSingleTicketRelationsByComment(req, res))
-  );
+  app.use("/post_comments_relations", postCommentsRelationsRoutes);
+  app.use("/ticket_comments_relations", ticketCommentsRelationsRoutes);
 };
 
 module.exports = configureRoutes;

@@ -3,6 +3,7 @@ import { useActions, AppCtx } from "../../contexted";
 import { IAppActions } from "../../contexted/App/types";
 import Api from "../../api/API";
 import TicketCommentsApi from "../../api/TicketComments";
+import TicketCommentsRelations from "../../api/TicketCommentsRelations";
 
 export const useComment = (updateData: () => void) => {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
@@ -22,7 +23,9 @@ export const useComment = (updateData: () => void) => {
   const handleDeleteComment = async (comment_id: number) => {
     setIsLoading(true);
     try {
-      await Api.deleteSingleTicketRelationsByComment(comment_id);
+      await TicketCommentsRelations.deleteSingleTicketRelationsByComment(
+        comment_id
+      );
       await TicketCommentsApi.deleteSingleTicketCommentByComment(comment_id);
 
       await updateData();

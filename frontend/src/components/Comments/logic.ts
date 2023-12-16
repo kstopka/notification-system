@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useActions, AppCtx } from "../../contexted";
 import { IAppActions } from "../../contexted/App/types";
-import Api from "../../api/API";
 import PostCommentsApi from "../../api/PostComments";
+import PostCommentsRelations from "../../api/PostCommentsRelations";
 
 export const useComment = (updateData: () => void) => {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
@@ -22,7 +22,9 @@ export const useComment = (updateData: () => void) => {
   const handleDeleteComment = async (comment_id: number) => {
     setIsLoading(true);
     try {
-      await Api.deleteSinglePostRelationsByComment(comment_id);
+      await PostCommentsRelations.deleteSinglePostRelationsByComment(
+        comment_id
+      );
       await PostCommentsApi.deleteSingleCommentByComment(comment_id);
 
       await updateData();

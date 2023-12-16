@@ -4,6 +4,7 @@ import { useActions, AppCtx } from "../../../contexted";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
 import PostCommentsApi from "../../../api/PostComments";
+import PostCommentsRelations from "../../../api/PostCommentsRelations";
 
 interface IResponse {
   message: string;
@@ -25,7 +26,9 @@ export const useDeleteComment = ({
   const handleDeleteComment = async () => {
     setIsLoading(true);
     try {
-      await Api.deleteSinglePostRelationsByComment(comment_id);
+      await PostCommentsRelations.deleteSinglePostRelationsByComment(
+        comment_id
+      );
       await PostCommentsApi.deleteSingleCommentByComment(comment_id);
       await updateData();
       setAlert({

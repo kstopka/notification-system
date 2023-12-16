@@ -12,6 +12,7 @@ import { IAuthState } from "../../../contexted/Auth/types";
 import PostsApi from "../../../api/PostsApi";
 import PostCommentsApi from "../../../api/PostComments";
 import VotesApi from "../../../api/VotesApi";
+import PostCommentsRelations from "../../../api/PostCommentsRelations";
 
 interface IResponse {
   message: string;
@@ -37,7 +38,7 @@ export const useDeletePost = ({
   const handleDeletePost = async () => {
     setIsLoading(true);
     try {
-      await Api.deleteSinglePostRelationsByPost(post_id);
+      await PostCommentsRelations.deleteSinglePostRelationsByPost(post_id);
       await PostCommentsApi.deleteSingleCommentByPost(post_id);
       await PostsApi.deleteSinglePost(post_id);
       await updateData();
