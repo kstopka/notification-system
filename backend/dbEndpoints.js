@@ -1,15 +1,6 @@
 const db = require("./config/db");
 const jwt = require("jsonwebtoken");
 
-const getLaws = (res) =>
-  db.query("SELECT * FROM `laws` ORDER BY date DESC", (err, result) => {
-    if (err) {
-      if (err) throw err;
-    }
-
-    res.send(result);
-  });
-
 const getSingleNews = (req, res) => {
   const id = req.params.id;
   db.query(
@@ -59,15 +50,6 @@ const getSingleLaw = (req, res) => {
     res.send(result);
   });
 };
-
-// const getLaws = (res) =>
-//   db.query("SELECT * FROM `laws` ORDER BY date DESC", (err, result) => {
-//     if (err) {
-//       if (err) throw err;
-//     }
-
-//     res.send(result);
-//   });
 
 const getSingleNewsComments = (req, res) => {
   const id = req.params.id;
@@ -354,7 +336,6 @@ const deleteSingleTicketCommentByComment = (req, res) => {
 };
 
 module.exports = {
-  getLaws,
   updateSingleNews,
   updateSingleComment,
   additionalSingleNews,

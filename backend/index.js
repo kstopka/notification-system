@@ -1,7 +1,6 @@
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
-  getLaws,
   getSingleNews,
   getSingleTicket,
   getSingleLaw,
@@ -32,6 +31,7 @@ const meetingRoutes = require("./routes/meetingRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
 const serviceProvidersRoutes = require("./routes/serviceProvidersRoutes");
+const lawsRoutes = require("./routes/lawsRoutes");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -61,7 +61,7 @@ app.use("/posts", postsRoutes);
 
 app.use("/service_providers", serviceProvidersRoutes);
 
-app.get("/get_laws", (req, res) => checkToken(req, res, () => getLaws(res)));
+app.use("/laws", lawsRoutes);
 
 app.get("/get_news/:id", (req, res) =>
   checkToken(req, res, () => getSingleNews(req, res))

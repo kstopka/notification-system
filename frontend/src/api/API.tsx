@@ -4,13 +4,6 @@ import Cookies from "js-cookie";
 class ClassApi {
   baseUrl = "http://localhost:3002";
 
-  getLaws() {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_laws`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
-
   getVoteLaw(user_id: number) {
     const token = Cookies.get("token");
     console.log("user_id", user_id);
