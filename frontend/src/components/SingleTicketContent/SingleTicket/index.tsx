@@ -8,6 +8,7 @@ import Select from "../../atoms/Select";
 import { priorityArray, statusArray } from "./utils";
 import { IUsersState } from "../../../contexted/Users/types";
 import Api from "../../../api/API";
+import TicketsApi from "../../../api/TicketsApi";
 
 const SingleTicket: React.FC<SingleTicketProps> = ({
   created_at,
@@ -45,7 +46,7 @@ const SingleTicket: React.FC<SingleTicketProps> = ({
   };
 
   useEffect(() => {
-    Api.updateSingleTicket({
+    TicketsApi.updateSingleTicket({
       ticket_id,
       priority,
       status,

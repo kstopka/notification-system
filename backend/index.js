@@ -1,10 +1,7 @@
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
-  getSingleTicket,
   updateSingleComment,
-  getTickets,
-  additionalTicket,
   getSingleNewsComments,
   getSingleTicketComments,
   additionalSingleComment,
@@ -12,7 +9,6 @@ const {
   deleteSingleCommentByPost,
   deleteSinglePostRelationsByComment,
   deleteSingleCommentByComment,
-  updateSingleTicket,
   deleteSingleTicketRelationsByComment,
   deleteSingleTicketCommentByComment,
   additionalSingleTicketComment,
@@ -25,6 +21,7 @@ const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
 const serviceProvidersRoutes = require("./routes/serviceProvidersRoutes");
 const lawsRoutes = require("./routes/lawsRoutes");
+const ticketsRoutes = require("./routes/ticketsRoutes");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -56,21 +53,15 @@ app.use("/service_providers", serviceProvidersRoutes);
 
 app.use("/laws", lawsRoutes);
 
-//Refactor:
+app.use("/tickets", ticketsRoutes);
 
-app.get("/get_ticket/:id", (req, res) =>
-  checkToken(req, res, () => getSingleTicket(req, res))
-);
+//Refactor:
 
 app.get("/get_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleNewsComments(req, res))
 );
 app.get("/get_ticket_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleTicketComments(req, res))
-);
-
-app.patch("/patch_ticket/:id", (req, res) =>
-  checkToken(req, res, () => updateSingleTicket(req, res))
 );
 
 app.post("/update_comment/:id", (req, res) =>
@@ -90,12 +81,6 @@ app.post("/additional_ticket_comment", (req, res) =>
   checkToken(req, res, () => additionalSingleTicketComment(req, res))
 );
 
-app.get("/get_tickets", (req, res) =>
-  checkToken(req, res, () => getTickets(res))
-);
-app.post("/additional_ticket", (req, res) =>
-  checkToken(req, res, () => additionalTicket(req, res))
-);
 app.post("/additional_service_request", (req, res) =>
   checkToken(req, res, () => additionalServiceRequest(req, res))
 );

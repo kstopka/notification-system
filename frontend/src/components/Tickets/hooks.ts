@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Api from "../../api/API";
 import { AxiosResponse } from "axios";
 import { ResponseTicketsProps, SingleTicket, UseNewsProps } from "./types";
+import TicketsApi from "../../api/TicketsApi";
 
 export const useTickets: UseNewsProps = () => {
   const [tickets, setTickets] = useState<SingleTicket[]>([]);
@@ -10,7 +11,7 @@ export const useTickets: UseNewsProps = () => {
   const getTickets = async () => {
     try {
       const result: AxiosResponse<any, ResponseTicketsProps> =
-        await Api.getTickets();
+        await TicketsApi.getTickets();
       setTickets(result.data);
     } catch (error) {}
   };

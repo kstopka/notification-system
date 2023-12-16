@@ -12,6 +12,7 @@ import {
 import { IAppActions } from "../../../contexted/App/types";
 import { IAuthState } from "../../../contexted/Auth/types";
 import Api from "../../../api/API";
+import TicketsApi from "../../../api/TicketsApi";
 
 export const useAdditionalTicket = () => {
   const { id: user_id } = useContextState<IAuthState>(AuthCtx, ["id"]);
@@ -31,8 +32,7 @@ export const useAdditionalTicket = () => {
   }) => {
     setIsLoading(true);
     try {
-      await Api.additionalTicket(user_id, subject, description);
-      // await getSingleNews();
+      await TicketsApi.additionalTicket(user_id, subject, description);
       setAlert({
         isAlertVisible: true,
         status: "success",
@@ -40,7 +40,6 @@ export const useAdditionalTicket = () => {
       });
 
       reset(defaultValues);
-      // handleAdditionalOpen();
     } catch (error) {
       setAlert({
         isAlertVisible: true,

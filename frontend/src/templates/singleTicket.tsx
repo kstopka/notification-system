@@ -5,6 +5,7 @@ import Api from "../api/API";
 import { AxiosResponse } from "axios";
 import { SingleTicketData, TicketCommentData } from "../types/standard";
 import SingleTicketContent from "../components/SingleTicketContent";
+import TicketsApi from "../api/TicketsApi";
 
 interface SingleTicketProps {}
 
@@ -16,7 +17,7 @@ const SingleTicketPage: React.FC<SingleTicketProps> = () => {
   const getSingleTicketAndComments = async () => {
     try {
       if (ticket_id === null) return;
-      const tickets: AxiosResponse<any, any> = await Api.getSingleTicket(
+      const tickets: AxiosResponse<any, any> = await TicketsApi.getSingleTicket(
         ticket_id
       );
       setTicket(tickets.data[0]);
