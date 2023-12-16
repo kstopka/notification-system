@@ -16,7 +16,7 @@ import { TypeOfComment } from "../../../../types/standard";
 import PostCommentsApi from "../../../../api/PostComments";
 
 const getApiFunction = {
-  post: PostCommentsApi.additionalSingleComment.bind(Api),
+  post: PostCommentsApi.additionalSingleComment.bind(PostCommentsApi),
   ticket: Api.additionalSingleTicketComment.bind(Api),
 };
 

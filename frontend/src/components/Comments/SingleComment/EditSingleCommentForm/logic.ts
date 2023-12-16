@@ -15,7 +15,7 @@ interface IResponse {
 }
 
 const getApiFunction = {
-  post: PostCommentsApi.updateSingleComment.bind(Api),
+  post: PostCommentsApi.updateSingleComment.bind(PostCommentsApi),
   ticket: Api.updateSingleTicketComment.bind(Api),
 };
 

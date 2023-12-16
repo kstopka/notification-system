@@ -3,7 +3,6 @@ const { customDelete } = require("./utils");
 
 class PostCommentsClass {
   getSingleNewsComments = (req, res) => {
-    console.log("getSingleNewsComments");
     const id = req.params.id;
     db.query(
       `SELECT pc.*, u.name AS user_name FROM post_comments pc JOIN users u ON pc.user_id = u.user_id JOIN post_comment_relations pcr ON pc.comment_id = pcr.comment_id WHERE pcr.post_id = ?
