@@ -11,12 +11,6 @@ class ClassApi {
     });
   }
 
-  getNews() {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_news`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
   getLaws() {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_laws`, {
@@ -27,7 +21,7 @@ class ClassApi {
   getVoteLaw(user_id: number) {
     const token = Cookies.get("token");
     console.log("user_id", user_id);
-    return Axios.get(`${this.baseUrl}/get_vote_law/${user_id}`, {
+    return Axios.get(`${this.baseUrl}/posts/get_vote_law/${user_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
