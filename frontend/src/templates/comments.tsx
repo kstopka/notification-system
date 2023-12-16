@@ -23,6 +23,8 @@ const CommentsPage: React.FC<CommentsProps> = () => {
         post_id
       );
       setPost(posts.data[0]);
+
+      console.log("post_id", post_id);
       const comments: AxiosResponse<any, any> =
         await PostCommentsApi.getSingleNewsComments(post_id);
       setComments(comments.data);

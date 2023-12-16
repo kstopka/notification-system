@@ -32,7 +32,6 @@ const Layout: React.FC<ILayout> = ({
     "permissions",
   ]);
   const { logOut } = useActions<IAuthActions>(AuthCtx, ["logOut"]);
-
   const { alert } = useContextState<IAppState>(AppCtx, ["alert"]);
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
 

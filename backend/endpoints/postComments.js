@@ -3,6 +3,7 @@ const { customDelete } = require("./utils");
 
 class PostCommentsClass {
   getSingleNewsComments = (req, res) => {
+    console.log("getSingleNewsComments");
     const id = req.params.id;
     db.query(
       `SELECT pc.*, u.name AS user_name FROM post_comments pc JOIN users u ON pc.user_id = u.user_id JOIN post_comment_relations pcr ON pc.comment_id = pcr.comment_id WHERE pcr.post_id = ?
@@ -36,6 +37,7 @@ class PostCommentsClass {
   additionalSingleComment = (req, res) => {
     const { user_id, post_id, content } = req.body;
     const created_at = new Date();
+    console.log("additionalSingleComment");
     db.query(
       "INSERT INTO `post_comments` (user_id, post_id, content,  created_at) VALUES (?,?,?,?)",
       [user_id, post_id, content, created_at],

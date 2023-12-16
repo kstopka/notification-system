@@ -5,6 +5,7 @@ class ClassPostCommentsApi {
   baseUrl = "http://localhost:3002/post_comments";
 
   getSingleNewsComments(post_id: string) {
+    console.log("getSingleNewsComments");
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_comments/${post_id}`, {
       headers: { Authorization: `Bearer ${token}` },

@@ -25,7 +25,7 @@ router.post("/additional_news", (req, res) =>
 );
 
 router.delete("/delete_post/:id", (req, res) =>
-  checkToken(req, res, () => deleteSinglePost(req, res))
+  checkToken(req, res, () => Posts.deleteSinglePost(req, res))
 );
 
 module.exports = router;
