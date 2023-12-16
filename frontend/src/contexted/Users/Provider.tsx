@@ -9,6 +9,7 @@ import initialState from "./state";
 import { AuthCtx, useContextState } from "..";
 import { IAuthState } from "../Auth/types";
 import Api from "../../api/API";
+import UsersApi from "../../api/UsersApi";
 
 const UsersProvider: React.FC<UsersProviderProps> = ({
   children,
@@ -26,7 +27,7 @@ const UsersProvider: React.FC<UsersProviderProps> = ({
       try {
         const getDataUsers = async () => {
           try {
-            const users = await Api.getUsers();
+            const users = await UsersApi.get();
             dispatch({
               type: "getUsers",
               payload: users.data as IUser[],

@@ -3,29 +3,11 @@ import Cookies from "js-cookie";
 
 class ClassApi {
   baseUrl = "http://localhost:3002";
-  getUsers() {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_users`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
-  getMeetings() {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/meetings/get`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
+
   getProviders() {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_providers`, {
       headers: { Authorization: `Bearer ${token}` },
-    });
-  }
-
-  login({ email, password }: { email: string; password: string }) {
-    return Axios.post(`${this.baseUrl}/auth`, {
-      email,
-      password,
     });
   }
 
@@ -184,29 +166,6 @@ class ClassApi {
     );
   }
 
-  additionalMeeting({
-    address,
-    description,
-    time,
-    date,
-  }: {
-    address: string;
-    description: string;
-    time: string;
-    date: string;
-  }) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/meetings/post`,
-      {
-        address,
-        description,
-        time,
-        date,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
   additionalVotes(user_id: number, post_id: number, vote_value: boolean) {
     const token = Cookies.get("token");
     return Axios.post(
@@ -283,12 +242,7 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
-  deleteMeeting(meeting_id: number) {
-    const token = Cookies.get("token");
-    return Axios.delete(`${this.baseUrl}/meetings/delete/${meeting_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
+
   deleteSinglePostRelationsByPost(post_id: number) {
     const token = Cookies.get("token");
     return Axios.delete(`${this.baseUrl}/delete_post_relations/${post_id}`, {

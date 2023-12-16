@@ -7,8 +7,8 @@ import { AppCtx, AuthCtx, useActions } from "../../contexted";
 import { IAuthActions } from "../../contexted/Auth/types";
 import { ILoginData, IUseLogin } from "./types";
 import { defaultValues, schema } from "./utils";
-import Api from "../../api/API";
 import { IAppActions } from "../../contexted/App/types";
+import UsersApi from "../../api/UsersApi";
 
 export const useLogin = (): IUseLogin => {
   const { logIn } = useActions<IAuthActions>(AuthCtx, ["logIn"]);
@@ -26,7 +26,7 @@ export const useLogin = (): IUseLogin => {
 
   const onSubmit: SubmitHandler<typeof defaultValues> = (formValues) => {
     setIsLoading(true);
-    Api.login(formValues)
+    UsersApi.login(formValues)
       // .then((res: ILoginData) => {
       .then((res: any) => {
         logIn(res.data);
