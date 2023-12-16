@@ -7,12 +7,12 @@ const lawsRoutes = require("./lawsRoutes");
 const ticketsRoutes = require("./ticketsRoutes");
 const postCommentsRoutes = require("./postCommentsRoutes");
 const ticketCommentsRoutes = require("./ticketCommentsRoutes");
+const votesRoutes = require("./votesRoutes");
 const {
   deleteSinglePostRelationsByPost,
   deleteSinglePostRelationsByComment,
   deleteSingleTicketRelationsByComment,
   additionalServiceRequest,
-  additionalVotes,
 } = require("../dbEndpoints");
 
 const configureRoutes = (app) => {
@@ -24,12 +24,9 @@ const configureRoutes = (app) => {
   app.use("/tickets", ticketsRoutes);
   app.use("/post_comments", postCommentsRoutes);
   app.use("/ticket_comments", ticketCommentsRoutes);
+  app.use("/votes", votesRoutes);
 
   //Refactor:
-
-  app.post("/additional_votes", (req, res) =>
-    checkToken(req, res, () => additionalVotes(req, res))
-  );
 
   app.post("/additional_service_request", (req, res) =>
     checkToken(req, res, () => additionalServiceRequest(req, res))

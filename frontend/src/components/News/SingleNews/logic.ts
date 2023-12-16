@@ -11,6 +11,7 @@ import Api from "../../../api/API";
 import { IAuthState } from "../../../contexted/Auth/types";
 import PostsApi from "../../../api/PostsApi";
 import PostCommentsApi from "../../../api/PostComments";
+import VotesApi from "../../../api/VotesApi";
 
 interface IResponse {
   message: string;
@@ -61,7 +62,7 @@ export const useDeletePost = ({
     if (value === null) return;
     setIsLoading(true);
     try {
-      await Api.additionalVotes(user_id, post_id, value);
+      await VotesApi.additionalVotes(user_id, post_id, value);
       await updateData();
       setAlert({
         isAlertVisible: true,

@@ -1,21 +1,5 @@
 const db = require("./config/db");
 
-const additionalVotes = (req, res) => {
-  const { user_id, post_id, vote_value } = req.body;
-  const timestamp = new Date();
-
-  db.query(
-    "INSERT INTO `votes` (user_id, post_id, vote_value, timestamp) VALUES (?,?,?,?)",
-    [user_id, post_id, vote_value, timestamp],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result);
-    }
-  );
-};
-
 const additionalServiceRequest = (req, res) => {
   const { user_id, provider_id, description } = req.body;
   const request_date = new Date();
@@ -68,6 +52,5 @@ module.exports = {
   deleteSinglePostRelationsByComment,
   deleteSingleTicketRelationsByComment,
   additionalServiceRequest,
-  additionalVotes,
   customDelete,
 };

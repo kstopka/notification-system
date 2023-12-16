@@ -4,19 +4,6 @@ import Cookies from "js-cookie";
 class ClassApi {
   baseUrl = "http://localhost:3002";
 
-  additionalVotes(user_id: number, post_id: number, vote_value: boolean) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/additional_votes`,
-      {
-        user_id,
-        post_id,
-        vote_value,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
-
   additionalServiceRequest(
     user_id: number,
     provider_id: number,
