@@ -3,6 +3,7 @@ import Api from "../api/API";
 import { useNavigate } from "react-router-dom";
 import URL_PATHS from "../constants/routes";
 import Layout from "../components/Layout";
+import ServiceProvidersApi from "../api/ServiceProvidersApi";
 
 interface PanelAdminPageProps {}
 
@@ -11,7 +12,7 @@ const PanelAdminPage: React.FC<PanelAdminPageProps> = () => {
 
   const getUsers = async () => {
     try {
-      const result = await Api.getProviders();
+      const result = await ServiceProvidersApi.get();
       console.log("result.data", result.data);
     } catch (error) {}
   };

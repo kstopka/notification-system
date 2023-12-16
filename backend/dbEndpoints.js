@@ -1,14 +1,6 @@
 const db = require("./config/db");
 const jwt = require("jsonwebtoken");
 
-const getProviders = (res) =>
-  db.query("SELECT * FROM `service_providers`", (err, result) => {
-    if (err) {
-      if (err) throw err;
-    }
-    res.send(result);
-  });
-
 const getLaws = (res) =>
   db.query("SELECT * FROM `laws` ORDER BY date DESC", (err, result) => {
     if (err) {
@@ -362,7 +354,6 @@ const deleteSingleTicketCommentByComment = (req, res) => {
 };
 
 module.exports = {
-  getProviders,
   getLaws,
   updateSingleNews,
   updateSingleComment,

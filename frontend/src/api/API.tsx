@@ -4,13 +4,6 @@ import Cookies from "js-cookie";
 class ClassApi {
   baseUrl = "http://localhost:3002";
 
-  getProviders() {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_providers`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
-
   getLaws() {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_laws`, {
