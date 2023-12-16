@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const jwt = require("jsonwebtoken");
 const { customDelete } = require("./utils");
 
 class ServiceProvidersClass {

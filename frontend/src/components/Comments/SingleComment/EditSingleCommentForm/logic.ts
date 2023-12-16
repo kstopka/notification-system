@@ -7,6 +7,7 @@ import { useActions, AppCtx } from "../../../../contexted";
 import { IAppActions } from "../../../../contexted/App/types";
 import Api from "../../../../api/API";
 import { TypeOfComment } from "../../../../types/standard";
+import PostCommentsApi from "../../../../api/PostComments";
 
 interface IResponse {
   message: string;
@@ -14,7 +15,7 @@ interface IResponse {
 }
 
 const getApiFunction = {
-  post: Api.updateSingleComment.bind(Api),
+  post: PostCommentsApi.updateSingleComment.bind(Api),
   ticket: Api.updateSingleTicketComment.bind(Api),
 };
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useActions, AppCtx } from "../../../contexted";
 import { IAppActions } from "../../../contexted/App/types";
 import Api from "../../../api/API";
+import PostCommentsApi from "../../../api/PostComments";
 
 interface IResponse {
   message: string;
@@ -25,7 +26,7 @@ export const useDeleteComment = ({
     setIsLoading(true);
     try {
       await Api.deleteSinglePostRelationsByComment(comment_id);
-      await Api.deleteSingleCommentByComment(comment_id);
+      await PostCommentsApi.deleteSingleCommentByComment(comment_id);
       await updateData();
       setAlert({
         isAlertVisible: true,

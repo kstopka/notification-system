@@ -1,14 +1,12 @@
 const db = require("./config/db");
 const { checkToken } = require("./middleware");
 const {
-  updateSingleComment,
-  getSingleNewsComments,
   getSingleTicketComments,
-  additionalSingleComment,
+
   deleteSinglePostRelationsByPost,
-  deleteSingleCommentByPost,
+
   deleteSinglePostRelationsByComment,
-  deleteSingleCommentByComment,
+
   deleteSingleTicketRelationsByComment,
   deleteSingleTicketCommentByComment,
   additionalSingleTicketComment,
@@ -22,6 +20,7 @@ const postsRoutes = require("./routes/postsRoutes");
 const serviceProvidersRoutes = require("./routes/serviceProvidersRoutes");
 const lawsRoutes = require("./routes/lawsRoutes");
 const ticketsRoutes = require("./routes/ticketsRoutes");
+const postComments = require("./routes/postCommentsRoutes");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
@@ -55,18 +54,14 @@ app.use("/laws", lawsRoutes);
 
 app.use("/tickets", ticketsRoutes);
 
+app.use("/post_comments", postComments);
+
 //Refactor:
 
-app.get("/get_comments/:id", (req, res) =>
-  checkToken(req, res, () => getSingleNewsComments(req, res))
-);
 app.get("/get_ticket_comments/:id", (req, res) =>
   checkToken(req, res, () => getSingleTicketComments(req, res))
 );
 
-app.post("/update_comment/:id", (req, res) =>
-  checkToken(req, res, () => updateSingleComment(req, res))
-);
 app.post("/update_ticket_comment/:id", (req, res) =>
   checkToken(req, res, () => updateSingleTicketComment(req, res))
 );
@@ -74,9 +69,6 @@ app.post("/additional_votes", (req, res) =>
   checkToken(req, res, () => additionalVotes(req, res))
 );
 
-app.post("/additional_comment", (req, res) =>
-  checkToken(req, res, () => additionalSingleComment(req, res))
-);
 app.post("/additional_ticket_comment", (req, res) =>
   checkToken(req, res, () => additionalSingleTicketComment(req, res))
 );
@@ -88,15 +80,11 @@ app.post("/additional_service_request", (req, res) =>
 app.delete("/delete_post_relations/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePostRelationsByPost(req, res))
 );
-app.delete("/delete_post_comment/:id", (req, res) =>
-  checkToken(req, res, () => deleteSingleCommentByPost(req, res))
-);
+
 app.delete("/delete_comment_relations/:id", (req, res) =>
   checkToken(req, res, () => deleteSinglePostRelationsByComment(req, res))
 );
-app.delete("/delete_comment/:id", (req, res) =>
-  checkToken(req, res, () => deleteSingleCommentByComment(req, res))
-);
+
 app.delete("/delete_ticket_comment_relations/:id", (req, res) =>
   checkToken(req, res, () => deleteSingleTicketRelationsByComment(req, res))
 );

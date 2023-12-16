@@ -4,12 +4,6 @@ import Cookies from "js-cookie";
 class ClassApi {
   baseUrl = "http://localhost:3002";
 
-  getSingleNewsComments(post_id: string) {
-    const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get_comments/${post_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
   getSingleTicketComments(ticket_id: string) {
     const token = Cookies.get("token");
     return Axios.get(`${this.baseUrl}/get_ticket_comments/${ticket_id}`, {
@@ -17,16 +11,6 @@ class ClassApi {
     });
   }
 
-  updateSingleComment(content: string, comment_id: number) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/update_comment/${comment_id}`,
-      {
-        content,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
   updateSingleTicketComment(comment_text: string, comment_id: number) {
     const token = Cookies.get("token");
     return Axios.post(
@@ -51,18 +35,6 @@ class ClassApi {
     );
   }
 
-  additionalSingleComment(user_id: number, post_id: number, content: string) {
-    const token = Cookies.get("token");
-    return Axios.post(
-      `${this.baseUrl}/additional_comment`,
-      {
-        user_id,
-        post_id,
-        content,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  }
   additionalSingleTicketComment(
     user_id: number,
     ticket_id: number,
@@ -103,12 +75,7 @@ class ClassApi {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
-  deleteSingleCommentByPost(post_id: number) {
-    const token = Cookies.get("token");
-    return Axios.delete(`${this.baseUrl}/delete_post_comment/${post_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
+
   deleteSinglePostRelationsByComment(comment_id: number) {
     const token = Cookies.get("token");
     return Axios.delete(
@@ -118,12 +85,7 @@ class ClassApi {
       }
     );
   }
-  deleteSingleCommentByComment(comment_id: number) {
-    const token = Cookies.get("token");
-    return Axios.delete(`${this.baseUrl}/delete_comment/${comment_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  }
+
   deleteSingleTicketRelationsByComment(comment_id: number) {
     const token = Cookies.get("token");
     return Axios.delete(

@@ -7,6 +7,7 @@ import { AxiosResponse } from "axios";
 import { PostCommentData, SingleNewsData } from "../types/standard";
 import CommentsContent from "../components/Comments";
 import PostsApi from "../api/PostsApi";
+import PostCommentsApi from "../api/PostComments";
 
 interface CommentsProps {}
 
@@ -22,9 +23,8 @@ const CommentsPage: React.FC<CommentsProps> = () => {
         post_id
       );
       setPost(posts.data[0]);
-      const comments: AxiosResponse<any, any> = await Api.getSingleNewsComments(
-        post_id
-      );
+      const comments: AxiosResponse<any, any> =
+        await PostCommentsApi.getSingleNewsComments(post_id);
       setComments(comments.data);
     } catch (error) {}
   };

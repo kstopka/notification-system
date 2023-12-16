@@ -13,9 +13,10 @@ import { IAppActions } from "../../../../contexted/App/types";
 import Api from "../../../../api/API";
 import { scrollToBottom } from "../../../../utils";
 import { TypeOfComment } from "../../../../types/standard";
+import PostCommentsApi from "../../../../api/PostComments";
 
 const getApiFunction = {
-  post: Api.additionalSingleComment.bind(Api),
+  post: PostCommentsApi.additionalSingleComment.bind(Api),
   ticket: Api.additionalSingleTicketComment.bind(Api),
 };
 
