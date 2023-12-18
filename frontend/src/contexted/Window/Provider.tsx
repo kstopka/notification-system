@@ -54,10 +54,10 @@ const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
       });
     }, 166),
     [
-      // window.innerHeight,
-      // window.innerWidth,
-      // window.outerHeight,
-      // window.outerWidth,
+      window.innerHeight,
+      window.innerWidth,
+      window.outerHeight,
+      window.outerWidth,
     ]
   );
 

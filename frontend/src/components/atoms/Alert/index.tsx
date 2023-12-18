@@ -32,19 +32,17 @@ const Alert = ({
   return (
     <S.FixedWrapper>
       <S.AlertContainer status={status}>
-        <div className="AlertSVGContainer">{alertImage[status]}</div>
+        <div>{alertImage[status]}</div>
         {title.length && (
-          <div className="ContentWrapper">
-            <div className="AlertHeading">{title}</div>
-            {description.length > 0 ? (
-              <div className="AlertDescription">{description}</div>
-            ) : null}
+          <div>
+            <div>{title}</div>
+            {description.length > 0 ? <div>{description}</div> : null}
             {buttonText.length > 0 ? (
               <button onClick={handleClick}>{buttonText}</button>
             ) : null}
           </div>
         )}
-        <div className="CloseButton" onClick={handleClose2}>
+        <div onClick={handleClose2}>
           <XSVG />
         </div>
       </S.AlertContainer>

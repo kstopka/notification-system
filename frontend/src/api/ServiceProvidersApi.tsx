@@ -1,11 +1,12 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "./API";
 
 class ClassServiceProvidersApi {
-  baseUrl = "http://localhost:3002/service_providers";
+  url = `${baseUrl}/service_providers`;
   get() {
     const token = Cookies.get("token");
-    return Axios.get(`${this.baseUrl}/get`, {
+    return Axios.get(`${this.url}/get`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

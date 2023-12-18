@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "./API";
 
 class ClassPostCommentsApi {
   baseUrl = "http://localhost:3002/post_comments";

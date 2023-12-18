@@ -1,8 +1,9 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
+import { baseUrl } from "./API";
 
 class ClassLawsApi {
-  baseUrl = "http://localhost:3002/laws";
+  baseUrl = `${baseUrl}/laws`;
 
   get() {
     const token = Cookies.get("token");

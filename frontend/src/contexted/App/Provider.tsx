@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AppProviderProps } from "./types";
 
-import React, { useReducer, useEffect, useLayoutEffect } from "react";
+import React, { useReducer, useLayoutEffect } from "react";
 
 import AppCtx from "./ctx";
 import reducer from "./reducer";
@@ -16,10 +16,6 @@ const AppProvider: React.FC<AppProviderProps> = ({
   useLayoutEffect(() => {
     onLoad(dispatch);
   }, []);
-
-  useEffect(() => {
-    console.log("AppProvider STATE: ", state);
-  }, [state]);
 
   return (
     <AppCtx.Provider
