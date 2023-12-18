@@ -1,18 +1,15 @@
-import * as S from "./styles";
+import { useState } from "react";
 import { useContextState, AuthCtx } from "../../contexted";
 import { IAuthState } from "../../contexted/Auth/types";
-import { useState } from "react";
 import { useDefaultColumns } from "./logic";
-import Table from "../atoms/Table";
 import { LawsContentProps } from "./types";
 import { useLaws } from "./hooks";
+import * as S from "./styles";
+import Table from "../atoms/Table";
 import AdditionalLawsForm from "./AdditionalLawsForm";
 
 const LawsContent: React.FC<LawsContentProps> = () => {
-  const { loggedIn, permissions } = useContextState<IAuthState>(AuthCtx, [
-    "loggedIn",
-    "permissions",
-  ]);
+  const { permissions } = useContextState<IAuthState>(AuthCtx, ["permissions"]);
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
   const handleAdditionalOpen = () => {
     setIsAdditionalOpen((isAdditionalOpen) => !isAdditionalOpen);

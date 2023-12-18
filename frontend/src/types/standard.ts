@@ -12,6 +12,7 @@ export type SingleNewsData = {
   comment_count?: number;
   user_name?: string;
 } & BasicPostData;
+
 export interface SingleTicketData {
   created_at: string;
   description: string;
@@ -34,6 +35,7 @@ export interface PostCommentData {
   user_id: number;
   user_name: string;
 }
+
 export interface TicketCommentData {
   comment_date: string;
   comment_id: number;

@@ -1,7 +1,7 @@
 import CheckCircleSVG from "../symbols/CheckCircleSVG";
 import InfoSVG from "../symbols/InfoSVG";
 import XSVG from "../symbols/XSVG";
-import { IAlertProps, IAlertStatus } from "./types";
+import { IAlertProps } from "./types";
 import AlertSVG from "../symbols/AlertSVG";
 import { useActions, AppCtx } from "../../../contexted";
 import { initialAlert } from "../../../contexted/App/state";
@@ -14,12 +14,8 @@ export const alertImage = {
   success: <CheckCircleSVG />,
 };
 
-const getClassName = (className: string, message: IAlertStatus) =>
-  `${className}${message}`;
-
 const Alert = ({
   title,
-  handleClose,
   status = "info",
   description = "",
   buttonText = "",
@@ -27,7 +23,7 @@ const Alert = ({
 }: IAlertProps): JSX.Element => {
   const { setAlert } = useActions<IAppActions>(AppCtx, ["setAlert"]);
 
-  const handleClose2 = () => setAlert(initialAlert);
+  const handleClose = () => setAlert(initialAlert);
 
   return (
     <S.FixedWrapper>
@@ -42,7 +38,7 @@ const Alert = ({
             ) : null}
           </div>
         )}
-        <div onClick={handleClose2}>
+        <div onClick={handleClose}>
           <XSVG />
         </div>
       </S.AlertContainer>

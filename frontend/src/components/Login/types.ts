@@ -16,7 +16,4 @@ export interface IUseLogin {
   isLoading: boolean;
   methods: UseFormReturn<TLoginDefaultState>;
   onSubmit: any;
-  // onSubmit: (
-  //   formValues: TLoginDefaultState
-  // ) => SubmitHandler<TLoginDefaultState>;
 }
