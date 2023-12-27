@@ -43,6 +43,7 @@ export const Navigation = styled.nav<{ isActive: boolean }>`
   }
 
   @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+    display: flex;
     flex-direction: row;
     padding: 0;
   }
@@ -56,6 +57,10 @@ export const Hamburger = styled.div`
   top: 20px;
   right: 20px;
   cursor: pointer;
+
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+    display: none;
+  }
 `;
 
 export const Bar = styled.div`
