@@ -78,7 +78,7 @@ class PostsClass {
         if (err) {
           console.log(err);
         }
-        res.send(result);
+        res.send({ ...result, message: "Poprawnie dodano" });
       }
     );
   };

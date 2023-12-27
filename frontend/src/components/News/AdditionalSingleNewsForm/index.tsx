@@ -2,6 +2,8 @@ import { FormProvider } from "react-hook-form";
 import { EditSingleNewsFormProps } from "./types";
 import FormTextInput from "../../atoms/FormTextInput";
 import { useAdditionalSinglePost } from "./logic";
+import FormTextareaInput from "../../atoms/FormTextareaInput";
+import * as S from "./styles";
 
 const AdditionalSinglePostForm: React.FC<EditSingleNewsFormProps> = ({
   type,
@@ -18,7 +20,7 @@ const AdditionalSinglePostForm: React.FC<EditSingleNewsFormProps> = ({
   return (
     <div>
       <FormProvider {...methods}>
-        <form
+        <S.Form
           id="additional-single-news-form"
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -29,7 +31,7 @@ const AdditionalSinglePostForm: React.FC<EditSingleNewsFormProps> = ({
             isDark
           />
 
-          <FormTextInput
+          <FormTextareaInput
             name="content"
             placeholder="Treść:"
             label="Treść:"
@@ -41,7 +43,7 @@ const AdditionalSinglePostForm: React.FC<EditSingleNewsFormProps> = ({
               {isLoading ? "Proszę czekać" : "Wyślij"}
             </button>
           </div>
-        </form>
+        </S.Form>
       </FormProvider>
     </div>
   );

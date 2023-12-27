@@ -39,13 +39,19 @@ export const useAdditionalSinglePost = ({
   }) => {
     setIsLoading(true);
     try {
-      await PostsApi.additionalSingleNews(user_id, title, content, type);
+      const result = await PostsApi.additionalSingleNews(
+        user_id,
+        title,
+        content,
+        type
+      );
+      console.log("result", result);
       await updateData();
       handleAdditionalOpen();
       setAlert({
         isAlertVisible: true,
         status: "success",
-        message: "response.data.message",
+        message: result.data.message,
       });
 
       reset(defaultValues);
