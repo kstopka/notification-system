@@ -32,11 +32,15 @@ export const useAdditionalTicket = () => {
   }) => {
     setIsLoading(true);
     try {
-      await TicketsApi.additionalTicket(user_id, subject, description);
+      const response = await TicketsApi.additionalTicket(
+        user_id,
+        subject,
+        description
+      );
       setAlert({
         isAlertVisible: true,
         status: "success",
-        message: "response.data.message",
+        message: response.data.message,
       });
 
       reset(defaultValues);

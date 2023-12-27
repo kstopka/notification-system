@@ -61,7 +61,7 @@ class PostsClass {
           if (err) throw err;
         }
 
-        res.send(result);
+        res.send({ ...result, message: "Poprawnie dodano" });
       }
     );
   };
@@ -85,7 +85,9 @@ class PostsClass {
 
   deleteSinglePost = async (req, res) => {
     const id = req.params.id;
-    customDelete("posts", "post_id", id, (result) => res.send(result));
+    customDelete("posts", "post_id", id, (result) =>
+      res.send({ ...result, message: "Poprawnie usunięto" })
+    );
   };
 }
 

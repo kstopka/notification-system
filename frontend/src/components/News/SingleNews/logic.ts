@@ -40,12 +40,12 @@ export const useDeletePost = ({
     try {
       await PostCommentsRelations.deleteSinglePostRelationsByPost(post_id);
       await PostCommentsApi.deleteSingleCommentByPost(post_id);
-      await PostsApi.deleteSinglePost(post_id);
+      const response = await PostsApi.deleteSinglePost(post_id);
       await updateData();
       setAlert({
         isAlertVisible: true,
         status: "success",
-        message: "response.data.message",
+        message: response.data.message,
       });
       handleDeleteModalActive();
     } catch (error) {

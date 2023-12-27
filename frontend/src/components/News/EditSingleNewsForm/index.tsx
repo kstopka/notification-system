@@ -2,6 +2,7 @@ import { FormProvider } from "react-hook-form";
 import { EditSingleNewsFormProps } from "./types";
 import { useEditSingleNews } from "./logic";
 import FormTextInput from "../../atoms/FormTextInput";
+import FormTextareaInput from "../../atoms/FormTextareaInput";
 
 const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
   isEditing,
@@ -25,7 +26,11 @@ const EditSingleNewsForm: React.FC<EditSingleNewsFormProps> = ({
         <form id="edit-single-news-form" onSubmit={handleSubmit(onSubmit)}>
           <FormTextInput name="title" placeholder="Tytuł:" label="Tytuł:" />
 
-          <FormTextInput name="content" placeholder="Treść:" label="Treść:" />
+          <FormTextareaInput
+            name="content"
+            placeholder="Treść:"
+            label="Treść:"
+          />
 
           <div className="wrapperButton">
             <button className="secondary">

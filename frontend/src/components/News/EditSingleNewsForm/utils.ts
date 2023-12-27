@@ -8,6 +8,6 @@ export const defaultValues: DefaultValuesEditSingleNewsForm = {
 };
 
 export const schema = yup.object().shape({
-  title: YUP.nameSchemeValidation,
+  title: YUP.textArea,
   content: YUP.textArea,
 });

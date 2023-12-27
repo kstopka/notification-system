@@ -41,12 +41,12 @@ export const useEditSingleNews = ({
   }) => {
     setIsLoading(true);
     try {
-      await PostsApi.updateSingleNews(title, content, post_id);
+      const response = await PostsApi.updateSingleNews(title, content, post_id);
       await getNews();
       setAlert({
         isAlertVisible: true,
         status: "success",
-        message: "response.data.message",
+        message: response.data.message,
       });
       handleEdit();
 
