@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { AuthCtx, useContextState } from "../../../contexted";
 import { IAuthState } from "../../../contexted/Auth/types";
 import * as S from "./styles";
+import { useState } from "react";
 
 interface IHeaderProps {}
 
@@ -13,10 +14,20 @@ const Header: React.FC<IHeaderProps> = (): JSX.Element => {
     "loggedIn",
     "permissions",
   ]);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleActiveHamburger = () => {
+    setIsActive((setIsActive) => !setIsActive);
+  };
 
   return (
     <S.Header>
-      <S.Navigation>
+      <S.Hamburger onClick={handleActiveHamburger}>
+        <S.Bar></S.Bar>
+        <S.Bar></S.Bar>
+        <S.Bar></S.Bar>
+      </S.Hamburger>
+      <S.Navigation isActive={isActive}>
         {URL_PATHS_ARRAY && URL_PATHS_ARRAY.length > 0
           ? URL_PATHS_ARRAY.map(({ slug, label, isAdmin }) =>
               (loggedIn && label !== "Login" && !isAdmin) ||

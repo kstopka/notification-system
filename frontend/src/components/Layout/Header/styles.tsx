@@ -14,12 +14,18 @@ export const Header = styled.header`
   height: auto;
   min-height: 88px;
   background: ${(props) => props.theme.colors.secondary};
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+  }
 `;
 
-export const Navigation = styled.nav`
-  display: flex;
+export const Navigation = styled.nav<{ isActive: boolean }>`
+  display: ${(props) => (props.isActive ? "flex" : "none")};
+  flex-direction: column;
+  padding: 30px;
 
   gap: 10px;
+
+  background: ${(props) => props.theme.colors.secondary};
 
   a {
     color: ${(props) => props.theme.colors.primary};
@@ -35,4 +41,27 @@ export const Navigation = styled.nav`
     color: ${(props) => props.theme.colors.primary};
     background-color: ${(props) => props.theme.colors.tertiary};
   }
+
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+    flex-direction: row;
+    padding: 0;
+  }
+`;
+
+export const Hamburger = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+`;
+
+export const Bar = styled.div`
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.4s;
 `;
