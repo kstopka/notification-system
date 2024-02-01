@@ -42,7 +42,7 @@ export const Navigation = styled.nav<{ isActive: boolean }>`
     background-color: ${(props) => props.theme.colors.tertiary};
   }
 
-  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.md}) {
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -58,7 +58,7 @@ export const Hamburger = styled.div`
   right: 20px;
   cursor: pointer;
 
-  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.sm}) {
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.md}) {
     display: none;
   }
 `;
